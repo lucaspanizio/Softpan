@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', 'Admin\ControllerUser@dashboard');
+Route::get('/', 'Admin\ControllerUser@login');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/admin/user', 'Admin\ControllerUser@index')->name('admin.user.index');
 
