@@ -37,6 +37,31 @@
             <!-- Footer -->
         </div>
     </div>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Parametros de formatação da tabela -->
+    <script>
+        $(document).ready(function() {
+            $('#table').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ resultados por página",
+                    "zeroRecords": "",
+                    "search": "Procurar",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum resultado encontrado",
+                    "infoFiltered": "",
+                    "paginate": {
+                        "first": "Primeira",
+                        "last": "Última",
+                        "next": ">",
+                        "previous": "<"
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
