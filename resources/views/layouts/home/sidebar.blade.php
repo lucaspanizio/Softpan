@@ -23,18 +23,17 @@
             <i class="fas fa-plus-circle"></i>
             <span class="hidden-sm-down">Cadastros <i class="fa fa-caret-down right"></i></span>
         </a>
-        <div class="list-group collapse" id="menu2">
-        
-            <a href="{{ route('admin.user.index') }}" class="list-group-item list-group-item-action"><i class="fas fa-users"></i> Usuários</a>
-            <a href="#" class="list-group-item" data-parent="#menu2"><i class="fas fa-building"></i> Empresas</a>
-            <a href="#" class="list-group-item" data-parent="#menu2"><i class="far fa-handshake"></i> Clientes</a>
-            <a href="#" class="list-group-item" data-parent="#menu2"><i class="fas fa-truck"></i> Fornecedores</a>
+        <div class="list-group collapse" id="menu2">        
+            <a href="{{ route('admin.user.index') }}" class="list-group-item"><i class="fas fa-users"></i> Usuários</a>
+            <a href="{{ route('admin.company.index') }}" class="list-group-item" data-parent="#menu2"><i class="fas fa-building"></i> Empresas</a>
+            <a href="{{ route('admin.client.index') }}" class="list-group-item" data-parent="#menu2"><i class="far fa-handshake"></i> Clientes</a>
+            <a href="{{ route('admin.provider.index') }}" class="list-group-item" data-parent="#menu2"><i class="fas fa-truck"></i> Fornecedores</a>
         </div>
         <a href="#menu3" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">
             <i class="fas fa-piggy-bank"></i>
             <span class="hidden-sm-down">Contas a Receber <i class="fa fa-caret-down right"></i></span>
         </a>
-        <div class="collapse" id="menu3">
+        <div class="list-group collapse" id="menu3">
             <a href="#" class="list-group-item" data-parent="#menu3"><i class="fas fa-list-alt"></i> Relação de Títulos</a>
             <a href="#" class="list-group-item" data-parent="#menu3"><i class="fas fa-plus"></i> Incluir Receita</a>
             <a href="#" class="list-group-item" data-parent="#menu3"><i class="fas fa-edit"></i> Alterar Receita</a>
@@ -47,7 +46,7 @@
             <i class="fas fa-hand-holding-usd"></i>
             <span class="hidden-sm-down">Contas a Pagar <i class="fa fa-caret-down right"></i></span>
         </a>
-        <div class="collapse" id="menu4">
+        <div class="list-group collapse" id="menu4">
             <a href="#" class="list-group-item" data-parent="#menu4"><i class="fas fa-list-alt"></i> Relação de Títulos</a>
             <a href="#" class="list-group-item" data-parent="#menu4"><i class="fas fa-plus"></i> Incluir Despesa</a>
             <a href="#" class="list-group-item" data-parent="#menu4"><i class="fas fa-edit"></i> Alterar Despesa</a>
@@ -60,7 +59,7 @@
             <i class="fas fa-clipboard-list"></i>
             <span class="hidden-sm-down">Relatórios <i class="fa fa-caret-down right"></i></span>
         </a>
-        <div class="collapse" id="menu5">
+        <div class="list-group collapse" id="menu5">
             <a href="#" class="list-group-item" data-parent="#menu5">Despesa x Fornecedor</a>
             <a href="#" class="list-group-item" data-parent="#menu5">Receita x Cliente</a>
         </div>

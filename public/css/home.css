@@ -18,7 +18,7 @@ body {
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px; 
+    /* margin-bottom: 45px;  */
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -33,7 +33,7 @@ body {
 ----------------------------------------------------- */
  
 #sidebar {
-    width: 18rem;
+    width: 16rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -49,7 +49,8 @@ span>i.right {
     float: right;
 }
 
-a { color: black !important; }
+/* Cor padrão da fonte no menu */
+.list-group>a { color: black !important; }
 
 /* Mouse sobre o menu */
 a:hover{
@@ -79,8 +80,8 @@ a:active{
 ----------------------------------------------------- */
 
 .content {
-    width: calc(100% - 18rem);
-    padding: 40px;
+    width: calc(100% - 16rem);
+    /* padding: 40px; */    
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
@@ -92,12 +93,16 @@ a:active{
     width: 100%;
 }
 
-/* .line {
+.container{
+    padding: 40px !important;
+}
+
+ /* .line {
     width: 100%;
     height: 1px;
-    border-bottom: 1px dashed #ddd;
-    margin: 40px 0;
-} */
+    border-bottom: 1px solid #ddd;
+    margin: 45px 0;
+}  */
 
 /* p {
     font-family: 'Poppins', sans-serif;

@@ -3,15 +3,38 @@
 @section('content')
 <div class="container">
 
-    <table class="table table-bordered" id="table">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCadastrarUsuario"><i class="fas fa-plus"></i> Novo Usuário</button> <br><br>
+
+    <!-- Modal com formulário para cadastro de novo usuário -->
+    @include('layouts.register.modals.modalUser', [
+    'id' => 'ModalCadastrarUsuario',
+    'title' => 'Cadastrar Usuário',
+    'btn' => 'Cadastrar',
+    'lbl_pass1' => 'Senha',
+    'lbl_pass2' => 'Confirme a Senha',
+    'method' => 'put',
+    'action' => route('admin.user.store')
+    ])
+    <!-- Fim do modal -->
+
+    <table class="table table-sm table-hover table-bordered" id="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Email</th>
                 <th scope="col">Perfil</th>
-                <th scope="col">Situação</th>
-                <th scope="col"></th>
+                <th width="80" scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -21,38 +44,36 @@
                 <td>{{$usuario->name}}</td>
                 <td>{{$usuario->email}}</td>
                 <td>{{$usuario->role}}</td>
-                <td></td>
-                <td><button type="button" class="btn btn-warning"><i class="fas fa-user-edit"></i></button></td>
+
+                <!-- Botão editar e remover usuário aciona modal -->
+                <td>                    
+                    <form action="{{ route('admin.user.destroy') }}" method="POST">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarUsuario{{$usuario->id}}"><i class="fas fa-edit"></i></button>
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="id" value="{{$usuario->id}}">
+                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    </form>
+                </td>
+
+                <!-- Modal com formulário para alteração dos dados do usuário selecionado -->
+                @include('layouts.register.modals.modalUser', [
+                'id' => 'ModalAlterarUsuario'.$usuario->id,
+                'title' => 'Alterar Usuário',
+                'btn' => 'Salvar Alterações',
+                'lbl_pass1' => 'Nova Senha',
+                'lbl_pass2' => 'Confirme a Nova Senha',
+                'method' => 'patch',
+                'action' => route('admin.user.update'),
+                'usuario' => $usuario
+                ])
+                <!-- Fim do modal -->
+
             </tr>
             @endforeach
         </tbody>
     </table>
+
+
 </div>
-
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-
-<!-- Parametros de formatação da tabela -->
-<script>
-    $(document).ready(function() {
-        $('#table').DataTable({
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ resultados por página",
-                "zeroRecords": "",
-                "search": "Procurar",
-                "info": "Mostrando página _PAGE_ de _PAGES_",
-                "infoEmpty": "Nenhum resultado encontrado",
-                "infoFiltered": "",
-                "paginate": {
-                    "first": "Primeira",
-                    "last": "Última",
-                    "next": "Próxima",
-                    "previous": "Início"
-                }
-            }
-        });
-    });
-</script>
-
-
 @endsection
