@@ -46,15 +46,21 @@
                 <td>{{$usuario->role}}</td>
 
                 <!-- Botão editar e remover usuário aciona modal -->
-                <td>                    
-                    <form action="{{ route('admin.user.destroy') }}" method="POST">
+                <td>
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarUsuario{{$usuario->id}}"><i class="fas fa-edit"></i></button>
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="id" value="{{$usuario->id}}">
-                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                    </form>
+                    <input type="hidden" name="id" value="{{$usuario->id}}">
+                    <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeletar{{$usuario->id}}"><i class="far fa-trash-alt"></i></button>
                 </td>
+
+                <!-- Modal para confirmação da exclusão  -->
+                @include('layouts.register.modals.modalDelete', [
+                'id' => 'ModalDeletar'.$usuario->id,
+                'title' => 'Excluir Usuário',
+                'message' => 'Confirma a exclusão deste usuário da aplicação?',
+                'action' => route('admin.user.destroy'),
+                'variable' => 'usuario'
+                ])
+                <!-- Fim do modal -->
 
                 <!-- Modal com formulário para alteração dos dados do usuário selecionado -->
                 @include('layouts.register.modals.modalUser', [

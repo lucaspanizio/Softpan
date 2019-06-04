@@ -18,7 +18,6 @@
     <!-- Modal com formulário para cadastro de nova empresa -->
     @include('layouts.register.modals.modalCompany', [
     'id' => 'ModalCadastrarEmpresa',
-    'labelledby' => 'Cadastrar Empresa',
     'title' => 'Cadastrar Empresa',
     'btn' => 'Cadastrar',
     'method' => 'put',
@@ -48,24 +47,28 @@
 
                 <!-- Botão editar e remover empresa aciona modal -->
                 <td>
-                    <form action="{{ route('admin.company.destroy') }}" method="POST">
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarEmpresa{{$empresa->id}}"><i class="fas fa-edit"></i></button>
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="id" value="{{$empresa->id}}">
-                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                    </form>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarEmpresa{{$empresa->id}}"><i class="fas fa-edit"></i></button>
+                    <input type="hidden" name="id" value="{{$empresa->id}}">
+                    <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" data-toggle="modal" data-target="#ModalDeletar{{$empresa->id}}"></i></button>
                 </td>
+
+                <!-- Modal para confirmação da exclusão  -->
+                @include('layouts.register.modals.modalDelete', [
+                'id' => 'ModalDeletar'.$empresa->id,
+                'title' => 'Excluir Empresa',
+                'message' => 'Confirma a exclusão desta empresa da aplicação?',
+                'action' => route('admin.company.destroy'),
+                'variable' => 'empresa'               
+                ])
+                <!-- Fim do modal -->
 
                 <!-- Modal com formulário para alteração dos dados do usuário selecionado -->
                 @include('layouts.register.modals.modalCompany', [
                 'id' => 'ModalAlterarEmpresa'.$empresa->id,
-                'labelledby' => 'Alterar Empresa',
                 'title' => 'Alterar Empresa',
                 'btn' => 'Salvar Alterações',
                 'method' => 'patch',
-                'action' => route('admin.company.update'),
-                'empresa' => $empresa
+                'action' => route('admin.company.update')
                 ])
                 <!-- Fim do modal -->
 

@@ -50,13 +50,14 @@
                     "zeroRecords": "",
                     "search": "Procurar",
                     "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "Nenhum resultado encontrado",
+                    "infoEmpty": "",
+                    "emptyTable": " Nenhum resultado encontrado ",
                     "infoFiltered": "",
                     "paginate": {
                         "first": "Primeira",
                         "last": "Última",
-                        "next": ">",
-                        "previous": "<"
+                        "next": '<i class="fas fa-angle-right"></i>',
+                        "previous": '<i class="fas fa-angle-left"></i>'
                     }
                 }
             });

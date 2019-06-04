@@ -52,37 +52,20 @@
 
                 <!-- Botão editar cliente aciona modal -->
                 <td>
-                    <form action="{{ route('admin.client.destroy') }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarCliente{{$cliente->id}}"><i class="fas fa-edit"></i></button>
-                        <input type="hidden" name="id" value="{{$cliente->id}}">
-                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeletarCliente"><i class="far fa-trash-alt"></i></button>
-                    </form>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarCliente{{$cliente->id}}"><i class="fas fa-edit"></i></button>
+                    <input type="hidden" name="id" value="{{$cliente->id}}">
+                    <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeletar{{$cliente->id}}"><i class="far fa-trash-alt"></i></button>
                 </td>
 
-                <!-- <div id="ModalDeletarCliente" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form action="{{ route('admin.client.destroy') }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Excluir Cliente</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Realmente deseja excluir este cliente?</p>
-                                    <p class="text-warning"><small>Esta ação não pode ser revertida.</small></p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secundary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-danger">Excluir</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div> -->
+                <!-- Modal para confirmação da exclusão  -->
+                @include('layouts.register.modals.modalDelete', [
+                'id' => 'ModalDeletar'.$cliente->id,
+                'title' => 'Excluir Cliente',
+                'message' => 'Confirma a exclusão deste cliente da aplicação?',
+                'action' => route('admin.client.destroy'),
+                'variable' => 'cliente'               
+                ])
+                <!-- Fim do modal -->
 
                 <!-- Modal com formulário para alteração dos dados do fornecedor selecionado -->
                 @include('layouts.register.modals.modalClient', [
@@ -91,8 +74,8 @@
                 'btn' => 'Salvar Alterações',
                 'labelledby' => 'Alterar Cliente',
                 'method' => 'patch',
-                'action' => route('admin.client.update'),
-                'fornecedor' => $cliente
+                'action' => route('admin.client.update')
+                
                 ])
                 <!-- Fim do modal -->
             </tr>

@@ -1,4 +1,4 @@
-<div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="{{$labelledby}}" aria-hidden="true">
+<div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <form id="form-modal" method="POST" action="{{$action}}">
@@ -68,8 +68,8 @@
                         <div class="col">
                             <label for="situation">Situação</label>
                             <select name="situation" id="situation" class="form-control">
-                                <option value="1" {{ empty($fornecedor) ? 'selected' : (($fornecedor->situation == "ATIVO")?'selected':'') }}>Ativo</option>
-                                <option value="0" {{ empty($fornecedor) ? 'selected' : (($fornecedor->situation == "INATIVO")?'selected':'') }}>Inativo</option>
+                                <option value="1" {{ empty($fornecedor) ? 'selected' : (($fornecedor->situation == "ATIVO")?'selected':'') }}>ATIVO</option>
+                                <option value="0" {{ empty($fornecedor) ? 'selected' : (($fornecedor->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
                             </select>
                         </div>
                     </div>

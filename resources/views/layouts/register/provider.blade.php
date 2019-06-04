@@ -18,7 +18,6 @@
     <!-- Modal com formulário para cadastro de novo fornecedor -->
     @include('layouts.register.modals.modalProvider', [
     'id' => 'ModalCadastrarFornecedor',
-    'labelledby' => 'Cadastrar Fornecedor',
     'title' => 'Cadastrar Fornecedor',
     'btn' => 'Cadastrar',
     'method' => 'put',
@@ -52,21 +51,26 @@
 
                 <!-- Botão editar fornecedor aciona modal -->
                 <td>
-                    <form action="{{ route('admin.provider.destroy') }}" method="POST">
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarFornecedor{{$fornecedor->id}}"><i class="fas fa-edit"></i></button>
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="id" value="{{$fornecedor->id}}">
-                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                    </form>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarFornecedor{{$fornecedor->id}}"><i class="fas fa-edit"></i></button>
+                    <input type="hidden" name="id" value="{{$fornecedor->id}}">
+                    <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" data-toggle="modal" data-target="#ModalDeletar{{$fornecedor->id}}"></i></button>
                 </td>
+
+                <!-- Modal para confirmação da exclusão  -->
+                @include('layouts.register.modals.modalDelete', [
+                'id' => 'ModalDeletar'.$fornecedor->id,
+                'title' => 'Excluir Fornecedor',
+                'message' => 'Confirma a exclusão deste fornecedor da aplicação?',
+                'action' => route('admin.provider.destroy'),
+                'variable' => 'fornecedor'               
+                ])
+                <!-- Fim do modal -->
 
                 <!-- Modal com formulário para alteração dos dados do fornecedor selecionado -->
                 @include('layouts.register.modals.modalProvider', [
                 'id' => 'ModalAlterarFornecedor'.$fornecedor->id,
                 'title' => 'Alterar Fornecedor',
                 'btn' => 'Salvar Alterações',
-                'labelledby' => 'Alterar Fornecedor',
                 'method' => 'patch',
                 'action' => route('admin.provider.update'),
                 'fornecedor' => $fornecedor
