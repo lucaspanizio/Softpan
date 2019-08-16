@@ -11,8 +11,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable
 {
     use Notifiable;
-
     use SoftDeletes;
+
+    /**
+     * Um usuário pode ter várias empresas
+     */
+    public function companies(){
+        return $this->belongsTo(Company::class);
+    }  
+
+    /**
+     * Um usuário pode ter várias transações
+     */
+    public function transactions(){
+        return $this->belongsTo(Transaction::class);
+    }  
 
     /**
      * The attributes that are mass assignable.

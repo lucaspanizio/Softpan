@@ -13,7 +13,7 @@
                 <div class="modal-body">
 
                 @if (!empty($usuario)) 
-                   <input type="hidden" name="id" value="{{$usuario->id}}">
+                   <input type="hidden" name="id" value="{{$usuario->id}}" onChange="javascript:this.value=this.value.toUpperCase();">
                 @endif
                     <div class="row">
                         <div class="col">
@@ -41,8 +41,8 @@
                         <div class="col">
                             <label for="role">Perfil</label>
                             <select name="role" id="role" class="form-control">
-                                <option value="COMUM" {{ empty($usuario) ? 'selected' : (($usuario->role == "COMUM")?'selected':'') }}>Comum</option>
-                                <option value="ADMIN"  {{ empty($usuario) ? 'selected' : (($usuario->role == "ADMIN")?'selected':'') }}>Administrador</option>
+                                <option value="COMUM" {{ empty($usuario) ? 'selected' : (($usuario->role == "COMUM")?'selected':'') }}>COMUM</option>
+                                <option value="ADMIN"  {{ empty($usuario) ? 'selected' : (($usuario->role == "ADMIN")?'selected':'') }}>ADMINISTRADOR</option>
                             </select>
                         </div>
 

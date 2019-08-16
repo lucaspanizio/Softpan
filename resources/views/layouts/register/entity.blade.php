@@ -13,7 +13,7 @@
     </div>
     @endif
 
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCadastrarCliente"><i class="fas fa-plus"></i> Novo Cliente</button> <br><br>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarCliente"><i class="fas fa-plus"></i> Novo Cliente</button> <br><br>
 
     <!-- Modal com formulário para cadastro de novo cliente -->
     @include('layouts.register.modals.modalClient', [
@@ -50,7 +50,7 @@
                 <td>{{$cliente->city}}</td>
                 <td>{{$cliente->state}}</td>
 
-                <!-- Botão editar cliente aciona modal -->
+                <!-- Botão editar e deletar cliente acionam modal -->
                 <td>
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarCliente{{$cliente->id}}"><i class="fas fa-edit"></i></button>
                     <input type="hidden" name="id" value="{{$cliente->id}}">
@@ -58,7 +58,7 @@
                 </td>
 
                 <!-- Modal para confirmação da exclusão  -->
-                @include('layouts.register.modals.modalDelete', [
+                @include('layouts.modalDelete', [
                 'id' => 'ModalDeletar'.$cliente->id,
                 'title' => 'Excluir Cliente',
                 'message' => 'Confirma a exclusão deste cliente da aplicação?',

@@ -13,7 +13,7 @@
     </div>
     @endif
 
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCadastrarUsuario"><i class="fas fa-plus"></i> Novo Usuário</button> <br><br>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarUsuario"><i class="fas fa-plus"></i> Novo Usuário</button> <br><br>
 
     <!-- Modal com formulário para cadastro de novo usuário -->
     @include('layouts.register.modals.modalUser', [
@@ -53,7 +53,7 @@
                 </td>
 
                 <!-- Modal para confirmação da exclusão  -->
-                @include('layouts.register.modals.modalDelete', [
+                @include('layouts.modalDelete', [
                 'id' => 'ModalDeletar'.$usuario->id,
                 'title' => 'Excluir Usuário',
                 'message' => 'Confirma a exclusão deste usuário da aplicação?',

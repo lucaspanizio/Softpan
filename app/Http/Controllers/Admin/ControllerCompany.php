@@ -15,8 +15,8 @@ class ControllerCompany extends Controller
      */
     public function index()
     {
-        $empresas = Company::all();        
-        return view('layouts.register.company', compact('empresas'));  
+        $companies = Company::all();        
+        return view('layouts.register.company', compact('companies'));  
     }
 
     public function store(Request $request)
@@ -25,16 +25,18 @@ class ControllerCompany extends Controller
             'name' => 'required|max:255',
             'number' => 'required|max:8'            
         ]);
-        $empresa = new Company();
-        $empresa->name = $request->name;
-        $empresa->phone = $request->phone;
-        $empresa->cnpj = $request->cnpj;
-        $empresa->street = $request->street;
-        $empresa->number = $request->number;
-        $empresa->city = $request->city;
-        $empresa->state = $request->state;        
-        $empresa->situation = $request->situation;
-        $empresa->save();
+        $company = new Company();
+        $company->name = $request->name;
+        $company->phone = $request->phone;
+        $company->cnpj = $request->cnpj;
+        $company->street = $request->street;
+        $company->number = $request->number;
+        $company->city = $request->city;
+        $company->zipcode = $request->zipcode;
+        $company->neighborhood = $request->neighborhood;
+        $company->state = $request->state;        
+        $company->situation = $request->situation;
+        $company->save();
 
         return redirect()->route('admin.company.index');
     }
@@ -46,23 +48,25 @@ class ControllerCompany extends Controller
             'number' => 'required|max:8'
         ]);
         
-        $empresa = Company::find($request->id);
-        $empresa->name = $request->name;        
-        $empresa->phone = $request->phone;
-        $empresa->cnpj = $request->cnpj;
-        $empresa->street = $request->street;
-        $empresa->number = $request->number;
-        $empresa->city = $request->city;
-        $empresa->state = $request->state;        
-        $empresa->situation = $request->situation;
-        $empresa->save();
+        $company = Company::find($request->id);
+        $company->name = $request->name;        
+        $company->phone = $request->phone;
+        $company->cnpj = $request->cnpj;
+        $company->street = $request->street;
+        $company->number = $request->number;
+        $company->zipcode = $request->zipcode;
+        $company->neighborhood = $request->neighborhood;
+        $company->city = $request->city;
+        $company->state = $request->state;        
+        $company->situation = $request->situation;
+        $company->save();
 
         return redirect()->route('admin.company.index');
     }
 
     public function destroy(Request $request) {
-        $empresa = Company::find($request->id);
-        $empresa->delete();
+        $company = Company::find($request->id);
+        $company->delete();
 
         return redirect()->route('admin.company.index');
 

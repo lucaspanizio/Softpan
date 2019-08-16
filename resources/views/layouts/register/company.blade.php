@@ -13,7 +13,7 @@
     </div>
     @endif
 
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCadastrarEmpresa"><i class="fas fa-plus"></i> Nova Empresa</button> <br><br>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarEmpresa"><i class="fas fa-plus"></i> Nova Empresa</button> <br><br>
 
     <!-- Modal com formulário para cadastro de nova empresa -->
     @include('layouts.register.modals.modalCompany', [
@@ -53,7 +53,7 @@
                 </td>
 
                 <!-- Modal para confirmação da exclusão  -->
-                @include('layouts.register.modals.modalDelete', [
+                @include('layouts.modalDelete', [
                 'id' => 'ModalDeletar'.$empresa->id,
                 'title' => 'Excluir Empresa',
                 'message' => 'Confirma a exclusão desta empresa da aplicação?',

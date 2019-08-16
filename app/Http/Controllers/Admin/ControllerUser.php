@@ -27,8 +27,6 @@ class ControllerUser extends Controller
 
     public function store(Request $request)
     {
-
-        // dd($request);
         $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
@@ -47,8 +45,6 @@ class ControllerUser extends Controller
 
     public function update(Request $request)
     {
-
-        // dd($request);
         $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255'

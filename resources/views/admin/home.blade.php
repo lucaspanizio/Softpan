@@ -17,9 +17,17 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
     <!-- Table CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css">
+    <!-- Table JS -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
 </head>
 
 <body>
@@ -44,13 +52,18 @@
     <!-- Parametros de formatação da tabela -->
     <script>
         $(document).ready(function() {
-            $('#table').DataTable({
+
+            //Guardei a table para encontrar as linhas selecionadas
+            var table = $('#table').DataTable({
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ resultados por página",
                     "zeroRecords": "",
                     "search": "Procurar",
                     "info": "Mostrando página _PAGE_ de _PAGES_",
                     "infoEmpty": "",
+                    "selected": " ",
+                    "decimal": ",",
+                    "thousands": ".",
                     "emptyTable": " Nenhum resultado encontrado ",
                     "infoFiltered": "",
                     "paginate": {
@@ -61,6 +74,25 @@
                     }
                 }
             });
+
+            $('#table tbody').on('click', 'tr', function() {
+                $(this).toggleClass('selected');
+                // alert(table.rows("Confirma o estorno de: "+'.selected').data().selected + ' receita(s)?');
+            });
+
+            function selectionRow(){
+                return table.data().selected();
+            }
+
+            // columnDefs: [{
+            //     orderable: false                    
+            // }],
+            // select: {
+            //     style: 'multi', // 'single', 'multi', 'os', 'multi+shift'                    
+            // },
+            // order: [
+            //     [1, 'asc']
+            // ]
         });
     </script>
 </body>

@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Http\Models\Provider;
+use App\Http\Models\Entity;
 
-class ProvidersTableSeeder extends Seeder
+class EntitiesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,28 +12,34 @@ class ProvidersTableSeeder extends Seeder
      */
     public function run()
     {
-        Provider::create([
+        Entity::create([
             'name' => 'MAGNUS FORMEDIC',
+            'type' => 'C',
             'cnpj' => '12111109876543',
+            'zipcode' => '86030817',
             'email' => 'magnus@magnus.com',
             'street' => 'RUA JOSE PIROLA',
-            // 'neighborhood' => 'VILA ROMANA',
+            'neighborhood' => 'VILA ROMANA',
             'number' => '236',
             'city' => 'SAO PAULO',
             'state' => 'SP',
             'situation' => true,
-            'phone' => '4333377488'
+            'phone' => '4333377488',
+            'phone' => '4330660255',
+            'phone' => '43998654203',
         ]);
 
         // Exibe uma informação no console durante o processo de seed
-        $this->command->info('Provider Magnus Formedic created');
+        $this->command->info('Client Magnus Formedic created');
 
-        Provider::create([
+        Entity::create([
             'name' => 'UNIFIOS',
             'cnpj' => '123456789101112',
+            'zipcode' => '86030290',
+            'type' => 'F',
             'email' => 'unifios@unifios.com',
             'street' => 'RUA ROMA',
-            // 'neighborhood' => 'JARDIM ALEMANHA',
+            'neighborhood' => 'JARDIM ALEMANHA',
             'number' => '2800',
             'city' => 'JATAIZINHO',
             'state' => 'PR',

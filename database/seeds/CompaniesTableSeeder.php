@@ -13,16 +13,16 @@ class CompaniesTableSeeder extends Seeder
     public function run()
     {
         Company::create([
-            'name' => 'J PANIZIO TRANSPORTES',
-            // 'email' => 'matriz@paniziotransportes.com.br',
+            'name' => 'J PANIZIO TRANSPORTES',            
+            'phone' => '4330660255',            
             'cnpj' => '21153290000183',            
             'street' => 'RUA AMELIA RISKALLAH ABIB TAUIL',
-            // 'neighborhood' => 'PARQUE INDUSTRIAL',
+            'neighborhood' => 'PARQUE INDUSTRIAL',
+            'zipcode' => '86030290',
             'number' => '290',
             'city' => 'LONDRINA',
             'state' => 'PR',
-            'situation' => true,
-            'phone' => '4330660255'
+            'situation' => true
         ]);
 
         // Exibe uma informação no console durante o processo de seed
@@ -30,15 +30,15 @@ class CompaniesTableSeeder extends Seeder
 
         Company::create([
             'name' => 'C E PANIZIO TRANSPORTES',
-            // 'email' => 'filial.ibaiti@paniziotransportes.com.br',
+            'phone' => '4336050619',
             'cnpj' => '8594615354894',           
             'street' => 'RUA INVENTADA',
-            // 'neighborhood' => 'PARQUE JOAO MIGUEL',
+            'neighborhood' => 'PARQUE JOAO MIGUEL',
+            'zipcode' => '86030817',
             'number' => '300',
             'city' => 'IBAITI',
             'state' => 'PR',
-            'situation' => true,
-            'phone' => '4336050619'
+            'situation' => true
         ]);
 
         // Exibe uma informação no console durante o processo de seed
