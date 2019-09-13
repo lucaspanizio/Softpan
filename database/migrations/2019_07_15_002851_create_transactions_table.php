@@ -15,26 +15,26 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('due_date')->nullable(false);
-            $table->date('pay_off_date')->nullable();
+            $table->date('due_date')->nullable(false); //Vencimento
+            $table->date('pay_off_date')->nullable();  //Data recebimento/pagamento
             $table->enum('type', ['CP', 'CR']); //CP - Contas a Pagar, CR - Contas a Receber
             $table->string('description');
-            $table->string('situation');
             $table->string('original_value');
-            $table->string('current_value');
-            $table->boolean('situation')->default(true);   
-            
-            $table->unsignedBigInteger('entity_id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('company_id');
+            $table->string('current_value')->nullable();
+            $table->enum('situation', ['1', '2', '3'])->default('1')->nullable(); //1 - A VENCER, 2 - PAGO, 3 - ATRASADO
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        Schema::table('transactions', function (Blueprint $table) {
+
+            $table->unsignedInteger('entity_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('company_id');
 
             $table->foreign('entity_id')->references('id')->on('entities');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('company_id')->references('id')->on('company');
-
-            $table->softDeletes();
-            $table->timestamps();
-
+            $table->foreign('company_id')->references('id')->on('companies');
         });
     }
 

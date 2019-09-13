@@ -23,7 +23,7 @@ class ControllerCompany extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'number' => 'required|max:8'            
+            'number' => 'max:8'            
         ]);
         $company = new Company();
         $company->name = $request->name;
@@ -45,7 +45,7 @@ class ControllerCompany extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'number' => 'required|max:8'
+            'number' => 'max:8'
         ]);
         
         $company = Company::find($request->id);

@@ -14,18 +14,20 @@ class User extends Authenticatable
     use SoftDeletes;
 
     /**
-     * Um usuário pode ter várias empresas
+     * Um usuário pode controlar várias empresas
      */
-    public function companies(){
-        return $this->belongsTo(Company::class);
-    }  
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    } 
 
     /**
-     * Um usuário pode ter várias transações
+     * Um usuário pode ter várias transações 
      */
-    public function transactions(){
-        return $this->belongsTo(Transaction::class);
-    }  
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
     /**
      * The attributes that are mass assignable.

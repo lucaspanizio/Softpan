@@ -24,9 +24,9 @@ class EntitiesTableSeeder extends Seeder
             'city' => 'SAO PAULO',
             'state' => 'SP',
             'situation' => true,
-            'phone' => '4333377488',
-            'phone' => '4330660255',
-            'phone' => '43998654203',
+            'phone1' => '4333377488',
+            'phone2' => '4330660255',
+            'cellphone' => '43998654203',
         ]);
 
         // Exibe uma informação no console durante o processo de seed
@@ -44,7 +44,7 @@ class EntitiesTableSeeder extends Seeder
             'city' => 'JATAIZINHO',
             'state' => 'PR',
             'situation' => true,
-            'phone' => '4333431890'
+            'phone1' => '4333431890'
         ]);
 
         // Exibe uma informação no console durante o processo de seed

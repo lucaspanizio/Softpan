@@ -19,7 +19,7 @@ class CreateCompaniesTable extends Migration
             $table->string('zipcode');                 
             $table->string('cnpj')->unique();
             $table->boolean('situation')->default(true); 
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('street');
             $table->string('neighborhood');
             $table->string('number');

@@ -38,40 +38,40 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($usuarios as $usuario)
+            @foreach ($users as $user)
             <tr>
-                <th scope="row">{{$usuario->id}}</th>
-                <td>{{$usuario->name}}</td>
-                <td>{{$usuario->email}}</td>
-                <td>{{$usuario->role}}</td>
+                <th scope="row">{{$user->id}}</th>
+                <td>{{$user->name}}</td>
+                <td>{{$user->email}}</td>
+                <td>{{$user->role}}</td>
 
                 <!-- Botão editar e remover usuário aciona modal -->
                 <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarUsuario{{$usuario->id}}"><i class="fas fa-edit"></i></button>
-                    <input type="hidden" name="id" value="{{$usuario->id}}">
-                    <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeletar{{$usuario->id}}"><i class="far fa-trash-alt"></i></button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarUsuario{{$user->id}}"><i class="fas fa-edit"></i></button>
+                    <input type="hidden" name="id" value="{{$user->id}}">
+                    <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeletar{{$user->id}}"><i class="far fa-trash-alt"></i></button>
                 </td>
 
                 <!-- Modal para confirmação da exclusão  -->
                 @include('layouts.modalDelete', [
-                'id' => 'ModalDeletar'.$usuario->id,
+                'id' => 'ModalDeletar'.$user->id,
                 'title' => 'Excluir Usuário',
                 'message' => 'Confirma a exclusão deste usuário da aplicação?',
                 'action' => route('admin.user.destroy'),
-                'variable' => 'usuario'
+                'variable' => $user
                 ])
                 <!-- Fim do modal -->
 
                 <!-- Modal com formulário para alteração dos dados do usuário selecionado -->
                 @include('layouts.register.modals.modalUser', [
-                'id' => 'ModalAlterarUsuario'.$usuario->id,
+                'id' => 'ModalAlterarUsuario'.$user->id,
                 'title' => 'Alterar Usuário',
                 'btn' => 'Salvar Alterações',
                 'lbl_pass1' => 'Nova Senha',
                 'lbl_pass2' => 'Confirme a Nova Senha',
                 'method' => 'patch',
                 'action' => route('admin.user.update'),
-                'usuario' => $usuario
+                'user' => $user
                 ])
                 <!-- Fim do modal -->
 

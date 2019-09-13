@@ -24,10 +24,11 @@
     <!-- Table CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css"> -->
+   
     <!-- Table JS -->
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script> -->
 </head>
 
 <body>
@@ -75,14 +76,14 @@
                 }
             });
 
-            $('#table tbody').on('click', 'tr', function() {
-                $(this).toggleClass('selected');
-                // alert(table.rows("Confirma o estorno de: "+'.selected').data().selected + ' receita(s)?');
-            });
+            // $('#table tbody').on('click', 'tr', function() {
+            //     $(this).toggleClass('selected');
+            //     // alert(table.rows("Confirma o estorno de: "+'.selected').data().selected + ' receita(s)?');
+            // });
 
-            function selectionRow(){
-                return table.data().selected();
-            }
+            // function selectionRow(){
+            //     return table.data().selected();
+            // }
 
             // columnDefs: [{
             //     orderable: false                    

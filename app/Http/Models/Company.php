@@ -4,31 +4,33 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Company extends Model
 {
     use SoftDeletes;
 
     /**
-     * Vários usuários por empresa
+     * N x N 
      */
-    public function users(){
-        return $this->belongsTo(User::class);
-    } 
+    public function entities()
+    {
+        return $this->belongsToMany(Entity::class, 'companies_entities', 'company_id', 'entity_id');
+    }
 
     /**
-     * Vários clientes por empresa
+     * Uma empresa pode ter vários usuários 
      */
-    public function clients(){
-        return $this->belongsTo(Client::class);
-    } 
-    
-    /**
-     * Vários fornecedores por empresa
-     */
-    public function providers(){
-        return $this->belongsTo(Provider::class);
+    public function users()
+    {
+        return $this->hasMany(User::class);
     } 
 
+
+    /**
+     * Uma empresa pode ter várias transações 
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

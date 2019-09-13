@@ -22,8 +22,7 @@ class CreateEntitiesTable extends Migration
 
             /* API VIACEP */
             $table->string('street');
-            $table->string('zipcode');
-            $table->string('complement');            
+            $table->string('zipcode');                       
             $table->string('city');
             $table->string('state');
             $table->string('neighborhood');
@@ -32,8 +31,8 @@ class CreateEntitiesTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone1');
-            $table->string('phone2');
-            $table->string('celphone');
+            $table->string('phone2')->nullable();
+            $table->string('cellphone')->nullable();
             $table->boolean('situation')->default(true);   
             
             $table->timestamps();

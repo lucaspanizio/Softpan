@@ -13,9 +13,9 @@ class CreateCompaniesEntitiesTable extends Migration
      */
     public function up()
     {
-        Schema::table('companies_entities', function (Blueprint $table) {
-            $table->unsignedBigInteger('entity_id');            
-            $table->unsignedBigInteger('company_id'); 
+        Schema::create('companies_entities', function (Blueprint $table) {
+            $table->unsignedInteger('entity_id');            
+            $table->unsignedInteger('company_id'); 
 
             $table->foreign('entity_id')->references('id')->on('entities');      
             $table->foreign('company_id')->references('id')->on('companies');

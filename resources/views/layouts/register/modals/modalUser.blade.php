@@ -12,17 +12,17 @@
                 </div>
                 <div class="modal-body">
 
-                @if (!empty($usuario)) 
-                   <input type="hidden" name="id" value="{{$usuario->id}}" onChange="javascript:this.value=this.value.toUpperCase();">
-                @endif
+                    @if (!empty($user))
+                    <input type="hidden" name="id" value="{{$user->id}}" onChange="javascript:this.value=this.value.toUpperCase();">
+                    @endif
                     <div class="row">
                         <div class="col">
                             <label for="name">Nome Completo</label>
-                            <input name="name" type="text" class="form-control" value="{{ empty($usuario) ?'':$usuario->name }}" id="name" placeholder="">
+                            <input name="name" type="text" class="form-control" value="{{ empty($user) ?'':$user->name }}" id="name" placeholder="">
                         </div>
                         <div class="col">
                             <label for="email">E-mail</label>
-                            <input name="email" type="email" class="form-control" id="email" value="{{ empty($usuario) ?'':$usuario->email }}">
+                            <input name="email" type="email" class="form-control" id="email" value="{{ empty($user) ?'':$user->email }}">
                         </div>
                     </div>
 
@@ -41,20 +41,31 @@
                         <div class="col">
                             <label for="role">Perfil</label>
                             <select name="role" id="role" class="form-control">
-                                <option value="COMUM" {{ empty($usuario) ? 'selected' : (($usuario->role == "COMUM")?'selected':'') }}>COMUM</option>
-                                <option value="ADMIN"  {{ empty($usuario) ? 'selected' : (($usuario->role == "ADMIN")?'selected':'') }}>ADMINISTRADOR</option>
+                                <option value="COMUM" {{ empty($user) ? 'selected' : (($user->role == "COMUM")?'selected':'') }}>COMUM</option>
+                                <option value="ADMIN" {{ empty($user) ? 'selected' : (($user->role == "ADMIN")?'selected':'') }}>ADMINISTRADOR</option>
                             </select>
                         </div>
 
                         <div class="col">
                             <label for="situation">Situação</label>
                             <select name="situation" id="situation" class="form-control">
-                                <option value="1" selected>ATIVO</option>
-                                <option value="0">INATIVO</option>
+                                <option value="1" {{ empty($user) ? 'selected' : (($user->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
+                                <option value="0" {{ empty($user) ? 'selected' : (($user->situation == "ATIVO")?'selected':'') }}>ATIVO</option>
                             </select>
                         </div>
                     </div>
 
+                    <br>
+                    <label>Empresas</label>
+
+                    <div class="row">
+                        @foreach ($companies as $company)
+                        <div class="col-6">
+                            <input id="company.{{$company->id}}" type="checkbox" value={{$company->id}}>
+                            <label for="company.{{$company->id}}">{{$company->name}}</label>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
 
                 <div class="modal-footer">

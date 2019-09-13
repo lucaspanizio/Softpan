@@ -5,15 +5,31 @@ namespace App\Http\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Receivable extends Model
+class Transaction extends Model
 {
     use SoftDeletes;
 
     /**
-     * Vários recebíveis por empresa
+     * Uma transação pode ser de apenas uma empresa
      */
-    public function companys(){
+    public function company()
+    {
         return $this->belongsTo(Company::class);
-    }       
-    
+    }
+
+    /**
+     * Uma transação pode ser de apenas um usuário
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Uma transação pertence a uma entidade
+     */
+    public function entity()
+    {
+        return $this->belongsTo(Entity::class);
+    }
 }

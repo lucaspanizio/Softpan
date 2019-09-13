@@ -11,9 +11,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- @if (!empty($variable))
-                    <input type="hidden" name="id" value="{{${$variable}->id}}">
-                    @endif -->
+                    
 
                     <p>{{$message}}</p>
                     <p class="text-danger"><small>Esta ação não pode ser revertida.</small></p>

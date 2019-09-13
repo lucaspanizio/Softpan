@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Models\Transaction;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ControllerTransaction extends Controller
 {
@@ -12,13 +13,21 @@ class ControllerTransaction extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($t)
     {
-        $transactions = Transaction::all();
-        return view('admin.register.etransaction', compact('transactions'));
+        if ($t == 'receivable') {
+            $transactions = DB::table('transactions')->where('type', 'CR')->get();
+            $typeTransaction = "receivable";
+            $tipoTransacao = "Receita";
+        }else{
+            $transactions = DB::table('transactions')->where('type', 'CP')->get();
+            $typeTransaction = "payable";
+            $tipoTransacao = "Despesa";
+        }      
+        return view('layouts.transactions.transaction', compact('transactions','typeTransaction','tipoTransacao'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $t)
     {        
         $transaction = new Transaction();
         $transaction->id_user = $request->id_user;

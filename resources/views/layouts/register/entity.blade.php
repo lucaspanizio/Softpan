@@ -13,16 +13,16 @@
     </div>
     @endif
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarCliente"><i class="fas fa-plus"></i> Novo Cliente</button> <br><br>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarEntidade"><i class="fas fa-plus"></i> Novo {{ $tipoEntidade }}</button> <br><br>
 
-    <!-- Modal com formulário para cadastro de novo cliente -->
-    @include('layouts.register.modals.modalClient', [
-    'id' => 'ModalCadastrarCliente',
-    'labelledby' => 'Cadastrar Cliente',
-    'title' => 'Cadastrar Cliente',
+    <!-- Modal com formulário para cadastro de nova entidade -->
+    @include('layouts.register.modals.modalEntity', [
+    'id' => 'ModalCadastrarEntidade',
+    'labelledby' => 'Cadastrar '.$tipoEntidade,
+    'title' => 'Cadastrar '.$tipoEntidade,
     'btn' => 'Cadastrar',
     'method' => 'put',
-    'action' => route('admin.client.store')
+    'action' => route('admin.entity.store', $typeEntity)
     ])
     <!-- Fim do modal -->
 
@@ -30,52 +30,53 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Documento</th>
+                <th scope="col">{{$tipoEntidade}}</th>                
+                <th scope="col">Documento</th>                
                 <th scope="col">Cidade</th>
                 <th scope="col">Estado</th>
                 <th width="80" scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($clientes as $cliente)
+            @foreach ($entities as $entity)
             <tr>
-                <th scope="row">{{$cliente->id}}</th>
-                <td>{{$cliente->name}}</td>
-                @if (!empty($cliente->cnpj))
-                <td>{{$cliente->cnpj}}</td>
+                <th scope="row">{{$entity->id}}</th>
+                <td>{{$entity->name}}</td>
+                
+                @if (!empty($entity->cnpj))
+                <td>{{$entity->cnpj}}</td>
                 @else
-                <td>{{$cliente->cpf}}</td>
+                <td>{{$entity->cpf}}</td>
                 @endif
-                <td>{{$cliente->city}}</td>
-                <td>{{$cliente->state}}</td>
 
-                <!-- Botão editar e deletar cliente acionam modal -->
+                <td>{{$entity->city}}</td>
+                <td>{{$entity->state}}</td>
+
+                <!-- Botão editar e deletar entidade acionam modal -->
                 <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarCliente{{$cliente->id}}"><i class="fas fa-edit"></i></button>
-                    <input type="hidden" name="id" value="{{$cliente->id}}">
-                    <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeletar{{$cliente->id}}"><i class="far fa-trash-alt"></i></button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarEntidade{{$entity->id}}"><i class="fas fa-edit"></i></button>
+                    <input type="hidden" name="id" value="{{$entity->id}}">
+                    <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeletar{{$entity->id}}"><i class="far fa-trash-alt"></i></button>
                 </td>
 
                 <!-- Modal para confirmação da exclusão  -->
                 @include('layouts.modalDelete', [
-                'id' => 'ModalDeletar'.$cliente->id,
-                'title' => 'Excluir Cliente',
-                'message' => 'Confirma a exclusão deste cliente da aplicação?',
-                'action' => route('admin.client.destroy'),
-                'variable' => 'cliente'               
+                'id' => 'ModalDeletar'.$entity->id,
+                'title' => 'Excluir '.$tipoEntidade,
+                'message' => 'Confirma a exclusão deste '.strtolower($tipoEntidade).' da aplicação?',
+                'action' => route('admin.entity.destroy'),
+                'variable' => $entity
                 ])
                 <!-- Fim do modal -->
 
                 <!-- Modal com formulário para alteração dos dados do fornecedor selecionado -->
-                @include('layouts.register.modals.modalClient', [
-                'id' => 'ModalAlterarCliente'.$cliente->id,
-                'title' => 'Alterar Cliente',
+                @include('layouts.register.modals.modalEntity', [
+                'id' => 'ModalAlterarEntidade'.$entity->id,
+                'title' => 'Alterar '.$tipoEntidade,
                 'btn' => 'Salvar Alterações',
-                'labelledby' => 'Alterar Cliente',
+                'labelledby' => 'Alterar '.$tipoEntidade,
                 'method' => 'patch',
-                'action' => route('admin.client.update')
-                
+                'action' => route('admin.entity.update')
                 ])
                 <!-- Fim do modal -->
             </tr>
