@@ -1,5 +1,5 @@
 <div class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <form id="form-modal" method="POST" action="{{$action}}">
                 @method($method)
@@ -21,13 +21,6 @@
                             <input name="name" type="text" class="form-control" value="{{ empty($entity) ?'':$entity->name }}" id="name">
                         </div>
                         <div class="col">
-                            <label for="email">E-mail</label>
-                            <input name="email" type="email" class="form-control" id="email" value="{{ empty($entity) ?'':$entity->email }}">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
                             <label for="cnpj">CNPJ</label>
                             <input name="cnpj" type="text" class="form-control" value="{{ empty($entity) ?'':$entity->cnpj }}" id="cnpj">
                         </div>
@@ -38,29 +31,26 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-9">
+                        <div class="col-5">
+                            <label for="neighborhood">Bairro</label>
+                            <input name="neighborhood" type="text" class="form-control" value="{{ empty($entity) ?'':$entity->neighborhood }}" id="neighborhood" required>
+                        </div>
+                        <div class="col-5">
                             <label for="street">Rua</label>
                             <input name="street" type="text" class="form-control" value="{{ empty($entity) ?'':$entity->street }}" id="street">
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
                             <label for="number">Número</label>
                             <input name="number" type="number" min="0" class="form-control" value="{{ empty($entity) ?'':$entity->number }}" id="number">
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-8">
-                            <label for="neighborhood">Bairro</label>
-                            <input name="neighborhood" type="text" class="form-control" value="{{ empty($entity) ?'':$entity->neighborhood }}" id="neighborhood">
-                        </div>
                         <div class="col-4">
                             <label for="zipcode">CEP</label>
-                            <input name="zipcode" type="number" class="form-control" value="{{ empty($entity) ?'':$entity->zipcode }}" id="zipcode">
+                            <input onblur="pesquisacep(this.value);" name="zipcode" class="form-control" value="{{ empty($entity) ? '' : $entity->zipcode }}" id="zipcode">
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-10">
+                        <div class="col-6">
                             <label for="city">Cidade</label>
                             <input name="city" type="text" class="form-control" value="{{ empty($entity) ?'':$entity->city }}" id="city">
                         </div>
@@ -72,6 +62,10 @@
 
                     <div class="row">
                         <div class="col">
+                            <label for="email">E-mail</label>
+                            <input name="email" type="email" class="form-control" id="email" value="{{ empty($entity) ?'':$entity->email }}">
+                        </div>
+                        <div class="col">
                             <label for="phone1">Telefone 1</label>
                             <input name="phone1" type="text" class="form-control" value="{{ empty($entity) ?'':$entity->phone1 }}" id="phone1">
                         </div>
@@ -82,12 +76,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="col">
+                        <div class="col-4">
                             <label for="cellphone">Celular</label>
                             <input name="cellphone" type="text" class="form-control" value="{{ empty($entity) ?'':$entity->cellphone }}" id="cellphone">
                         </div>
 
-                        <div class="col">
+                        <div class="col-4">
                             <label for="situation">Situação</label>
                             <select name="situation" id="situation" class="form-control">
                                 <option value="1" {{ empty($entity) ? 'selected' : (($entity->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
@@ -96,13 +90,12 @@
                         </div>
                     </div>
 
-                    <br>
-                    <label>Empresas</label>
-
-                    <div class="row">
+                    <hr>
+                    <label>Empresas</label>                   
+                    <div class="row">                    
                         @foreach ($companies as $company)
                         <div class="col-6">
-                            <input id="company.{{$company->id}}" type="checkbox" value={{$company->id}}>
+                            <input name="companies[]" id="company.{{$company->id}}" type="checkbox" value="{{$company->id}}" {{ empty($entity) ? '' : (($entity->companies->isEmpty() ? '' : ($entity->companies->contains($company->id) ? 'checked' : ''))) }}>
                             <label for="company.{{$company->id}}">{{$company->name}}</label>
                         </div>
                         @endforeach

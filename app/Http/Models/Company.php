@@ -22,7 +22,7 @@ class Company extends Model
      */
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class, 'companies_users','user_id','company_id');
     } 
 
 
@@ -31,6 +31,6 @@ class Company extends Model
      */
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->belongsToMany(Transaction::class);
     }
 }

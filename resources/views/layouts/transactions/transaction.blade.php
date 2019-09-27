@@ -19,7 +19,7 @@
 
     <div class="row">
 
-        <!-- Campo de data para filtro dos títulos -->
+        <!-- Campo de data para filtro dos títulos -->  
         <div class="col-3">
             <label>Vencimentos até: </label>
             <div class=" input-group">
@@ -68,7 +68,6 @@
             </tr>
         </thead>
         <tbody>
-            <!-- foreach () -->
             <tr>
                 @foreach ($transactions as $transaction)
                 <td>{{$transaction->id}}</td>

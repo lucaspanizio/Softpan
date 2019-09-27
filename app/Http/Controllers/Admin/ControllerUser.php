@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Company;
@@ -36,9 +37,16 @@ class ControllerUser extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->input('email');
-        $user->password = $request->input('password');
+        $user->password = bcrypt($request->input('password'));
         $user->role = $request->input('role');
         $user->situation = $request->input('situation');
+        $user->save();
+
+        foreach ($request->companies as $c) {
+            $company = Company::find($c);
+            $user->companies()->attach($company);
+        }
+
         $user->save();
 
         return redirect()->route('admin.user.index');
@@ -55,23 +63,30 @@ class ControllerUser extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
 
-        if (!empty($request->password)){
-            if($request->password == $request->password_confirmation)
-                $user->password = $request->password;
-        }            
-            
+        if (!empty($request->password)) {
+            if ($request->password == $request->input('password-confirmation'))
+                $user->password = bcrypt($request->password);
+        }
+
         $user->role = $request->role;
         $user->situation = $request->situation;
+
+        $user->companies()->detach();
+        foreach ($request->companies as $c) {
+            $company = Company::find($c);
+            $user->companies()->attach($company);
+        }
+
         $user->save();
 
         return redirect()->route('admin.user.index');
     }
 
-    public function destroy(Request $request) {
+    public function destroy(Request $request)
+    {
         $user = User::find($request->id);
         $user->delete();
 
-        return redirect()->route('admin.user.index');
-
+        return redirect()->back();
     }
 }

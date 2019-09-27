@@ -15,29 +15,41 @@
                     @if (!empty($user))
                     <input type="hidden" name="id" value="{{$user->id}}" onChange="javascript:this.value=this.value.toUpperCase();">
                     @endif
-                    <div class="row">
+                    <div class="form-group row">
                         <div class="col">
                             <label for="name">Nome Completo</label>
-                            <input name="name" type="text" class="form-control" value="{{ empty($user) ?'':$user->name }}" id="name" placeholder="">
+                            <input name="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" required autofocus value="{{ empty($user) ?'':$user->name }}" id="name" placeholder="">
+
+                            @if ($errors->has('name'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                            @endif
                         </div>
                         <div class="col">
                             <label for="email">E-mail</label>
-                            <input name="email" type="email" class="form-control" id="email" value="{{ empty($user) ?'':$user->email }}">
+                            <input name="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="name" required id="email" value="{{ empty($user) ?'':$user->email }}">
+
+                            @if ($errors->has('email'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                            @endif
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="form-group row">
                         <div class="col">
-                            <label for="newpass">{{$lbl_pass1}}</label>
-                            <input name="password" type="password" class="form-control" id="newpass" value="">
+                            <label for="password">{{$lbl_pass1}}</label>
+                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" confirmed>
                         </div>
                         <div class="col">
-                            <label for="newpass2">{{$lbl_pass2}}</label>
-                            <input name="password_confirmation" type="password" class="form-control" id="newpass2" data-match="newpass">
+                            <label for="password-confirm">{{$lbl_pass2}}</label>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="form-group row">
                         <div class="col">
                             <label for="role">Perfil</label>
                             <select name="role" id="role" class="form-control">
@@ -49,20 +61,21 @@
                         <div class="col">
                             <label for="situation">Situação</label>
                             <select name="situation" id="situation" class="form-control">
-                                <option value="1" {{ empty($user) ? 'selected' : (($user->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
                                 <option value="0" {{ empty($user) ? 'selected' : (($user->situation == "ATIVO")?'selected':'') }}>ATIVO</option>
+                                <option value="1" {{ empty($user) ? 'selected' : (($user->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
                             </select>
                         </div>
                     </div>
 
-                    <br>
+                    <hr>
                     <label>Empresas</label>
-
-                    <div class="row">
+                    <div class="form-group row">
                         @foreach ($companies as $company)
                         <div class="col-6">
-                            <input id="company.{{$company->id}}" type="checkbox" value={{$company->id}}>
-                            <label for="company.{{$company->id}}">{{$company->name}}</label>
+                            <label for="company.{{$company->id}}">
+                                <input name="companies[]" id="company.{{$company->id}}" type="checkbox" value="{{$company->id}}" {{ empty($user) ? '' : (($user->companies->isEmpty() ? '' : ($user->companies->contains($company->id) ? 'checked' : ''))) }}>
+                                {{$company->name}}
+                            </label>
                         </div>
                         @endforeach
                     </div>
@@ -76,3 +89,4 @@
         </div>
     </div>
 </div>
+

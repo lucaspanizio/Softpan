@@ -23,8 +23,8 @@
         <div class="list-group collapse" id="menu2">
             <a href="{{ route('admin.user.index') }}" class="list-group-item"><i class="fas fa-users"></i> Usuários</a>
             <a href="{{ route('admin.company.index') }}" class="list-group-item" data-parent="#menu2"><i class="fas fa-building"></i> Empresas</a>
-            <a href="{{ route('admin.entity.index', 'client') }}" class="list-group-item" data-parent="#menu2"><i class="far fa-handshake"></i> Clientes</a>  
-            <a href="{{ route('admin.entity.index', 'provider') }}" class="list-group-item" data-parent="#menu2"><i class="fas fa-truck"></i> Fornecedores</a>
+            <a href="{{ route('admin.entity.index', 'C') }}" class="list-group-item" data-parent="#menu2"><i class="far fa-handshake"></i> Clientes</a>  
+            <a href="{{ route('admin.entity.index', 'F') }}" class="list-group-item" data-parent="#menu2"><i class="fas fa-truck"></i> Fornecedores</a>
         </div>
         
         <a href="{{ route('admin.transaction.index', 'receivable') }}" class="list-group-item">

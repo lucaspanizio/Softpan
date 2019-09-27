@@ -40,7 +40,7 @@ $this->group(['prefix' => 'admin'], function () {
 
     /* Entidades - Clientes ou Fornecedores  */
     Route::get('entity/{e}', 'Admin\ControllerEntity@index')->name('admin.entity.index');
-    Route::put('entity/{e}', 'Admin\ControllerEntity@store')->name('admin.entity.store');
+    Route::put('entity{e}', 'Admin\ControllerEntity@store')->name('admin.entity.store');
     Route::patch('entity', 'Admin\ControllerEntity@update')->name('admin.entity.update');
     Route::delete('entity', 'Admin\ControllerEntity@destroy')->name('admin.entity.destroy');    
 });

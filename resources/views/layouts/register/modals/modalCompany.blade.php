@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-4">
                             <label for="zipcode">CEP</label>
-                            <input name="zipcode" type="number" class="form-control" value="{{ empty($company) ?'':$company->zipcode }}" id="zipcode">
+                            <input name="zipcode" type="text" class="form-control" value="{{ empty($company) ?'':$company->zipcode }}" id="zipcode">
                         </div>
                     </div>
 

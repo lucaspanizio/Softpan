@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
     public function companies()
     {
-        return $this->hasMany(Company::class);
+        return $this->belongsToMany(Company::class, 'companies_users','user_id','company_id');
     } 
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
      */
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->belongsToMany(Transaction::class);
     }
 
     /**

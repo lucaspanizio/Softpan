@@ -65,10 +65,10 @@ class ControllerCompany extends Controller
     }
 
     public function destroy(Request $request) {
+
         $company = Company::find($request->id);
         $company->delete();
 
         return redirect()->route('admin.company.index');
-
     }
 }

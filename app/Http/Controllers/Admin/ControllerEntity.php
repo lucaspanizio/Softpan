@@ -6,24 +6,19 @@ use App\Http\Models\Entity;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Company;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 
 class ControllerEntity extends Controller
 {
     public function index($e)
-    {
-        if ($e == 'client') {
-            $entities = DB::table('entities')->where('type', 'C')->get();
-            $typeEntity = 'client';
-            $tipoEntidade = 'Cliente';
-        } else {
-            $entities = DB::table('entities')->where('type', 'F')->get();
-            $typeEntity = 'provider';
-            $tipoEntidade = 'Fornecedor';
-        }
+    {        
         $companies = Company::all();
+        $entities = Entity::where('type', $e)->get();
 
-        return view('layouts.register.entity', compact('entities', 'typeEntity', 'tipoEntidade', 'companies'));
+        if ($e == 'C') $tipoEntidade = 'Cliente';
+        else           $tipoEntidade = 'Fornecedor'; 
+
+        return view('layouts.register.entity', compact('entities', 'e', 'tipoEntidade', 'companies'));
     }
 
     public function store(Request $request, $e)
@@ -53,21 +48,14 @@ class ControllerEntity extends Controller
         $entity->state = $request->state;
         $entity->situation = $request->situation;
 
-        $entity->save();
-
-        for ($i = 0; $i < $request->companies; $i++) {
-            $company = Company::find($request->companies[$i]);
-            $entity->company()->attach($company);
+        foreach ($request->companies as $c) {
+            $company = Company::find($c);
+            $entity->companies()->attach($company);
         }
 
         $entity->save();
 
-        // Se a entidade é do tipo cliente
-        if ($request->type == 'C')
-            return redirect()->route('admin.entity.index', 'client');
-        // Se a entidade é do tipo fornecedor
-        else
-            return redirect()->route('admin.entity.index', 'provider');
+        return redirect()->back();
     }
 
     public function update(Request $request)
@@ -93,32 +81,29 @@ class ControllerEntity extends Controller
         $entity->state = $request->state;
         $entity->situation = $request->situation;
 
-        for ($i = 0; $i < $request->companies; $i++) {
-            $company = Company::find($request->companies[$i]);
-            $entity->company()->detta($company);
-            $entity->company()->attach($company);
+        $entity->companies()->detach();
+        foreach ($request->companies as $c) {
+            $company = Company::find($c);
+            $entity->companies()->attach($company);
         }
 
         $entity->save();
 
-        // Se a entidade é do tipo cliente
-        if ($entity->type == 'C')
-            return redirect()->route('admin.entity.index', 'client');
-        // Se a entidade é do tipo fornecedor
-        else
-            return redirect()->route('admin.entity.index', 'provider');
+        return redirect()->back();
     }
 
     public function destroy(Request $request)
-    {
-        $entity = Entity::find($request->id);
-        $entity->delete();
+    {           
+        $entity = Entity::find($request->id); 
+        $entity->delete(); 
+        
+        return redirect()->back();
 
-        // Se a entidade é do tipo cliente
-        if ($request->type == 'C')
-            return redirect()->route('admin.entity.index', 'client');
-        // Se a entidade é do tipo fornecedor
-        else
-            return redirect()->route('admin.entity.index', 'provider');
+        // // Se a entidade é do tipo cliente
+        // if ($request->type == 'C')
+        //     return redirect()->route('admin.entity.index', 'client');
+        // // Se a entidade é do tipo fornecedor
+        // else
+        //     return redirect()->route('admin.entity.index', 'provider');
     }
 }

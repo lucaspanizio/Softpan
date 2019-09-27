@@ -58,7 +58,7 @@
                 'title' => 'Excluir Empresa',
                 'message' => 'Confirma a exclusão desta empresa da aplicação?',
                 'action' => route('admin.company.destroy'),
-                'variable' => 'company'               
+                'variable' => $company              
                 ])
                 <!-- Fim do modal -->
 
@@ -67,8 +67,9 @@
                 'id' => 'ModalAlterarEmpresa'.$company->id,
                 'title' => 'Alterar Empresa',
                 'btn' => 'Salvar Alterações',
-                'method' => 'patch',
-                'action' => route('admin.company.update')
+                'method' => 'patch',                                
+                'action' => route('admin.company.update'),
+                'company' => $company
                 ])
                 <!-- Fim do modal -->
 

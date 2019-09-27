@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-    @if ($errors->any())
+    <!-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -11,7 +11,7 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif -->
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarUsuario"><i class="fas fa-plus"></i> Novo Usuário</button> <br><br>
 
