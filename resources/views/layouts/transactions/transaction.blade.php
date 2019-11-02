@@ -7,9 +7,8 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarTransacao"><i class="fas fa-plus"></i> Nova {{$tipoTransacao}}</button><br><br>
 
     <!-- Modal com formulário para cadastro de nova entidade -->
-    @include('layouts.transactions.modals.modalTransaction', [
+    @include('layouts.modals.modalTransaction', [
     'id' => 'ModalCadastrarTransacao',
-    'labelledby' => 'Cadastrar '.$tipoTransacao,
     'title' => 'Cadastrar '.$tipoTransacao,
     'btn' => 'Cadastrar',
     'method' => 'put',
@@ -18,15 +17,21 @@
     <!-- Fim do modal -->
 
     <div class="row">
-
-        <!-- Campo de data para filtro dos títulos -->  
-        <div class="col-3">
-            <label>Vencimentos até: </label>
-            <div class=" input-group">
-                <input class="form-control" type="date" id="inputDate1">
+        <!-- Campo de data para filtro dos títulos -->
+        <div class="form-group px-3">
+            <label for="initial_date">Data Inicial: </label>
+            <div class='input-group date' id='datetimepicker6'>
+                <input type='date' id="initial_date" name="initial_date" class="form-control" />                
             </div>
         </div>
 
+        <div class="form-group px-3">
+            <label for="final_date">Data Final: </label>
+            <div class='input-group date' id='datetimepicker7'>
+                <input type='date' id="final_date" name="final_date" class="form-control" />
+            </div>
+        </div>
+        
         <!-- Check box's de filtro para demonstração dos títulos -->
         <div class="col">
             <label>Situação: </label><br>
@@ -47,64 +52,72 @@
                 <label class="custom-control-label" for="defaultInline4">Atrasados</label>
             </div>
         </div>
-    </div><br>
+    </div>
 
     <!-- Tabela de Despesas com breves informações de cada qual -->
     <table class="table table-sm table-hover table-bordered" id="table">
         <thead>
-            <tr>
-                <th>#</th>
-                @if ($typeTransaction == "receivable")
-                <th>Cliente</th>
-                @else
-                <th>Fornecedor</th>
-                @endif
+            <th>#</th>
+            @if ($typeTransaction == "receivable")
+            <th>Cliente</th>
+            @else
+            <th>Fornecedor</th>
+            @endif
 
-                <th>Descrição</th>
-                <th>Vencimento</th>
-                <th>Valor</th>
-                <th>Situação</th>
-                <th width="120"></th>
+            <th>Descrição</th>
+            <th>Vencimento</th>
+            <th>Valor</th>
+            <th>Situação</th>
+            <th width="130"></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                @foreach ($transactions as $transaction)
+            @foreach ($transactions as $transaction)
+            <tr data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+
                 <td>{{$transaction->id}}</td>
-                <td>COMO COLOCAR AQUI?</td> <!-- Nome do fornecedor ou cliente -->
+                <td>{{empty($transaction->entity) ? ' ': $transaction->entity->name}}</td> <!-- Nome do fornecedor ou cliente -->
                 <td>{{$transaction->description}}</td>
-                <td>{{$transaction->due_date}}</td>
-                <td>{{$transaction->original_value}}</td>
+                <td>{{$transaction->due_date->format('d/m/Y')}}</td>
+                <td>{{$transaction->current_value != null ? $transaction->current_value : $transaction->original_value}}</td>
                 <td>
-                    @if($transaction->situation == '1')
-                    A VENCER
-                    @elseif ($transaction->situation == '2')
-                    PAGO
-                    @else
-                    ATRASADO
+                    @if($transaction->situation == '1') A VENCER
+                    @elseif ($transaction->situation == '2') PAGO
+                    @else ATRASADO
                     @endif
                 </td>
-                @endforeach
+
 
                 <!-- Botão de alterar receita (aciona modal) -->
-                <td>
-                    <button id="btnReceber" type="submit" class="btn btn-success" data-toggle="modal" data-target="#ModalReceber"><i class="fas fa-check"></i></button>
-                    <button id="btnAlterar" type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarTransacao"><i class="fas fa-edit"></i></button>
-                    <button id="btnEstornar" class="btn btn-danger" data-toggle="modal" data-target="#ModalEstornar"><i class="far fa-trash-alt"></i></button>
+                <td class="text-right">
+                    @if($transaction->current_value == null)
+                    <button id="btnReceber" type="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLiquidarTransacao{{$transaction->id}}"><i class="fas fa-check"></i></button>
+                    @endif
+                    <button id="btnVisualizar" type="button" class="btn btn-secundary btn-sm" data-toggle="modal" data-target="#ModalVisualizarTransacao{{$transaction->id}}"><i class="fas fa-eye"></i></button>
+                    <button id="btnAlterar" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalAlterarTransacao{{$transaction->id}}"><i class="fas fa-edit"></i></button>
+                    <button id="btnEstornar" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#ModalDeletar{{$transaction->id}}"><i class="far fa-trash-alt"></i></button>
                 </td>
 
-                <!-- Modal para confirmação da exclusão  -->
-                @include('layouts.modalDelete', [
-                'id' => 'ModalEstornar'.$transaction->id,
-                'title' => 'Estornar '.$tipoTransacao,
-                'message' => 'Confirma a exclusão desta '.strtolower($tipoTransacao).' da aplicação?',
-                'action' => route('admin.transaction.destroy'),
-                'variable' => $transaction
+                <!-- Modal com formulário para visualização dos dados da transação selecionada -->
+                @include('layouts.modals.modalViewTransaction', [
+                'id' => 'ModalVisualizarTransacao'.$transaction->id,
+                'title' => 'Visualizar Transação',
+                'transaction' => $transaction
                 ])
                 <!-- Fim do modal -->
 
-                <!-- Modal com formulário para alteração dos dados da transação selecionado -->
-                @include('layouts.transactions.modals.modalTransaction', [
+                <!-- Modal com formulário para alteração dos dados da transação selecionada -->
+                @include('layouts.modals.modalLiquidateTransaction', [
+                'id' => 'ModalLiquidarTransacao'.$transaction->id,
+                'title' => 'Liquidar Transação',
+                'btn' => 'Liquidar',
+                'method' => 'post',
+                'action' => route('admin.transaction.liquidate')
+                ])               
+                <!-- Fim do modal -->
+
+                <!-- Modal com formulário para alteração dos dados da transação selecionada -->
+                @include('layouts.modals.modalTransaction', [
                 'id' => 'ModalAlterarTransacao'.$transaction->id,
                 'title' => 'Alterar '.$tipoTransacao,
                 'btn' => 'Salvar Alterações',
@@ -114,33 +127,19 @@
                 ])
                 <!-- Fim do modal -->
 
+                <!-- Modal para confirmação da exclusão  -->
+                @include('layouts.modals.modalDelete', [
+                'id' => 'ModalDeletar'.$transaction->id,
+                'title' => 'Excluir '.$tipoTransacao,
+                'message' => 'Confirma a exclusão da '.strtolower($tipoTransacao).' de Nº '.$transaction->id.' da aplicação?',
+                'action' => route('admin.transaction.destroy'),
+                'variable' => $transaction
+                ])
+                <!-- Fim do modal -->
             </tr>
+            @endforeach
         </tbody>
     </table>
-
-    <br>
-    <!-- Campos de valor original, juros, multa e valor atual para o título selecionado -->
-    <div class="row">
-
-        <div class="col-3">
-            <label for="inputJuros">Juros: </label>
-            <input class="form-control" type="text" id="inputJuros" placeholder="R$ 0.00" disabled>
-        </div>
-
-        <div class="col-3">
-            <label for="inputMulta">Multa: </label>
-            <input class="form-control" type="text" id="inputMulta" placeholder="R$ 0.00" disabled>
-        </div>
-
-        <div class="col-3">
-            <label for="inputValorFinal">Valor Final: </label>
-            <input class="form-control" type="text" id="inputValorFinal" placeholder="TRANSACAO SELECIONADA (COMO?)" disabled>
-        </div>
-
-        <div class="col-3">
-            <label for="inputDataRecebimento">Recebimento: </label>
-            <input class="form-control" type="text" id="inputDataRecebimento" placeholder="TRANSACAO SELECIONADA (COMO?)" disabled>
-        </div>
-    </div>
+    
 </div>
 @endsection

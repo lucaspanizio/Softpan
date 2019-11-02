@@ -9,21 +9,21 @@ class Company extends Model
 {
     use SoftDeletes;
 
-    /**
-     * N x N 
-     */
-    public function entities()
-    {
-        return $this->belongsToMany(Entity::class, 'companies_entities', 'company_id', 'entity_id');
-    }
+    // /**
+    //  * N x N 
+    //  */
+    // public function entities()
+    // {
+    //     return $this->belongsToMany(Entity::class, 'companies_entities', 'company_id', 'entity_id');
+    // }
 
-    /**
-     * Uma empresa pode ter vários usuários 
-     */
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'companies_users','user_id','company_id');
-    } 
+    // /**
+    //  * Uma empresa pode ter vários usuários 
+    //  */
+    // public function users()
+    // {
+    //     return $this->belongsToMany(User::class, 'companies_users','user_id','company_id');
+    // } 
 
 
     /**
@@ -31,6 +31,6 @@ class Company extends Model
      */
     public function transactions()
     {
-        return $this->belongsToMany(Transaction::class);
+        return $this->hasMany(Transaction::class);
     }
 }

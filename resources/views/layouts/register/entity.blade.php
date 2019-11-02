@@ -16,7 +16,7 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarEntidade"><i class="fas fa-plus"></i> Novo {{ $tipoEntidade }}</button> <br><br>
 
     <!-- Modal com formulário para cadastro de nova entidade -->
-    @include('layouts.register.modals.modalEntity', [
+    @include('layouts.modals.modalEntity', [
     'id' => 'ModalCadastrarEntidade',
     'labelledby' => 'Cadastrar '.$tipoEntidade,
     'title' => 'Cadastrar '.$tipoEntidade,
@@ -60,17 +60,17 @@
                 </td>
 
                 <!-- Modal para confirmação da exclusão  -->
-                @include('layouts.modalDelete', [
+                @include('layouts.modals.modalDelete', [
                 'id' => 'ModalDeletar'.$entity->id,
                 'title' => 'Excluir '.$tipoEntidade,
-                'message' => 'Confirma a exclusão deste '.strtolower($tipoEntidade).' da aplicação?',
+                'message' => 'Confirma a exclusão do '.strtolower($tipoEntidade).' '.$entity->name.' da aplicação?',
                 'action' => route('admin.entity.destroy'),
                 'variable' => $entity
                 ])
                 <!-- Fim do modal -->
 
                 <!-- Modal com formulário para alteração dos dados do fornecedor selecionado -->
-                @include('layouts.register.modals.modalEntity', [
+                @include('layouts.modals.modalEntity', [
                 'id' => 'ModalAlterarEntidade'.$entity->id,
                 'title' => 'Alterar '.$tipoEntidade,
                 'btn' => 'Salvar Alterações',

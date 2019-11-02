@@ -26,6 +26,7 @@
                             </span>
                             @endif
                         </div>
+
                         <div class="col">
                             <label for="email">E-mail</label>
                             <input name="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="name" required id="email" value="{{ empty($user) ?'':$user->email }}">
@@ -43,6 +44,7 @@
                             <label for="password">{{$lbl_pass1}}</label>
                             <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" confirmed>
                         </div>
+                    
                         <div class="col">
                             <label for="password-confirm">{{$lbl_pass2}}</label>
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
@@ -50,34 +52,13 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col">
-                            <label for="role">Perfil</label>
-                            <select name="role" id="role" class="form-control">
-                                <option value="COMUM" {{ empty($user) ? 'selected' : (($user->role == "COMUM")?'selected':'') }}>COMUM</option>
-                                <option value="ADMIN" {{ empty($user) ? 'selected' : (($user->role == "ADMIN")?'selected':'') }}>ADMINISTRADOR</option>
-                            </select>
-                        </div>
-
-                        <div class="col">
+                        <div class="col-6">
                             <label for="situation">Situação</label>
                             <select name="situation" id="situation" class="form-control">
                                 <option value="0" {{ empty($user) ? 'selected' : (($user->situation == "ATIVO")?'selected':'') }}>ATIVO</option>
                                 <option value="1" {{ empty($user) ? 'selected' : (($user->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
                             </select>
                         </div>
-                    </div>
-
-                    <hr>
-                    <label>Empresas</label>
-                    <div class="form-group row">
-                        @foreach ($companies as $company)
-                        <div class="col-6">
-                            <label for="company.{{$company->id}}">
-                                <input name="companies[]" id="company.{{$company->id}}" type="checkbox" value="{{$company->id}}" {{ empty($user) ? '' : (($user->companies->isEmpty() ? '' : ($user->companies->contains($company->id) ? 'checked' : ''))) }}>
-                                {{$company->name}}
-                            </label>
-                        </div>
-                        @endforeach
                     </div>
                 </div>
 
@@ -89,4 +70,3 @@
         </div>
     </div>
 </div>
-

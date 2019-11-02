@@ -5,12 +5,12 @@ namespace App\Http\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Entity extends Model
+class FormOfPayment extends Model
 {
-    use SoftDeletes;    
+    use SoftDeletes;
 
     /**
-     * Uma entidade pode ter várias transações 
+     * Uma forma de pagamento pode estar em várias transações 
      */
     public function transactions()
     {

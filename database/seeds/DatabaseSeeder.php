@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             EntitiesTableSeeder::class,
             CompaniesTableSeeder::class ,
+            FormOfPaymentsTableSeeder::class,
             TransactionsTableSeeder::class                     
         ]);       
     }

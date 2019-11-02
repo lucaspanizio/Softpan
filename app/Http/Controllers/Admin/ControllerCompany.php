@@ -6,21 +6,14 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class ControllerCompany extends Controller
-{
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
+class ControllerCompany extends Controller{
+    
+    public function index(){
         $companies = Company::all();        
         return view('layouts.register.company', compact('companies'));  
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'name' => 'required|max:255',
             'number' => 'max:8'            
@@ -41,8 +34,7 @@ class ControllerCompany extends Controller
         return redirect()->route('admin.company.index');
     }
 
-    public function update(Request $request)
-    {
+    public function update(Request $request){
         $request->validate([
             'name' => 'required|max:255',
             'number' => 'max:8'
@@ -64,8 +56,7 @@ class ControllerCompany extends Controller
         return redirect()->route('admin.company.index');
     }
 
-    public function destroy(Request $request) {
-
+    public function destroy(Request $request){
         $company = Company::find($request->id);
         $company->delete();
 

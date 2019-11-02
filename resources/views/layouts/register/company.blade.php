@@ -16,7 +16,7 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarEmpresa"><i class="fas fa-plus"></i> Nova Empresa</button> <br><br>
 
     <!-- Modal com formulário para cadastro de nova empresa -->
-    @include('layouts.register.modals.modalCompany', [
+    @include('layouts.modals.modalCompany', [
     'id' => 'ModalCadastrarEmpresa',
     'title' => 'Cadastrar Empresa',
     'btn' => 'Cadastrar',
@@ -53,17 +53,17 @@
                 </td>
 
                 <!-- Modal para confirmação da exclusão  -->
-                @include('layouts.modalDelete', [
+                @include('layouts.modals.modalDelete', [
                 'id' => 'ModalDeletar'.$company->id,
                 'title' => 'Excluir Empresa',
-                'message' => 'Confirma a exclusão desta empresa da aplicação?',
+                'message' => 'Confirma a exclusão da empresa '.$company->name.' da aplicação?',
                 'action' => route('admin.company.destroy'),
                 'variable' => $company              
                 ])
                 <!-- Fim do modal -->
 
                 <!-- Modal com formulário para alteração dos dados do usuário selecionado -->
-                @include('layouts.register.modals.modalCompany', [
+                @include('layouts.modals.modalCompany', [
                 'id' => 'ModalAlterarEmpresa'.$company->id,
                 'title' => 'Alterar Empresa',
                 'btn' => 'Salvar Alterações',

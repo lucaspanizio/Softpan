@@ -6,23 +6,24 @@ use App\Http\Models\Entity;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Company;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\DB;
 
-class ControllerEntity extends Controller
-{
-    public function index($e)
-    {        
+class ControllerEntity extends Controller{
+    
+    public function index($e){         
+        if ($e == 'client'){
+            $entities = Entity::where('type', 'C')->get();
+            $tipoEntidade = 'Cliente';
+        }else {
+            $entities = Entity::where('type', 'F')->get();
+            $tipoEntidade = 'Fornecedor';
+        }                
         $companies = Company::all();
-        $entities = Entity::where('type', $e)->get();
 
-        if ($e == 'C') $tipoEntidade = 'Cliente';
-        else           $tipoEntidade = 'Fornecedor'; 
-
-        return view('layouts.register.entity', compact('entities', 'e', 'tipoEntidade', 'companies'));
+        return view('layouts.register.entity', 
+        compact('entities', 'e', 'tipoEntidade', 'companies'));
     }
 
-    public function store(Request $request, $e)
-    {
+    public function store(Request $request, $e){
         $request->validate([
             'name' => 'required|max:255',
             'number' => 'required|max:8'
@@ -48,18 +49,17 @@ class ControllerEntity extends Controller
         $entity->state = $request->state;
         $entity->situation = $request->situation;
 
-        foreach ($request->companies as $c) {
-            $company = Company::find($c);
-            $entity->companies()->attach($company);
-        }
+        // foreach ($request->companies as $c) {
+        //     $company = Company::find($c);
+        //     $entity->companies()->attach($company);
+        // }
 
         $entity->save();
 
         return redirect()->back();
     }
 
-    public function update(Request $request)
-    {
+    public function update(Request $request){
         $request->validate([
             'name' => 'required|max:255',
             'number' => 'required|max:8'
@@ -81,29 +81,21 @@ class ControllerEntity extends Controller
         $entity->state = $request->state;
         $entity->situation = $request->situation;
 
-        $entity->companies()->detach();
-        foreach ($request->companies as $c) {
-            $company = Company::find($c);
-            $entity->companies()->attach($company);
-        }
+        // $entity->companies()->detach();
+        // foreach ($request->companies as $c) {
+        //     $company = Company::find($c);
+        //     $entity->companies()->attach($company);
+        // }
 
         $entity->save();
 
         return redirect()->back();
     }
 
-    public function destroy(Request $request)
-    {           
+    public function destroy(Request $request){           
         $entity = Entity::find($request->id); 
         $entity->delete(); 
         
         return redirect()->back();
-
-        // // Se a entidade é do tipo cliente
-        // if ($request->type == 'C')
-        //     return redirect()->route('admin.entity.index', 'client');
-        // // Se a entidade é do tipo fornecedor
-        // else
-        //     return redirect()->route('admin.entity.index', 'provider');
     }
 }

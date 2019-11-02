@@ -16,7 +16,7 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarUsuario"><i class="fas fa-plus"></i> Novo Usuário</button> <br><br>
 
     <!-- Modal com formulário para cadastro de novo usuário -->
-    @include('layouts.register.modals.modalUser', [
+    @include('layouts.modals.modalUser', [
     'id' => 'ModalCadastrarUsuario',
     'title' => 'Cadastrar Usuário',
     'btn' => 'Cadastrar',
@@ -53,17 +53,17 @@
                 </td>
 
                 <!-- Modal para confirmação da exclusão  -->
-                @include('layouts.modalDelete', [
+                @include('layouts.modals.modalDelete', [
                 'id' => 'ModalDeletar'.$user->id,
                 'title' => 'Excluir Usuário',
-                'message' => 'Confirma a exclusão deste usuário da aplicação?',
+                'message' => 'Confirma a exclusão do usuário '.$user->name.' da aplicação?',
                 'action' => route('admin.user.destroy'),
                 'variable' => $user
                 ])
                 <!-- Fim do modal -->
 
                 <!-- Modal com formulário para alteração dos dados do usuário selecionado -->
-                @include('layouts.register.modals.modalUser', [
+                @include('layouts.modals.modalUser', [
                 'id' => 'ModalAlterarUsuario'.$user->id,
                 'title' => 'Alterar Usuário',
                 'btn' => 'Salvar Alterações',

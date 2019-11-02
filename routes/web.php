@@ -36,6 +36,7 @@ $this->group(['prefix' => 'admin'], function () {
     Route::get('transaction/{t}', 'Admin\ControllerTransaction@index')->name('admin.transaction.index');
     Route::put('transaction/{t}', 'Admin\ControllerTransaction@store')->name('admin.transaction.store');
     Route::patch('transaction', 'Admin\ControllerTransaction@update')->name('admin.transaction.update');
+    Route::post('transaction', 'Admin\ControllerTransaction@liquidate')->name('admin.transaction.liquidate');
     Route::delete('transaction', 'Admin\ControllerTransaction@destroy')->name('admin.transaction.destroy');    
 
     /* Entidades - Clientes ou Fornecedores  */

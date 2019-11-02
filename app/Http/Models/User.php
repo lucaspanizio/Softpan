@@ -13,20 +13,20 @@ class User extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
-    /**
-     * Um usuário pode controlar várias empresas
-     */
-    public function companies()
-    {
-        return $this->belongsToMany(Company::class, 'companies_users','user_id','company_id');
-    } 
+    // /**
+    //  * Um usuário pode controlar várias empresas
+    //  */
+    // public function companies()
+    // {
+    //     return $this->belongsToMany(Company::class, 'companies_users','user_id','company_id');
+    // } 
 
     /**
      * Um usuário pode ter várias transações 
      */
     public function transactions()
     {
-        return $this->belongsToMany(Transaction::class);
+        return $this->hasMany(Transaction::class);
     }
 
     /**

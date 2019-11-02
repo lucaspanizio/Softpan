@@ -89,21 +89,9 @@
                             </select>
                         </div>
                     </div>
-
-                    <hr>
-                    <label>Empresas</label>                   
-                    <div class="row">                    
-                        @foreach ($companies as $company)
-                        <div class="col-6">
-                            <input name="companies[]" id="company.{{$company->id}}" type="checkbox" value="{{$company->id}}" {{ empty($entity) ? '' : (($entity->companies->isEmpty() ? '' : ($entity->companies->contains($company->id) ? 'checked' : ''))) }}>
-                            <label for="company.{{$company->id}}">{{$company->name}}</label>
-                        </div>
-                        @endforeach
-                    </div>
-
                 </div>
 
-                <div class="modal-footer">
+                <div class="actions modal-footer">
                     <button type="button" class="btn btn-secundary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">{{$btn}}</button>
                 </div>

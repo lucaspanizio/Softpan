@@ -7,28 +7,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Company;
 use Illuminate\Http\Request;
 
-class ControllerUser extends Controller
-{
-    public function login()
-    {
+class ControllerUser extends Controller{
+    
+    public function login(){
         return view('auth.login');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
+    public function index(){
         $users = User::all();
         $companies = Company::all();
         return view('layouts.register.user', compact('users', 'companies'));
     }
 
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
@@ -38,22 +30,20 @@ class ControllerUser extends Controller
         $user->name = $request->name;
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
-        $user->role = $request->input('role');
         $user->situation = $request->input('situation');
         $user->save();
 
-        foreach ($request->companies as $c) {
-            $company = Company::find($c);
-            $user->companies()->attach($company);
-        }
+        // foreach ($request->companies as $c) {
+        //     $company = Company::find($c);
+        //     $user->companies()->attach($company);
+        // }
 
         $user->save();
 
         return redirect()->route('admin.user.index');
     }
 
-    public function update(Request $request)
-    {
+    public function update(Request $request){
         $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255'
@@ -64,26 +54,24 @@ class ControllerUser extends Controller
         $user->email = $request->email;
 
         if (!empty($request->password)) {
-            if ($request->password == $request->input('password-confirmation'))
+            if ($request->password == $request->input('password_confirmation'))
                 $user->password = bcrypt($request->password);
         }
 
-        $user->role = $request->role;
         $user->situation = $request->situation;
 
-        $user->companies()->detach();
-        foreach ($request->companies as $c) {
-            $company = Company::find($c);
-            $user->companies()->attach($company);
-        }
+        // $user->companies()->detach();
+        // foreach ($request->companies as $c) {
+        //     $company = Company::find($c);
+        //     $user->companies()->attach($company);
+        // }
 
         $user->save();
 
         return redirect()->route('admin.user.index');
     }
 
-    public function destroy(Request $request)
-    {
+    public function destroy(Request $request){
         $user = User::find($request->id);
         $user->delete();
 

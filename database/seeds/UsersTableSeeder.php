@@ -16,8 +16,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'LUCAS PANIZIO',
             'email' => 'teste@teste.com',
             'password' => bcrypt('senha123'),
-            'situation' => true,
-            'role' => 'ADMIN'
+            'situation' => true
         ]);
 
         // Exibe uma informação no console durante o processo de seed
@@ -27,8 +26,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'MARIO ADANYIA',
             'email' => 'teste1@teste.com',
             'password' => bcrypt('senha123'),
-            'situation' => true,
-            'role' => 'COMUM'
+            'situation' => true
         ]);
 
         // Exibe uma informação no console durante o processo de seed
