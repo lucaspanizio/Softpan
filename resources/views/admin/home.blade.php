@@ -200,7 +200,7 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a class="transition" href="#">
+                                                    <a class="transition" href="{{ route('auth.reset.index') }}">
                                                         <i class="zmdi zmdi-lock"></i>Alterar Senha</a>
                                                 </div>
                                             </div>

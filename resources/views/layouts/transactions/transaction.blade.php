@@ -33,14 +33,17 @@
                                 <div class="dropDownSelect2"></div>
                             </div>
                             <div class="rs-select2--light rs-select2--md">
-                                <input class="form-control" type="text" id="datepicker1" class="input-group" placeholder="Data inicial" />
+                                <input class="form-control" type="text" id="datepicker1" class="input-group"
+                                    placeholder="Data inicial" />
                             </div>
                             <div class="rs-select2--light rs-select2--md">
-                                <input class="form-control" type="text" id="datepicker2" class="input-group" placeholder="Data Final" />
+                                <input class="form-control" type="text" id="datepicker2" class="input-group"
+                                    placeholder="Data Final" />
                             </div>
                         </div>
                         <div class="table-data__tool-right">
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#ModalCadastrarTransacao">
+                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal"
+                                data-target="#ModalCadastrarTransacao">
                                 <i class="zmdi zmdi-plus"></i>Incluir {{$tipoTransacao}}</button>
                         </div>
                     </div>
@@ -65,10 +68,12 @@
                                 @foreach ($transactions as $transaction)
                                 <tr class="tr-shadow">
                                     <td>{{$transaction->id}}</td>
-                                    <td>{{empty($transaction->entity) ? ' ': $transaction->entity->name}}</td> <!-- Nome do fornecedor ou cliente -->
+                                    <td>{{empty($transaction->entity) ? ' ': $transaction->entity->name}}</td>
+                                    <!-- Nome do fornecedor ou cliente -->
                                     <td>{{$transaction->description}}</td>
                                     <td>{{$transaction->due_date->format('d/m/Y')}}</td>
-                                    <td>{{$transaction->current_value != null ? $transaction->current_value : $transaction->original_value}}</td>
+                                    <td>{{$transaction->current_value != null ? $transaction->current_value : $transaction->original_value}}
+                                    </td>
                                     <td>
                                         @if($transaction->situation == '1')
                                         <span class="status--meddium">A VENCER</span>
@@ -82,24 +87,34 @@
                                         <div class="table-data-feature">
                                             <input type="hidden" name="id" value="{{$transaction->id}}">
                                             @if($transaction->current_value != null)
-                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Liquidar">
-                                                <button class="item" id="btnReceber" type="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLiquidarTransacao{{$transaction->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title="Liquidar">
+                                                <button class="item" id="btnReceber" type="submit"
+                                                    class="btn btn-success btn-sm" data-toggle="modal"
+                                                    data-target="#ModalLiquidarTransacao{{$transaction->id}}">
                                                     <i class=" zmdi zmdi-check"></i>
                                                 </button>
                                             </span>
                                             @endif
-                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Visualizar">
-                                                <button class="item" id="btnVisualizar" type="button" class="btn btn-secundary btn-sm" data-toggle="modal" data-target="#ModalVisualizarTransacao{{$transaction->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title="Visualizar">
+                                                <button class="item" id="btnVisualizar" type="button"
+                                                    class="btn btn-secundary btn-sm" data-toggle="modal"
+                                                    data-target="#ModalVisualizarTransacao{{$transaction->id}}">
                                                     <i class="fas fa-eye"></i>
                                                 </button>
                                             </span>
-                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Alterar">
-                                                <button class="item" data-toggle="modal" data-target="#ModalAlterarTransacao{{$transaction->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title="Alterar">
+                                                <button class="item" data-toggle="modal"
+                                                    data-target="#ModalAlterarTransacao{{$transaction->id}}">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
                                             </span>
-                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
-                                                <button class="item" data-toggle="modal" data-target="#ModalDeletar{{$transaction->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title="Excluir">
+                                                <button class="item" data-toggle="modal"
+                                                    data-target="#ModalDeletar{{$transaction->id}}">
                                                     <i class=" zmdi zmdi-delete"></i>
                                                 </button>
                                             </span>
@@ -138,7 +153,8 @@
                                     @include('layouts.modals.modalDelete', [
                                     'id' => 'ModalDeletar'.$transaction->id,
                                     'title' => 'Excluir '.$tipoTransacao,
-                                    'message' => 'Confirma a exclusão da '.strtolower($tipoTransacao).' de Nº '.$transaction->id.' da aplicação?',
+                                    'message' => 'Confirma a exclusão da '.strtolower($tipoTransacao).' de Nº
+                                    '.$transaction->id.' da aplicação?',
                                     'action' => route('admin.transaction.destroy'),
                                     'variable' => $transaction
                                     ])
@@ -154,4 +170,5 @@
             </div>
         </div>
     </div>
-    @endsection
+</div>
+@endsection

@@ -52,6 +52,15 @@ ul {
     margin: 0;
 }
 
+.modal-backdrop{
+    position: flex !important;   
+    font-size: 14px;
+}
+
+.form-group{
+    font-size: 14px;
+}
+
 button,
 input[type='button'] {
     cursor: pointer;

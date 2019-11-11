@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'Admin\ControllerUser@login');
+Route::get('/reset-password', 'Admin\ControllerUser@reset_index')->name('auth.reset.index');
+Route::post('/reset-password', 'Admin\ControllerUser@reset')->name('auth.reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -22,8 +24,8 @@ $this->group(['prefix' => 'admin'], function () {
     Route::get('dashboard', 'Admin\ControllerDashboard@index')->name('admin.dashboard.index');
     
     /* Relatórios */
-    // Route::get('reports', 'Admin\ControllerReport@index')->name('admin.report.index');
-    Route::get('reports', 'Admin\ControllerReport@teste')->name('admin.report.teste');
+    Route::get('reports', 'Admin\ControllerReport@index')->name('admin.report.index');
+    // Route::get('reports', 'Admin\ControllerReport@teste')->name('admin.report.teste');
     
     /* Usuários */
     Route::get('users', 'Admin\ControllerUser@index')->name('admin.user.index');

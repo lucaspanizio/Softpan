@@ -76,6 +76,28 @@
                                             </span>
                                         </div>
                                     </td>
+                                    <!-- Modal com formulário para alteração dos dados do usuário selecionado -->
+                                    @include('layouts.modals.modalUser', [
+                                    'id' => 'ModalAlterar'.$user->id,
+                                    'title' => 'Alterar Usuário',
+                                    'btn' => 'Salvar Alterações',
+                                    'lbl_pass1' => 'Nova Senha',
+                                    'lbl_pass2' => 'Confirme a Nova Senha',
+                                    'method' => 'patch',
+                                    'action' => route('admin.user.update'),
+                                    'user' => $user
+                                    ])
+                                    <!-- Fim do modal -->
+
+                                    <!-- Modal para confirmação da exclusão  -->
+                                    @include('layouts.modals.modalDelete', [
+                                    'id' => 'ModalExcluir'.$user->id,
+                                    'title' => 'Excluir Usuário',
+                                    'message' => 'Confirma a exclusão do usuário '.$user->name.' da aplicação?',
+                                    'action' => route('admin.user.destroy'),
+                                    'variable' => $user
+                                    ])
+                                    <!-- Fim do modal -->
                                 </tr>
                                 <tr class="spacer"></tr>
                                 @endforeach
@@ -87,28 +109,5 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal com formulário para alteração dos dados do usuário selecionado -->
-    @include('layouts.modals.modalUser', [
-    'id' => 'ModalAlterar'.$user->id,
-    'title' => 'Alterar Usuário',
-    'btn' => 'Salvar Alterações',
-    'lbl_pass1' => 'Nova Senha',
-    'lbl_pass2' => 'Confirme a Nova Senha',
-    'method' => 'patch',
-    'action' => route('admin.user.update'),
-    'user' => $user
-    ])
-    <!-- Fim do modal -->
-
-    <!-- Modal para confirmação da exclusão  -->
-    @include('layouts.modals.modalDelete', [
-    'id' => 'ModalExcluir'.$user->id,
-    'title' => 'Excluir Usuário',
-    'message' => 'Confirma a exclusão do usuário '.$user->name.' da aplicação?',
-    'action' => route('admin.user.destroy'),
-    'variable' => $user
-    ])
-    <!-- Fim do modal -->
 </div>
 @endsection
