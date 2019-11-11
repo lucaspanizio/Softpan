@@ -8,11 +8,11 @@ use App\Http\Models\Entity;
 use App\Http\Models\Company;
 use App\Http\Models\FormOfPayment;
 use App\Http\Models\User;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class ControllerTransaction extends Controller{
+class ControllerTransaction extends Controller
+{
 
     public function index($t)
     {
@@ -55,14 +55,14 @@ class ControllerTransaction extends Controller{
         if ($t == 'receivable')
             $transaction->type = 'CR';
         else
-        $transaction->type = 'CP';
-        
-        $transaction->save(); 
+            $transaction->type = 'CP';
+
+        $transaction->save();
         $transaction->entity()->associate(Entity::find($request->input('entity')));
         $transaction->user()->associate(User::find(Auth::user()->id));
         $transaction->company()->associate(Company::find($request->input('company')));
         $transaction->payment()->associate(FormOfPayment::find($request->input('form_of_payment')));
-        $transaction->save();     
+        $transaction->save();
 
         return redirect()->back();
     }
@@ -84,17 +84,18 @@ class ControllerTransaction extends Controller{
         $transaction->entity()->dissociate();
         $transaction->payment()->dissociate();
 
-        $transaction->save(); 
+        $transaction->save();
         $transaction->entity()->associate(Entity::find($request->input('entity')));
         $transaction->user()->associate(User::find(Auth::user()->id));
         $transaction->company()->associate(Company::find($request->input('company')));
         $transaction->payment()->associate(FormOfPayment::find($request->input('form_of_payment')));
-        $transaction->save(); 
+        $transaction->save();
 
         return redirect()->back();
     }
 
-    public function liquidate(Request $request){
+    public function liquidate(Request $request)
+    {
         $transaction = Transaction::find($request->id);
 
         $transaction->interest_rate = $request->interest_rate;
@@ -103,12 +104,12 @@ class ControllerTransaction extends Controller{
         $transaction->pay_off_date = \Carbon\Carbon::now();
         $transaction->situation = "2";
 
-        $transaction->save(); 
+        $transaction->save();
 
-        if ($request->type === "CR"){
-            return redirect()->action('Admin\ControllerTransaction@index','receivable');
+        if ($request->type === "CR") {
+            return redirect()->action('Admin\ControllerTransaction@index', 'receivable');
         }
-        return redirect()->action('Admin\ControllerTransaction@index','payable');
+        return redirect()->action('Admin\ControllerTransaction@index', 'payable');
     }
 
     public function destroy(Request $request)

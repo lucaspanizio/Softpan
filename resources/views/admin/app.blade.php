@@ -1,48 +1,64 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Tela de Login">
+    <meta name="author" content="José Lucas Panizio">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Title Page-->
+    <title>SoftPan - @yield('title')</title>
 
-    <title>SoftPan</title>
+    <!-- Fontfaces CSS-->
+    <link href="cooladmin/css/font-face.css" rel="stylesheet" media="all">
+    <link href="cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="cooladmin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="cooladmin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Bootstrap CSS-->
+    <link href="cooladmin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <!-- Vendor CSS-->
+    <link href="cooladmin/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="cooladmin/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="cooladmin/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="cooladmin/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="cooladmin/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="cooladmin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('cooladmin/css/theme.css') }}">    
 </head>
 
 <body>
-    <div id="app">
-        <!-- <nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-between">
-            <div class="container-fluid">                
+    @yield('content')
 
-                <div class="navbar-collapse collapse dual-nav w-50 order-1 order-md-0">
-                </div>
-                
-                <a href="{{ url('/') }}" class="navbar-brand mx-auto d-block text-center order-0 order-md-1 w-25">SoftPan</a>
-                
-                <div class="navbar-collapse collapse dual-nav w-50 order-2">
-                    
-                </div>
-            </div>
-        </nav> -->
+    <!-- Jquery JS-->
+    <script src="cooladmin/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="cooladmin/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="cooladmin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="cooladmin/vendor/slick/slick.min.js">
+    </script>
+    <script src="cooladmin/vendor/wow/wow.min.js"></script>
+    <script src="cooladmin/vendor/animsition/animsition.min.js"></script>
+    <script src="cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="cooladmin/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="cooladmin/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="cooladmin/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="cooladmin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="cooladmin/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="cooladmin/vendor/select2/select2.min.js">
+    </script>
 
-        <div class="row" style="margin-top: 10% ">            
-            <div class="col align-self-center">
-                @yield('content')
-            </div>
-        </div>
-    </div>
+    <!-- Main JS-->
+    <script src="cooladmin/js/main.js"></script>
 </body>
 
 </html>

@@ -59,7 +59,7 @@
 
                         <div class="col-6">
                             <label for="due_date">Vencimento</label>
-                            <input class="form-control" type="date" id="due_date" name="due_date" value="{{ empty($transaction) ?'':$transaction->due_date }}" />
+                            <input class="form-control" type="date" id="due_date" name="due_date" value="{{ empty($transaction) ?'':$transaction->due_date->format('Y-m-d')}}" />
                         </div>
                     </div>
 
@@ -70,12 +70,12 @@
                         </div>
 
                         <div class="col-4">
-                            <label for="rates">Valor em Taxas</label>
+                            <label for="rates">Taxas</label>
                             <input class="form-control" type="text" id="rates" name="rates" value="{{ empty($transaction) ?'':$transaction->rates }}" />
                         </div>
 
                         <div class="col-4">
-                            <label for="original_value">Valor Total</label>
+                            <label for="original_value">Valor</label>
                             <input class="form-control" type="text" id="original_value" name="original_value" value="{{ empty($transaction) ?'':$transaction->original_value }}" />
                         </div>
 

@@ -59,11 +59,11 @@
                 <div class="row">
                     <div class="col-4"><b>Situação:</b></div>
                     @if($transaction->situation == '1')
-                        <div class="col-8"><b><span style="color: yellow;">A VENCER</span></b></div>
+                        <div class="col-8">A VENCER</div>
                     @elseif($transaction->situation == '2')
-                        <div class="col-8"><b><span style="color: green;">PAGO</span></b></div>
+                        <div class="col-8">PAGO</div>
                     @else
-                        <div class="col-8"><b><span style="color: red;">ATRASADO</span></b></div>
+                        <div class="col-8">ATRASADO</div>
                     @endif
                 </div>
             </div>

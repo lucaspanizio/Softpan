@@ -13,7 +13,7 @@
                 <div class="modal-body">
 
                     @if (!empty($user))
-                    <input type="hidden" name="id" value="{{$user->id}}" onChange="javascript:this.value=this.value.toUpperCase();">
+                    <input type="hidden" name="id" value="{{$user->id}}">
                     @endif
                     <div class="form-group row">
                         <div class="col">

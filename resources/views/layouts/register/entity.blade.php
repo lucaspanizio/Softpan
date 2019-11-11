@@ -1,20 +1,10 @@
 @extends('admin.home')
 
+@section('title', '- '.$tipoEntidade)
+
 @section('content')
-<div class="container">
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCadastrarEntidade"><i class="fas fa-plus"></i> Novo {{ $tipoEntidade }}</button> <br><br>
-
+<!-- MAIN CONTENT-->
+<div class="main-content">
     <!-- Modal com formulário para cadastro de nova entidade -->
     @include('layouts.modals.modalEntity', [
     'id' => 'ModalCadastrarEntidade',
@@ -26,136 +16,107 @@
     ])
     <!-- Fim do modal -->
 
-    <table class="table table-sm table-hover table-bordered" id="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">{{$tipoEntidade}}</th>
-                <th scope="col">Documento</th>
-                <th scope="col">Cidade</th>
-                <th scope="col">Estado</th>
-                <th width="80" scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($entities as $entity)
-            <tr>
-                <th scope="row">{{$entity->id}}</th>
-                <td>{{$entity->name}}</td>
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
 
-                @if (!empty($entity->cnpj))
-                <td>{{$entity->cnpj}}</td>
-                @else
-                <td>{{$entity->cpf}}</td>
-                @endif
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- DATA TABLE -->
+                    <div class="table-data__tool">
+                        <div class="table-data__tool-left">
+                            <div class="rs-select2--light rs-select2--md">
+                                <select class="js-select2" name="property">
+                                    <option selected="selected">Todos</option>
+                                    <option value="">Ativos</option>
+                                    <option value="">Inativos</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        </div>
+                        <div class="table-data__tool-right">
+                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#ModalCadastrarEmpresa">
+                                <i class="zmdi zmdi-plus"></i>incluir empresa</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive table-responsive-data2">
+                        <table class="table table-data2">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">{{$tipoEntidade}}</th>
+                                    <th scope="col">Documento</th>
+                                    <th scope="col">Cidade</th>
+                                    <th scope="col">Estado</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($entities as $entity)
+                                <tr class="tr-shadow">
+                                    <td>{{$entity->id}}</td>
+                                    <td>{{$entity->name}}</td>
+                                    @if (!empty($entity->cnpj))
+                                    <td>{{$entity->cnpj}}</td>
+                                    @else
+                                    <td>{{$entity->cpf}}</td>
+                                    @endif
+                                    <td>{{$entity->city}}</td>
+                                    <td>{{$entity->state}}</td>
+                                    <td>
+                                        <div class="table-data-feature">
+                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
+                                                <button class="item" data-original-title="Alterar" data-toggle="modal" data-target="#ModalAlterarEntidade{{$entity->id}}">
+                                                    <i class="zmdi zmdi-edit"></i>
+                                                </button>
+                                            </span>
+                                            <input type="hidden" name="id" value="{{$entity->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
+                                                <button class="item" data-original-title="Deletar" data-toggle="modal" data-target="#ModalDeletar{{$entity->id}}">
+                                                    <i class="zmdi zmdi-delete"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <!-- Modal para confirmação da exclusão  -->
+                                    @include('layouts.modals.modalDelete', [
+                                    'id' => 'ModalDeletar'.$entity->id,
+                                    'title' => 'Excluir '.$tipoEntidade,
+                                    'message' => 'Confirma a exclusão do '.strtolower($tipoEntidade).' '.$entity->name.' da aplicação?',
+                                    'action' => route('admin.entity.destroy'),
+                                    'variable' => $entity
+                                    ])
+                                    <!-- Fim do modal -->
 
-                <td>{{$entity->city}}</td>
-                <td>{{$entity->state}}</td>
-
-                <!-- Botão editar e deletar entidade acionam modal -->
-                <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalAlterarEntidade{{$entity->id}}"><i class="fas fa-edit"></i></button>
-                    <input type="hidden" name="id" value="{{$entity->id}}">
-                    <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#ModalDeletar{{$entity->id}}"><i class="far fa-trash-alt"></i></button>
-                </td>
-
-                <!-- Modal para confirmação da exclusão  -->
-                @include('layouts.modals.modalDelete', [
-                'id' => 'ModalDeletar'.$entity->id,
-                'title' => 'Excluir '.$tipoEntidade,
-                'message' => 'Confirma a exclusão do '.strtolower($tipoEntidade).' '.$entity->name.' da aplicação?',
-                'action' => route('admin.entity.destroy'),
-                'variable' => $entity
-                ])
-                <!-- Fim do modal -->
-
-                <!-- Modal com formulário para alteração dos dados do fornecedor selecionado -->
-                @include('layouts.modals.modalEntity', [
-                'id' => 'ModalAlterarEntidade'.$entity->id,
-                'title' => 'Alterar '.$tipoEntidade,
-                'btn' => 'Salvar Alterações',
-                'labelledby' => 'Alterar '.$tipoEntidade,
-                'method' => 'patch',
-                'action' => route('admin.entity.update')
-                ])
-                <!-- Fim do modal -->
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                                    <!-- Modal com formulário para alteração dos dados do fornecedor selecionado -->
+                                    @include('layouts.modals.modalEntity', [
+                                    'id' => 'ModalAlterarEntidade'.$entity->id,
+                                    'title' => 'Alterar '.$tipoEntidade,
+                                    'btn' => 'Salvar Alterações',
+                                    'labelledby' => 'Alterar '.$tipoEntidade,
+                                    'method' => 'patch',
+                                    'action' => route('admin.entity.update')
+                                    ])
+                                    <!-- Fim do modal -->
+                                </tr>
+                                <tr class="spacer"></tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- END DATA TABLE -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-@endsection
 
-@section('scripts')
-<!-- Adicionando Javascript -->
-<script type="text/javascript">
-    function limpa_formulário_cep() {
-        //Limpa valores do formulário de cep.
-        document.getElementById('street').value = ("");
-        // document.getElementById('bairro').value = ("");
-        // document.getElementById('cidade').value = ("");
-        // document.getElementById('uf').value = ("");
-        // document.getElementById('ibge').value = ("");
-    }
-
-    function meu_callback(conteudo) {
-        if (!("erro" in conteudo)) {
-            //Atualiza os campos com os valores.
-            document.getElementById('street').value = (conteudo.logradouro);
-            console.log(conteudo.logradour)
-            // document.getElementById('bairro').value = (conteudo.bairro);
-            // document.getElementById('cidade').value = (conteudo.localidade);
-            // document.getElementById('uf').value = (conteudo.uf);
-            // document.getElementById('ibge').value = (conteudo.ibge);
-        } //end if.
-        else {
-            //CEP não Encontrado.
-            limpa_formulário_cep();
-            alert("CEP não encontrado.");
-        }
-    }
-
-    function pesquisacep(valor) {
-
-        //Nova variável "cep" somente com dígitos.
-        var cep = valor.replace(/\D/g, '');
-
-        //Verifica se campo cep possui valor informado.
-        if (cep != "") {
-
-            //Expressão regular para validar o CEP.
-            var validacep = /^[0-9]{8}$/;
-
-            //Valida o formato do CEP.
-            if (validacep.test(cep)) {
-
-                //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('street').value = "...";
-                // document.getElementById('bairro').value = "...";
-                // document.getElementById('cidade').value = "...";
-                // document.getElementById('uf').value = "...";
-                // document.getElementById('ibge').value = "...";
-
-                //Cria um elemento javascript.
-                var script = document.createElement('script');
-
-                //Sincroniza com o callback.
-                script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
-
-                //Insere script no documento e carrega o conteúdo.
-                document.body.appendChild(script);
-
-            } //end if.
-            else {
-                //cep é inválido.
-                limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
-            }
-        } //end if.
-        else {
-            //cep sem valor, limpa formulário.
-            limpa_formulário_cep();
-        }
-    };
-</script>
+<!-- @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif -->
 @endsection

@@ -17,7 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->date('due_date')->nullable(false); //Vencimento
             $table->date('pay_off_date')->nullable();  //Data recebimento/pagamento
-            $table->string('installments')->nullable(false); //Quantidade de parcelas
+            $table->string('installments')->nullable(false)->default('1'); //Quantidade de parcelas
             $table->enum('type', ['CP', 'CR']); //CP - Contas a Pagar, CR - Contas a Receber
             $table->string('description')->nullable(false);
             $table->string('original_value')->nullable(false);

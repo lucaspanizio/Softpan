@@ -59,7 +59,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="form-group row">
                         <div class="col">
                             <label for="phone1">Telefone</label>
                             <input name="phone1" type="text" class="form-control" value="{{ empty($company) ?'':$company->phone1 }}" id="phone1">

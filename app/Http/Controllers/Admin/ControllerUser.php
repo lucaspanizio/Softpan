@@ -33,13 +33,6 @@ class ControllerUser extends Controller{
         $user->situation = $request->input('situation');
         $user->save();
 
-        // foreach ($request->companies as $c) {
-        //     $company = Company::find($c);
-        //     $user->companies()->attach($company);
-        // }
-
-        $user->save();
-
         return redirect()->route('admin.user.index');
     }
 
@@ -58,13 +51,9 @@ class ControllerUser extends Controller{
                 $user->password = bcrypt($request->password);
         }
 
-        $user->situation = $request->situation;
+        // return $request;
 
-        // $user->companies()->detach();
-        // foreach ($request->companies as $c) {
-        //     $company = Company::find($c);
-        //     $user->companies()->attach($company);
-        // }
+        $user->situation = $request->situation;
 
         $user->save();
 
