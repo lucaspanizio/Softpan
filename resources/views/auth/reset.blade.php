@@ -20,18 +20,12 @@
                     </div>
                     @endif
 
-                    <script>
-                        setTimeout(function() {
-                        $('.alert').fadeOut('slow');
-                     }, 6000);
-                    </script>
-
                     <div class="card">
                         <div class="card-header">Redefinir Senha</div>
                         <div class="card-body">
                             <div class="login-content">
                                 <div class="login-form">
-                                    <form action="{{ route('auth.reset')}}" method="POST">
+                                    <form method="POST" action="{{ route('password.email') }}">
                                         @csrf
                                         <div class="form-group has-success">
                                             <label for="password" class="control-label mb-1">Digite Nova Senha</label>

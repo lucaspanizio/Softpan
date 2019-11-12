@@ -1,12 +1,23 @@
 @extends('admin.app')
 
-@section('title','- Redefinir Senha')
+@section('title','Redefinir Senha')
 
 @section('content')
 <div class="page-wrapper">
     <div class="page-content--bge5">
         <div class="container">
             <div class="login-wrap">
+
+                @if(session('msg-error'))
+                <div class="alert alert-danger">
+                    <p>{{session('msg-error')}}</p>
+                </div>
+                @elseif(session('msg-success'))
+                <div class="alert alert-success">
+                    <p>{{session('msg-success')}}</p>
+                </div>
+                @endif
+
                 <div class="login-content">
                     <div class="login-logo">
                         <a href="{{ route('password.request') }}">
@@ -16,12 +27,15 @@
                         </a>
                     </div>
                     <div class="login-form">
-                        <form action="" method="post">
+                        <form action="{{ route('password.email') }}" method="post">
+                            @csrf
                             <div class="form-group">
                                 <label>E-mail</label>
-                                <input class="au-input au-input--full" type="email" name="email" placeholder="E-mail" autofocus>
+                                <input class="au-input au-input--full" type="email" name="email" placeholder="E-mail"
+                                    autofocus>
                             </div>
-                            <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Solicitar Link de Redefinição</button>
+                            <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Solicitar Link de
+                                Redefinição</button>
                         </form>
                     </div>
                 </div>

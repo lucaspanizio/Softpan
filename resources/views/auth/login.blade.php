@@ -60,13 +60,7 @@
                                 </div>
                             </div>
                             <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Entrar</button>
-                        </form>
-                        <!-- <div class="register-link">
-                            <p>
-                                Don't you have account?
-                                <a href="#">Sign Up Here</a>
-                            </p>
-                        </div> -->
+                        </form>                        
                     </div>
                 </div>
             </div>

@@ -5,7 +5,8 @@
                 @csrf
                 @method('DELETE')
                 <div class="modal-header">
-                    <h5 class="modal-title" id="TituloModalCentralizado">{{$title}}</h5>
+                    {{-- <h5 class="modal-title" id="TituloModalCentralizado">{{$title}}</h5> --}}
+                    {{$title}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>

@@ -14,16 +14,20 @@
 
     <!-- Fontfaces CSS-->
     <link href="/cooladmin/css/font-face.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/cooladmin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/cooladmin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" type="text/css"
+        media="all">
+    <link href="/cooladmin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" type="text/css"
+        media="all">
+    <link href="/cooladmin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css"
+        media="all">
 
     <!-- Bootstrap CSS-->
     <link href="/cooladmin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
 
     <!-- Vendor CSS-->
     <link href="/cooladmin/vendor/animsition/animsition.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" type="text/css"
+        rel="stylesheet" media="all">
     <link href="/cooladmin/vendor/wow/animate.css" rel="stylesheet" type="text/css" media="all">
     <link href="/cooladmin/vendor/css-hamburgers/hamburgers.min.css" type="text/css" rel="stylesheet" media="all">
     <link href="/cooladmin/vendor/slick/slick.css" rel="stylesheet" type="text/css" media="all">
@@ -35,8 +39,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('cooladmin/css/theme.css') }}">
 
     <!-- DatePicker CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet"
+        type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+
+    <!-- Bootstrap-Select -->
+    <link href="/cooladmin/vendor/bootstrap-select-1.13.9/css/bootstrap-select.min.css') }}" rel="stylesheet">
 </head>
 
 <body class="animsition ">
@@ -81,10 +89,12 @@
                                     <a class="transition" href="{{ route('admin.company.index') }}">Empresas</a>
                                 </li>
                                 <li>
-                                    <a class="transition" href="{{ route('admin.entity.index', 'provider') }}">Fornecedores</a>
+                                    <a class="transition"
+                                        href="{{ route('admin.entity.index', 'provider') }}">Fornecedores</a>
                                 </li>
                                 <li>
-                                    <a class="transition" href="{{ route('admin.entity.index', 'client') }}">Clientes</a>
+                                    <a class="transition"
+                                        href="{{ route('admin.entity.index', 'client') }}">Clientes</a>
                                 </li>
                             </ul>
                         </li>
@@ -163,7 +173,8 @@
                                 <i class="fas fa-clipboard-list"></i>Relatórios</a>
                         </li>
                         <li>
-                            <a class="transition" href="#" aria-label="Sair" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="transition" href="#" aria-label="Sair"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-power-off"></i>Sair</a>
                         </li>
                     </ul>
@@ -184,7 +195,8 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">{{ucwords(strtolower(Auth::user()->name))}}</a>
+                                            <a class="js-acc-btn"
+                                                href="#">{{ucwords(strtolower(Auth::user()->name))}}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -205,11 +217,13 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a class="transition" href="#" aria-label="Sair" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <a class="transition" href="#" aria-label="Sair"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                     <i class="zmdi zmdi-power"></i>Sair</a>
                                             </div>
                                         </div>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
                                             @csrf
                                         </form>
                                     </div>
@@ -229,7 +243,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a
+                                        href="https://colorlib.com">Colorlib</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -241,9 +256,11 @@
 
     <!-- Jquery JS-->
     <script src="/cooladmin/vendor/jquery-3.2.1.min.js"></script>
+    
     <!-- Bootstrap JS-->
     <script src="/cooladmin/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="/cooladmin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+
     <!-- Vendor JS       -->
     <script src="/cooladmin/vendor/slick/slick.min.js">
     </script>
@@ -269,14 +286,18 @@
 
     <!-- DatePicker js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap-Select -->
+    <script src="/cooladmin/vendor/bootstrap-select-1.13.9/js/bootstrap-select.min.js"></script>
 
     <script>
         $(function() {
             $("#datepicker1").datepicker({
                 autoclose: true,
                 todayHighlight: true,
-                dateFormat: 'dd/mm/yyyy',
+                dateFormat: 'dd/mm/yy',
                 dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
                 dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
                 dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
@@ -291,7 +312,6 @@
             $("#datepicker2").datepicker({
                 autoclose: true,
                 todayHighlight: true,
-                format: 'dd/mm/yyyy',
                 locale: 'pt-br',
                 dateFormat: 'dd/mm/yy',
                 dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -302,6 +322,23 @@
                 nextText: 'Próximo',
                 prevText: 'Anterior'
             });
+            $("#datepicker3").datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                locale: 'pt-br',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: 'Próximo',
+                prevText: 'Anterior'
+            });
+             setTimeout(function() {
+                        $('.alert').fadeOut('slow');
+                     }, 6000);
+                    
         });
     </script>
 </body>
