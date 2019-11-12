@@ -97,7 +97,7 @@
                                 <i class="far fa-check-square"></i>Contas a Pagar</a>
                         </li>
                         <li>
-                            <a class="transition" href="#">
+                            <a class="transition" href="{{ route('admin.report.index') }}">
                                 <i class="fas fa-calendar-alt"></i>Relatórios</a>
                         </li>
                     </ul>
@@ -159,7 +159,7 @@
                             <span class="inbox-num">3</span>
                         </li>
                         <li>
-                            <a class="transition" href="#">
+                            <a class="transition" href="{{ route('admin.report.index') }}">
                                 <i class="fas fa-clipboard-list"></i>Relatórios</a>
                         </li>
                         <li>
@@ -276,7 +276,7 @@
             $("#datepicker1").datepicker({
                 autoclose: true,
                 todayHighlight: true,
-                dateFormat: 'dd/mm/yyyy',
+                dateFormat: 'dd/mm/yy',
                 dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
                 dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
                 dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
@@ -291,14 +291,15 @@
             $("#datepicker2").datepicker({
                 autoclose: true,
                 todayHighlight: true,
-                format: 'dd/mm/yyyy',
-                locale: 'pt-br',
-                dateFormat: 'dd/mm/yy',
+                format: 'dd/mm/yy',
                 dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
                 dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
                 dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
                 monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                 monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                today: "Hoje",
+                monthsTitle: "Meses",
+                clear: "Limpar",
                 nextText: 'Próximo',
                 prevText: 'Anterior'
             });

@@ -22,8 +22,8 @@
 
                     <script>
                         setTimeout(function() {
-                        $('.alert').fadeOut('slow');
-                     }, 6000);
+                            $('.alert').fadeOut('slow');
+                        }, 6000);
                     </script>
 
                     <div class="card">
@@ -35,25 +35,17 @@
                                         @csrf
                                         <div class="form-group has-success">
                                             <label for="password" class="control-label mb-1">Digite Nova Senha</label>
-                                            <input id="password" name="password" type="password" class="form-control"
-                                                data-val="true" data-val-required="Digite a senha corretamente."
-                                                autofocus required>
+                                            <input id="password" name="password" type="password" class="form-control" data-val="true" data-val-required="Digite a senha corretamente." autofocus required>
                                         </div>
                                         <div class="form-group">
                                             <label for="password_confirmation" class="control-label mb-1">Confirme Nova
                                                 Senha</label>
-                                            <input id="password_confirmation" name="password_confirmation"
-                                                type="password" class="form-control" data-val="true"
-                                                data-val-required="Confirme a senha corretamente." required>
+                                            <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" data-val="true" data-val-required="Confirme a senha corretamente." required>
                                         </div>
-                                        <div class="form-group">
-                                            <button id="payment-button" type="submit"
-                                                class="au-btn au-btn--block au-btn--green m-b-20">Redefinir Senha
-                                            </button>
-                                        </div>
+                                        <button id="payment-button" type="submit" class="au-btn au-btn--block au-btn--green m-b-20">Redefinir Senha
+                                        </button>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>
