@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Company;
+use App\Http\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,7 @@ class ControllerUser extends Controller
                 $user->password = bcrypt($request->password);
             else
                 return redirect()->back()->with('msg-error', 'As senhas digitadas são diferentes!');
-        }else{
+        } else {
             return redirect()->back()->with('msg-error', 'Senha não pode ser em branco!');
         }
         $user->save();
@@ -40,7 +41,18 @@ class ControllerUser extends Controller
     {
         $users = User::all();
         $companies = Company::all();
-        return view('layouts.register.user', compact('users', 'companies'));
+        $count_r = Transaction::where([['type', '=', 'CR'], ['situation', '=', '3']])->count();
+        $count_p = Transaction::where([['type', '=', 'CP'], ['situation', '=', '3']])->count();
+
+        return view(
+            'layouts.register.user',
+            compact(
+                'users',
+                'companies',
+                'count_r',
+                'count_p'
+            )
+        );
     }
 
 

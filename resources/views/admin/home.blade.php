@@ -31,12 +31,16 @@
     <link href="/cooladmin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css" media="all">
     <link href="/cooladmin/vendor/vector-map/jqvmap.min.css" rel="stylesheet" type="text/css" media="all">
 
+    <!-- DatePicker CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+
+    <!-- Select2 CSS -->
+    <link href="/cooladmin/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" media="all">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('cooladmin/css/theme.css') }}">
 
-    <!-- DatePicker CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+
 </head>
 
 <body class="animsition ">
@@ -150,13 +154,19 @@
                         </li>
                         <li>
                             <a class="transition" href="{{ route('admin.transaction.index', 'receivable') }}">
-                                <i class="fas fa-piggy-bank"></i>Contas a Receber</a>
-                            <span class="inbox-num">3</span>
+                                <i class="fas fa-piggy-bank"></i>Contas a Receber
+                                @if ($count_r > 0)
+                                <span class="inbox-num" data-toggle="tooltip" title="Receitas Vencidas">{{ $count_r }}</span>
+                                @endif
+                            </a>
                         </li>
                         <li>
                             <a class="transition" href="{{ route('admin.transaction.index', 'payable') }}">
-                                <i class="fas fa-hand-holding-usd"></i>Contas a Pagar</a>
-                            <span class="inbox-num">3</span>
+                                <i class="fas fa-hand-holding-usd"></i>Contas a Pagar
+                                @if ($count_p > 0)
+                                <span class="inbox-num" data-toggle="tooltip" title="Despesas Vencidas">{{ $count_p }}</span>
+                                @endif
+                            </a>
                         </li>
                         <li>
                             <a class="transition" href="{{ route('admin.report.index') }}">
@@ -264,16 +274,19 @@
     <script src="/cooladmin/vendor/vector-map/jquery.vmap.sampledata.js"></script>
     <script src="/cooladmin/vendor/vector-map/jquery.vmap.world.js"></script>
 
+    <!-- DatePicker js -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+    <!-- Select2 JS -->
+    <script src="/cooladmin/js/bootstrap-select.min.js"></script>
+
     <!-- Main JS-->
     <script src="/cooladmin/js/main.js"></script>
 
-    <!-- DatePicker js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
     <script>
         $(function() {
-            $("#datepicker1").datepicker({
+            $("[datepicker]").datepicker({
                 autoclose: true,
                 todayHighlight: true,
                 dateFormat: 'dd/mm/yy',
@@ -288,21 +301,7 @@
                 nextText: 'Próximo',
                 prevText: 'Anterior'
             });
-            $("#datepicker2").datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                format: 'dd/mm/yy',
-                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                today: "Hoje",
-                monthsTitle: "Meses",
-                clear: "Limpar",
-                nextText: 'Próximo',
-                prevText: 'Anterior'
-            });
+            $('.selectpicker').selectpicker();
         });
     </script>
 </body>

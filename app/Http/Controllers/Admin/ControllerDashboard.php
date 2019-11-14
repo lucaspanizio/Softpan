@@ -4,22 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Transaction;
-use Illuminate\Support\Facades\DB;
 
 class ControllerDashboard extends Controller{
        
-    public function index(){           
-        
-        $transactions = Transaction::all();
-            // $qtdCR = Transaction::select(DB::raw('count(*)'))->where('type','CR')
-            //     ->groupBy('type')
-            //     ->get();
-            // $qtdCR = Transaction::select(DB::raw('count(*)'))->where('type','CP')
-            //     ->groupBy('type')
-            //     ->get();
+    public function index(){          
+        $count_r = Transaction::where([['type','=','CR'],['situation','=','3']])->count();
+        $count_p = Transaction::where([['type','=','CP'],['situation','=','3']])->count();
 
-            //     return $qtdCR;
-
-        return view('layouts.dashboard.dashboard', compact('transactions'));
+        return view('layouts.dashboard.dashboard', compact('count_r','count_p'));
     }
 }

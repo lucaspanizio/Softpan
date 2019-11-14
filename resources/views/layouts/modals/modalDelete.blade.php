@@ -5,7 +5,7 @@
                 @csrf
                 @method('DELETE')
                 <div class="modal-header">
-                    <h5 class="modal-title" id="TituloModalCentralizado">{{$title}}</h5>
+                    {{$title}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -19,8 +19,8 @@
                     <p class="text-danger"><small>Esta ação não pode ser revertida.</small></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-danger">Excluir</button>
+                    <button type="button" class="btn btn-secundary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Excluir</button>
                 </div>
             </form>
         </div>

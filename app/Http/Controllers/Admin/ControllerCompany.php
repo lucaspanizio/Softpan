@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Models\Company;
+use App\Http\Models\Transaction;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -9,8 +10,10 @@ use Illuminate\Http\Request;
 class ControllerCompany extends Controller{
     
     public function index(){
-        $companies = Company::all();        
-        return view('layouts.register.company', compact('companies'));  
+        $companies = Company::all(); 
+        $count_r = Transaction::where([['type','=','CR'],['situation','=','3']])->count();
+        $count_p = Transaction::where([['type','=','CP'],['situation','=','3']])->count();       
+        return view('layouts.register.company', compact('companies','count_r','count_p'));  
     }
 
     public function store(Request $request){

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="TituloModalCentralizado">{{$title}}</h5>
+                {{$title}}
                 <div class="close">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
@@ -59,11 +59,11 @@
                 <div class="row">
                     <div class="col-4"><b>Situação:</b></div>
                     @if($transaction->situation == '1')
-                        <div class="col-8">A VENCER</div>
+                    <div class="col-8">A VENCER</div>
                     @elseif($transaction->situation == '2')
-                        <div class="col-8">PAGO</div>
+                    <div class="col-8">PAGA</div>
                     @else
-                        <div class="col-8">ATRASADO</div>
+                    <div class="col-8">VENCIDA</div>
                     @endif
                 </div>
             </div>

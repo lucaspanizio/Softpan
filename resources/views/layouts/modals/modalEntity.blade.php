@@ -5,7 +5,7 @@
                 @method($method)
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="TituloModalCentralizado">{{$title}}</h5>
+                    {{$title}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -83,7 +83,7 @@
 
                         <div class="col-4">
                             <label for="situation">Situação</label>
-                            <select name="situation" id="situation" class="form-control">
+                            <select name="situation" id="situation" class="form-control selectpicker">
                                 <option value="1" {{ empty($entity) ? 'selected' : (($entity->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
                                 <option value="0" {{ empty($entity) ? 'selected' : (($entity->situation == "ATIVO")?'selected':'') }}>ATIVO</option>
                             </select>
@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="actions modal-footer">
-                    <button type="button" class="btn btn-secundary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">{{$btn}}</button>
                 </div>
             </form>

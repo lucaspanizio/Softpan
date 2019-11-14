@@ -5,7 +5,7 @@
                 @method($method)
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="TituloModalCentralizado">{{$title}}</h5>
+                    {{$title}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -24,7 +24,7 @@
                     <div class="form-group row">
                         <div class="col-6">
                             <label for="company">Empresa</label>
-                            <select name="company" id="company" class="form-control">
+                            <select class="selectpicker" name="company" id="company" data-live-search="true" data-size="3">
                                 @foreach($companies as $company)
                                 <option value="{{$company->id}}" {{ empty($transaction) ?"": ($transaction->company_id == $company->id ? 'selected' : '') }}>
                                     {{$company->name}}
@@ -39,9 +39,11 @@
                                 @else Cliente
                                 @endif
                             </label>
-                            <select name="entity" id="entity" class="form-control">
+                            <select name="entity" id="entity" class="selectpicker" data-live-search="true" data-size="3">
                                 @foreach($entities as $entity)
+                                @if ($entity->situation = false)
                                 <option value="{{$entity->id}}" {{ empty($transaction) ?"": ($transaction->entity_id == $entity->id ? 'selected' : '') }}>{{$entity->name}}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
@@ -50,7 +52,7 @@
                     <div class="form-group row">
                         <div class="col-6">
                             <label for="form_of_payment">Forma de Pagamento</label>
-                            <select name="form_of_payment" id="form_of_payment" class="form-control">
+                            <select name="form_of_payment" id="form_of_payment" class="form-control selectpicker" data-dropup-auto="false">
                                 @foreach ($payments as $p)
                                 <option value="{{$p->id}}">{{$p->description}}</option>
                                 @endforeach
@@ -59,31 +61,32 @@
 
                         <div class="col-6">
                             <label for="due_date">Vencimento</label>
-                            <input class="form-control" type="date" id="due_date" name="due_date" value="{{ empty($transaction) ?'':$transaction->due_date->format('Y-m-d')}}" />
+                            <div class="form-group">
+                                <input class="form-control" type="text" datepicker id="due_date" name="due_date" value="{{ empty($transaction) ?'':$transaction->due_date->format('Y-m-d')}}" placeholder="Vencimento" autocomplete="off" />
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-2">
+                        <div class="col-3">
                             <label for="installments">Parcelas</label>
-                            <input class="form-control" type="text" id="installments" name="installments" maxlength="3" value="{{ empty($transaction) ?'':$transaction->installments }}" />
+                            <input class="form-control" type="number" id="installments" name="installments" maxlength="3" value="{{ empty($transaction) ?'':$transaction->installments }}" />
                         </div>
 
                         <div class="col-4">
                             <label for="rates">Taxas</label>
-                            <input class="form-control" type="text" id="rates" name="rates" value="{{ empty($transaction) ?'':$transaction->rates }}" />
+                            <input class="form-control" type="text" id="rates" name="rates" value="{{ empty($transaction) ?'':$transaction->rates }}" placeholder="R$">
                         </div>
 
                         <div class="col-4">
                             <label for="original_value">Valor</label>
-                            <input class="form-control" type="text" id="original_value" name="original_value" value="{{ empty($transaction) ?'':$transaction->original_value }}" />
+                            <input class="form-control" type="text" id="original_value" name="original_value" value="{{ empty($transaction) ?'':$transaction->original_value }}" placeholder="R$" />
                         </div>
-
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secundary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">{{$btn}}</button>
                 </div>
             </form>

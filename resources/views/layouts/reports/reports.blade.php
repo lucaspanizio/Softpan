@@ -20,14 +20,14 @@
                                             <div class="form-group col-lg-6">
                                                 <label for="initial_date">Data Inicial: </label>
                                                 <div class="input-group">
-                                                    <input class="form-control" type="text" id="datepicker1" class="input-group" placeholder="Data inicial" />
+                                                    <input class="form-control" type="text" class="input-group" datepicker placeholder="Data inicial" />
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-lg-6">
                                                 <label for="final_date">Data Final: </label>
                                                 <div class="input-group">
-                                                    <input class="form-control" type="text" id="datepicker2" class="input-group" placeholder="Data Final" />
+                                                    <input class="form-control" type="text" datepicker class="input-group" placeholder="Data Final" />
                                                 </div>
                                             </div>
                                         </div>
@@ -35,7 +35,7 @@
                                         <div class="row">
                                             <div class="form-group col">
                                                 <label for="report"> </label>
-                                                <select name="report" id="report" class="form-control">
+                                                <select name="report" id="report" class="form-control selectpicker">
                                                     <option value="0">RECEITAS x CLIENTES</option>
                                                     <option value="1">DESPESAS x FORNECEDOR</option>
                                                     <option value="2">LISTA DE USUÁRIOS</option>

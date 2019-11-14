@@ -57,6 +57,10 @@ ul {
     font-size: 14px;
 }
 
+button{
+    font-size: 14px !important;
+}
+
 .form-group{
     font-size: 14px;
 }
@@ -110,7 +114,7 @@ p {
 body {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.625;
     color: #666;
     -webkit-font-smoothing: antialiased;
@@ -1156,8 +1160,17 @@ section {
 
 .form-control {
     -webkit-border-radius: 2px;
+    font-size: 14px !important;
     -moz-border-radius: 2px;
     border-radius: 2px;
+}
+
+.form-control.datepicker{
+    padding: .599rem .75rem !important;    
+}
+
+#due_date{
+    height: calc(2.25rem + 2px);
 }
 
 .card {
@@ -1642,7 +1655,7 @@ section {
 .navbar-sidebar .navbar__list li a {
     display: block;
     color: #555;
-    font-size: 16px;
+    font-size: 14px;
     padding: 15px 0;
 }
 
@@ -2261,7 +2274,7 @@ section {
 }
 
 .navbar-sidebar2 .navbar__list li a {
-    font-size: 16px;
+    font-size: 14px;
     color: #555;
     display: block;
     padding: 18px 35px;
@@ -2288,6 +2301,17 @@ section {
     border-color: #ebebeb;
 }
 
+.btn-light{
+    border: 1px solid #ced4da !important;
+    border-radius: .2x !important;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out !important;
+    background-color: #fff !important;
+    background-clip: padding-box !important;
+    font-size: 14px !important;
+    height: calc(2.25rem + 2px) !important;
+    color: #495057 !important;
+}
+
 .inbox-num {
     position: absolute;
     top: 50%;
@@ -2308,6 +2332,10 @@ section {
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
+
+/* .inbox-num.on{
+    background: #63c76a;
+} */
 
 .header-desktop2 {
     height: 75px;
@@ -4670,17 +4698,6 @@ section {
     border-radius: 2px;
     line-height: 30px;
     padding: 0 14px;
-}
-
-#datepicker1, #datepicker2{
-    cursor: pointer;
-    height: 42px !important;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #808080;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .status--process {
@@ -14674,4 +14691,8 @@ section {
 
 .vue-lists ul, .vue-lists ol {
     padding-left: 30px;
+}
+
+.dropdown-item{
+    font-size: 14px !important;
 }

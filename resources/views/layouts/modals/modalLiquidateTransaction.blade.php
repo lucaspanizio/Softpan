@@ -5,7 +5,7 @@
                 @method($method)
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="TituloModalCentralizado">{{$title}}</h5>
+                    {{$title}}
                     <div class="close">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                             <span aria-hidden="true">&times;</span>
@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secundary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success">{{$btn}}</button>
                 </div>
             </form>

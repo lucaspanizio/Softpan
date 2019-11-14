@@ -26,19 +26,17 @@
                             <div class="rs-select2--light rs-select2--md">
                                 <select class="js-select2" name="property">
                                     <option selected="selected">Todas</option>
-                                    <option value="">Atrasadas</option>
+                                    <option value="">Vencidas</option>
                                     <option value="">A vencer</option>
                                     <option value="">Pagas</option>
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
                             <div class="rs-select2--light rs-select2--md">
-                                <input class="form-control" type="text" id="datepicker1" class="input-group"
-                                    placeholder="Data inicial" />
+                                <input class="form-control datepicker" type="text" datepicker placeholder="Data inicial" />
                             </div>
                             <div class="rs-select2--light rs-select2--md">
-                                <input class="form-control" type="text" id="datepicker2" class="input-group"
-                                    placeholder="Data Final" />
+                                <input class="form-control datepicker" type="text" datepicker placeholder="Data Final" />
                             </div>
                         </div>
                         <div class="table-data__tool-right">
@@ -78,9 +76,9 @@
                                         @if($transaction->situation == '1')
                                         <span class="status--meddium">A VENCER</span>
                                         @elseif ($transaction->situation == '2')
-                                        <span class="status--process">PAGO</span>
+                                        <span class="status--process">PAGA</span>
                                         @else
-                                        <span class="status--denied">ATRASADO</span>
+                                        <span class="status--denied">VENCIDA</span>
                                         @endif
                                     </td>
                                     <td>
@@ -96,23 +94,20 @@
                                                 </button>
                                             </span>
                                             @endif
-                                            <span data-toggle="tooltip" data-placement="top" title=""
-                                                data-original-title="Visualizar">
+                                            <span data-toggle="tooltip" data-placement="top" title="Visualizar">                                                
                                                 <button class="item" id="btnVisualizar" type="button"
                                                     class="btn btn-secundary btn-sm" data-toggle="modal"
                                                     data-target="#ModalVisualizarTransacao{{$transaction->id}}">
                                                     <i class="fas fa-eye"></i>
                                                 </button>
                                             </span>
-                                            <span data-toggle="tooltip" data-placement="top" title=""
-                                                data-original-title="Alterar">
+                                            <span data-toggle="tooltip" data-placement="top" title="Alterar">
                                                 <button class="item" data-toggle="modal"
                                                     data-target="#ModalAlterarTransacao{{$transaction->id}}">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
                                             </span>
-                                            <span data-toggle="tooltip" data-placement="top" title=""
-                                                data-original-title="Excluir">
+                                            <span data-toggle="tooltip" data-placement="top" title="Excluir">
                                                 <button class="item" data-toggle="modal"
                                                     data-target="#ModalDeletar{{$transaction->id}}">
                                                     <i class=" zmdi zmdi-delete"></i>

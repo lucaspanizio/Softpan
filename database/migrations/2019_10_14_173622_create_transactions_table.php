@@ -25,7 +25,7 @@ class CreateTransactionsTable extends Migration
             $table->string('penalty')->nullable(); //Multa
             $table->string('rates')->nullable(true); //Taxas (TED, geração de boleto...)
             $table->string('current_value')->nullable();
-            $table->enum('situation', ['1', '2', '3'])->default('1')->nullable(); //1 - A VENCER, 2 - PAGO, 3 - ATRASADO
+            $table->enum('situation', ['1', '2', '3'])->default('1')->nullable(); //1 - A VENCER, 2 - PAGA, 3 - VENCIDA
             $table->softDeletes();
             $table->timestamps();
         });

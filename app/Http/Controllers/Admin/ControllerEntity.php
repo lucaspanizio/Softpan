@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Models\Entity;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Company;
+use App\Http\Models\Transaction;
 use Illuminate\Http\Request;
 
 class ControllerEntity extends Controller{
@@ -18,9 +19,11 @@ class ControllerEntity extends Controller{
             $tipoEntidade = 'Fornecedor';
         }                
         $companies = Company::all();
+        $count_r = Transaction::where([['type','=','CR'],['situation','=','3']])->count();
+        $count_p = Transaction::where([['type','=','CP'],['situation','=','3']])->count();
 
         return view('layouts.register.entity', 
-        compact('entities', 'e', 'tipoEntidade', 'companies'));
+        compact('entities', 'e', 'tipoEntidade', 'companies','count_r','count_p'));
     }
 
     public function store(Request $request, $e){

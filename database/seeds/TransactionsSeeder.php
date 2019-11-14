@@ -22,7 +22,7 @@ class TransactionsTableSeeder extends Seeder
         $payment = FormOfPayment::find(1);
 
         $t1 = new Transaction([
-            'due_date' => \Carbon\Carbon::now(),
+            'due_date' => \Carbon\Carbon::yesterday(),
             'type' => 'CP',
             'description' => 'CONTA DE LUZ',
             'installments' => '1',

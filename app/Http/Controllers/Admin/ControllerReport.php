@@ -14,18 +14,30 @@ class ControllerReport extends Controller
 
     public function index()
     {
-        $companies = Company::all();
-        $users = User::all();
-        $entities = Entity::all();
-        $transactions = Transaction::all();
+        // $companies = Company::all();
+        // $users = User::all();
+        // $entities = Entity::all();
+        // $transactions = Transaction::all();
+        $count_r = Transaction::where([['type','=','CR'],['situation','=','3']])->count();
+        $count_p = Transaction::where([['type','=','CP'],['situation','=','3']])->count();
 
-        return view('layouts.reports.reports', compact('companies', 'users', 'entities', 'transactions'));
+        return view(
+            'layouts.reports.reports',
+            compact(
+                // 'companies',
+                // 'users',
+                // 'entities',
+                // 'transactions',
+                'count_r',
+                'count_p'
+            )
+        );
     }
 
     public function teste()
     {
- 
-        
-        return PDF::loadHTML('<h1>Test</h1>')->stream();       
+
+
+        return PDF::loadHTML('<h1>Test</h1>')->stream();
     }
 }

@@ -64,14 +64,14 @@
                                     <td>{{$entity->state}}</td>
                                     <td>
                                         <div class="table-data-feature">
-                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
-                                                <button class="item" data-original-title="Alterar" data-toggle="modal" data-target="#ModalAlterarEntidade{{$entity->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title="Alterar">
+                                                <button class="item" data-toggle="modal" data-target="#ModalAlterarEntidade{{$entity->id}}">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
                                             </span>
                                             <input type="hidden" name="id" value="{{$entity->id}}">
-                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
-                                                <button class="item" data-original-title="Deletar" data-toggle="modal" data-target="#ModalDeletar{{$entity->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title="Excluir">
+                                                <button class="item" data-toggle="modal" data-target="#ModalDeletar{{$entity->id}}">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
                                             </span>

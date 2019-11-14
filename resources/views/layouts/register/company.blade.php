@@ -59,14 +59,14 @@
                                     <td>{{$company->state}}</td>
                                     <td>
                                         <div class="table-data-feature">
-                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Alterar">
-                                                <button class="item" data-original-title="Alterar" data-toggle="modal" data-target="#ModalAlterarEmpresa{{$company->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title="Alterar">
+                                                <button class="item" data-toggle="modal" data-target="#ModalAlterarEmpresa{{$company->id}}">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
                                             </span>
                                             <input type="hidden" name="id" value="{{$company->id}}">
-                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Excluir">
-                                                <button class="item" data-original-title="Deletar" data-toggle="modal" data-target="#ModalDeletar{{$company->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title="Excluir">
+                                                <button class="item" data-toggle="modal" data-target="#ModalDeletar{{$company->id}}">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
                                             </span>
