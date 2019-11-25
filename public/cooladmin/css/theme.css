@@ -1274,11 +1274,11 @@ section {
     justify-content: flex-end;
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+/* @media (min-width: 992px) and (max-width: 1199px) {
     .header-wrap .account-item > .content {
         display: none;
     }
-}
+} */
 
 @media (max-width: 991px) {
     .header-wrap {
