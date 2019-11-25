@@ -31,7 +31,7 @@
                 <div class="col-md-4 col-sm-6 col-lg">
                     <div class="statistic__item">
                         <h3 class="title-2 m-b-50">Receitas (Anual)</h3>
-                        <h2 class="number" style="color:green">R$ 10.368,00</h2>
+                        <h2 class="number" style="color:green">{{ $sum_r }}</h2>
                         <div class="icon">
                             <i class="zmdi zmdi-money"></i>
                         </div>
@@ -41,7 +41,7 @@
                 <div class="col-md-4 col-sm-6 col-lg">
                     <div class="statistic__item">
                         <h3 class="title-2 m-b-50">Despesas (Anual)</h3>
-                        <h2 class="number" style="color:red">R$ 388,68</h2>
+                        <h2 class="number" style="color:red">{{ $sum_p }}</h2>
                         <div class="icon">
                             <i class="zmdi zmdi-money-off"></i>
                         </div>

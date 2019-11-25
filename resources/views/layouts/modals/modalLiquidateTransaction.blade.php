@@ -41,29 +41,31 @@
 
                         <div class="col-4">
                             <label for="current_value">Valor Atual</label>
-                            <input class="form-control" type="text" id="current_value_{{$transaction->id}}" disabled/>
+                            <input class="form-control" type="text" id="current_value_{{$transaction->id}}" disabled />
                             <input type="hidden" type="text" id="hidden_current_value_{{$transaction->id}}" name="current_value" />
-                        </div>                        
+                        </div>
 
                         <script>
-                            $('#refresh_{{$transaction->id}}').click(function() {
-                                let juros = document.getElementById('penalty_{{$transaction->id}}').value;
-                                let multa = document.getElementById('interest_rate_{{$transaction->id}}').value;
-                                let atual = document.getElementById('current_value_{{$transaction->id}}');
-                                let hidden_atual = document.getElementById('hidden_current_value_{{$transaction->id}}');
-                                let original = {{$transaction->original_value}};
+                            $(document).ready(function() {
+                                $('#refresh_{{$transaction->id}}').click(function() {
+                                    let juros = document.getElementById('penalty_{{$transaction->id}}').value;
+                                    let multa = document.getElementById('interest_rate_{{$transaction->id}}').value;
+                                    let atual = document.getElementById('current_value_{{$transaction->id}}');
+                                    let hidden_atual = document.getElementById('hidden_current_value_{{$transaction->id}}');
+                                    let original = {{$transaction->original_value}};
 
-                                if (juros === "" && multa === "")
-                                    atual.value = original;
-                                else if (juros !== "" && multa === "")
-                                    atual.value = parseFloat(original) + parseFloat(juros);                                
-                                else if (juros === "" && multa !== "")
-                                    atual.value = parseFloat(original) + parseFloat(multa);
-                                else if (juros !== "" && multa !== "")
-                                    atual.value = parseFloat(original) + parseFloat(juros) + parseFloat(multa);
+                                    if (juros === "" && multa === "")
+                                        atual.value = original;
+                                    else if (juros !== "" && multa === "")
+                                        atual.value = parseFloat(original) + parseFloat(juros);
+                                    else if (juros === "" && multa !== "")
+                                        atual.value = parseFloat(original) + parseFloat(multa);
+                                    else if (juros !== "" && multa !== "")
+                                        atual.value = parseFloat(original) + parseFloat(juros) + parseFloat(multa);
 
-                                hidden_atual.value = atual.value;
-                            });
+                                    hidden_atual.value = atual.value;
+                                });
+                            })
                         </script>
                     </div>
                 </div>

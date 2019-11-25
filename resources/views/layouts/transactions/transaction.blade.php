@@ -24,29 +24,40 @@
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="rs-select2--light rs-select2--md">
-                                <select class="js-select2" name="property">
-                                    <option selected="selected">Todas</option>
-                                    <option value="">Vencidas</option>
-                                    <option value="">A vencer</option>
-                                    <option value="">Pagas</option>
+                                <select class="js-select2" id="status" name="property">
+                                    <option value="TODAS" selected="selected">Todas</option>
+                                    <option value="VENCIDA">Vencidas</option>
+                                    <option value="A VENCER">A vencer</option>
+                                    <option value="PAGA">Pagas</option>
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
                             <div class="rs-select2--light rs-select2--md">
-                                <input class="form-control datepicker" type="text" datepicker placeholder="Data inicial" />
+                                <input class="form-control datepicker" type="text" id="min" name="min" datepicker placeholder="Data inicial" />
                             </div>
                             <div class="rs-select2--light rs-select2--md">
-                                <input class="form-control datepicker" type="text" datepicker placeholder="Data Final" />
+                                <input class="form-control datepicker" type="text" id="max" name="max" datepicker placeholder="Data Final" />
                             </div>
                         </div>
                         <div class="table-data__tool-right">
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal"
-                                data-target="#ModalCadastrarTransacao">
+                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#ModalCadastrarTransacao">
                                 <i class="zmdi zmdi-plus"></i>Incluir {{$tipoTransacao}}</button>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-data2">
-                        <table class="table table-data2">
+                        <!-- <table cellspacing="5" cellpadding="5">
+                            <tbody> 
+                                <tr>
+                                    <td>Minimum age:</td>
+                                    <td><input type="text" id="min" name="min"></td>
+                                </tr>
+                                <tr>
+                                    <td>Maximum age:</td>
+                                    <td><input type="text" id="max" name="max"></td>
+                                </tr>
+                            </tbody>
+                        </table> -->
+                        <table id="example" class="table table-data2" style="width:100%">
                             <thead>
                                 <th>#</th>
                                 @if ($typeTransaction == "receivable")
@@ -59,8 +70,7 @@
                                 <th>Vencimento</th>
                                 <th>Valor</th>
                                 <th width="120">Situação</th>
-                                <th></th>
-                                </tr>
+                                <th></th>                                                                
                             </thead>
                             <tbody>
                                 @foreach ($transactions as $transaction)
@@ -85,31 +95,24 @@
                                         <div class="table-data-feature">
                                             <input type="hidden" name="id" value="{{$transaction->id}}">
                                             @if($transaction->current_value != null)
-                                            <span data-toggle="tooltip" data-placement="top" title=""
-                                                data-original-title="Liquidar">
-                                                <button class="item" id="btnReceber" type="submit"
-                                                    class="btn btn-success btn-sm" data-toggle="modal"
-                                                    data-target="#ModalLiquidarTransacao{{$transaction->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Liquidar">
+                                                <button class="item" id="btnReceber" type="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLiquidarTransacao{{$transaction->id}}">
                                                     <i class=" zmdi zmdi-check"></i>
                                                 </button>
                                             </span>
                                             @endif
-                                            <span data-toggle="tooltip" data-placement="top" title="Visualizar">                                                
-                                                <button class="item" id="btnVisualizar" type="button"
-                                                    class="btn btn-secundary btn-sm" data-toggle="modal"
-                                                    data-target="#ModalVisualizarTransacao{{$transaction->id}}">
+                                            <span data-toggle="tooltip" data-placement="top" title="Visualizar">
+                                                <button class="item" id="btnVisualizar" type="button" class="btn btn-secundary btn-sm" data-toggle="modal" data-target="#ModalVisualizarTransacao{{$transaction->id}}">
                                                     <i class="fas fa-eye"></i>
                                                 </button>
                                             </span>
                                             <span data-toggle="tooltip" data-placement="top" title="Alterar">
-                                                <button class="item" data-toggle="modal"
-                                                    data-target="#ModalAlterarTransacao{{$transaction->id}}">
+                                                <button class="item" data-toggle="modal" data-target="#ModalAlterarTransacao{{$transaction->id}}">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
                                             </span>
                                             <span data-toggle="tooltip" data-placement="top" title="Excluir">
-                                                <button class="item" data-toggle="modal"
-                                                    data-target="#ModalDeletar{{$transaction->id}}">
+                                                <button class="item" data-toggle="modal" data-target="#ModalDeletar{{$transaction->id}}">
                                                     <i class=" zmdi zmdi-delete"></i>
                                                 </button>
                                             </span>
@@ -155,9 +158,9 @@
                                     ])
                                     <!-- Fim do modal -->
                                 </tr>
-                                <tr class="spacer"></tr>
+                                <!-- <tr class="spacer"></tr> -->
                                 @endforeach
-                            </tbody>
+                            </tbody>                            
                         </table>
                     </div>
                     <!-- END DATA TABLE -->
