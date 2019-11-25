@@ -62,8 +62,8 @@
                         <div class="col-6">
                             <label for="due_date">Vencimento</label>
                             <div class="form-group">                                
-                                <input class="form-control" type="text" datepicker id="due_date" name="due_date" value="{{ empty($transaction) ?'':$transaction->due_date->format('d/m/Y')}}" placeholder="Vencimento" autocomplete="off" />
-                            </div>
+                                <input class="form-control" type="text" datepicker name="due_date" value="{{ empty($transaction) ? '' : $transaction->due_date->format('d/m/Y') }}" placeholder="Vencimento" autocomplete="off" />
+                            </div>                            
                         </div>
                     </div>
 

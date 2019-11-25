@@ -8,22 +8,27 @@
     <meta name="description" content="Sistema de Controle Financeiro Básico">
     <meta name="author" content="José Lucas Panizio">
     <meta name="keywords" content="contas a pagar, contas a receber, despesas, receitas">
+    <meta name="copyright" content="© 2019 José Lucas Panizio" />
 
     <!-- Title Page-->
     <title>SoftPan @yield('title')</title>
 
     <!-- Fontfaces CSS-->
     <link href="/cooladmin/css/font-face.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/cooladmin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/cooladmin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" type="text/css"
+        media="all">
+    <link href="/cooladmin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" type="text/css"
+        media="all">
+    <link href="/cooladmin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css"
+        media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="/cooladmin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/cooladmin/vendor/bootstrap-4.1/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 
     <!-- Vendor CSS-->
     <link href="/cooladmin/vendor/animsition/animsition.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" type="text/css"
+        rel="stylesheet" media="all">
     <link href="/cooladmin/vendor/wow/animate.css" rel="stylesheet" type="text/css" media="all">
     <link href="/cooladmin/vendor/css-hamburgers/hamburgers.min.css" type="text/css" rel="stylesheet" media="all">
     <link href="/cooladmin/vendor/slick/slick.css" rel="stylesheet" type="text/css" media="all">
@@ -32,7 +37,8 @@
     <link href="/cooladmin/vendor/vector-map/jqvmap.min.css" rel="stylesheet" type="text/css" media="all">
 
     <!-- DatePicker CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"> --}}
+    <link href="/cooladmin/css/jquery-ui.css" rel="stylesheet" type="text/css" media="all">
 
     <!-- Select2 CSS -->
     <link href="/cooladmin/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" media="all">
@@ -92,20 +98,22 @@
                                     <a class="transition" href="{{ route('admin.company.index') }}">Empresas</a>
                                 </li>
                                 <li>
-                                    <a class="transition" href="{{ route('admin.entity.index', 'provider') }}">Fornecedores</a>
+                                    <a class="transition"
+                                        href="{{ route('admin.entity.index', 'provider') }}">Fornecedores</a>
                                 </li>
                                 <li>
-                                    <a class="transition" href="{{ route('admin.entity.index', 'client') }}">Clientes</a>
+                                    <a class="transition"
+                                        href="{{ route('admin.entity.index', 'client') }}">Clientes</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <a class="transition" href="{{ route('admin.transaction.index', 'receivable') }}">
-                                <i class="fas fa-table"></i>Contas a Receber</a>
+                                <i class="fas fa-thumbs-up"></i>Contas a Receber</a>
                         </li>
                         <li>
                             <a class="transition" href="{{ route('admin.transaction.index', 'payable') }}">
-                                <i class="far fa-check-square"></i>Contas a Pagar</a>
+                                <i class="fas fa-thumbs-down"></i>Contas a Pagar</a>
                         </li>
                         <li>
                             <a class="transition" href="{{ route('admin.report.index') }}">
@@ -161,17 +169,19 @@
                         </li>
                         <li>
                             <a class="transition" href="{{ route('admin.transaction.index', 'receivable') }}">
-                                <i class="fas fa-piggy-bank"></i>Contas a Receber
+                                <i class="fas fa-thumbs-up"></i>Contas a Receber
                                 @if ($count_r > 0)
-                                <span class="inbox-num" data-toggle="tooltip" title="Receitas Vencidas">{{ $count_r }}</span>
+                                <span class="inbox-num" data-toggle="tooltip"
+                                    title="Receitas Vencidas">{{ $count_r }}</span>
                                 @endif
                             </a>
                         </li>
                         <li>
                             <a class="transition" href="{{ route('admin.transaction.index', 'payable') }}">
-                                <i class="fas fa-hand-holding-usd"></i>Contas a Pagar
+                                <i class="fas fa-thumbs-down"></i>Contas a Pagar
                                 @if ($count_p > 0)
-                                <span class="inbox-num" data-toggle="tooltip" title="Despesas Vencidas">{{ $count_p }}</span>
+                                <span class="inbox-num" data-toggle="tooltip"
+                                    title="Despesas Vencidas">{{ $count_p }}</span>
                                 @endif
                             </a>
                         </li>
@@ -180,7 +190,8 @@
                                 <i class="fas fa-clipboard-list"></i>Relatórios</a>
                         </li>
                         <li>
-                            <a class="transition" href="#" aria-label="Sair" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="transition" href="#" aria-label="Sair"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-power-off"></i>Sair</a>
                         </li>
                     </ul>
@@ -201,7 +212,8 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">{{ucwords(strtolower(Auth::user()->name))}}</a>
+                                            <a class="js-acc-btn"
+                                                href="#">{{ucwords(strtolower(Auth::user()->name))}}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -222,11 +234,13 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a class="transition" href="#" aria-label="Sair" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <a class="transition" href="#" aria-label="Sair"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                     <i class="zmdi zmdi-power"></i>Sair</a>
                                             </div>
                                         </div>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
                                             @csrf
                                         </form>
                                     </div>
@@ -246,7 +260,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                <p>Copyright © 2019 José Lucas Panizio. Template by <a
+                                        href="https://colorlib.com">Colorlib</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -281,7 +296,8 @@
     <script src="/cooladmin/vendor/vector-map/jquery.vmap.world.js"></script>
 
     <!-- DatePicker js -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script> --}}
+    <script src="/cooladmin/js/jquery-ui.js"></script>
 
     <!-- DataTable js -->
     <script src="/cooladmin/js/jquery.dataTables.min.js"></script>
@@ -293,25 +309,6 @@
     <script src="/cooladmin/js/main.js"></script>
 
     <script>
-        $(function() {
-            $("[datepicker]").datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                dateFormat: 'dd/mm/yy',
-                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                today: "Hoje",
-                monthsTitle: "Meses",
-                clear: "Limpar",
-                nextText: 'Próximo',
-                prevText: 'Anterior'
-            });
-            $('.selectpicker').selectpicker();
-        });
-
         $.fn.dataTableExt.afnFiltering.push(
             function(settings, data, dataIndex) {
                 var min = $('#min').val();  
@@ -338,7 +335,7 @@
                     (mindate <= coldate && coldate <= maxdate)) {
                     return true;
                 }
-                if (document.getElementById('example') == settings.nTable) {
+                if (document.getElementById('transactions') == settings.nTable) {
                     return false;
                 } else {
                     return true;
@@ -356,19 +353,34 @@
                     return true;
                 }
             }
-        );
+        );        
 
-        $(document).ready(function() {
-            var table = $('#example').DataTable();
+        $(function() {
+            $("[datepicker]").datepicker();            
+            $('.selectpicker').selectpicker();
+
+            var table = $('#transactions').DataTable({
+                "language": {                
+                    "paginate": {
+                        "first": '<button class="btn"><i class="fas fa-step-backward"></i></button>',
+                        "last": '<button class="btn"><i class="fas fa-step-forward"></i></button>',
+                        "next": '<button class="btn"><i class="fas fa-chevron-circle-right"></i></button>',
+                        "previous": '<button class="btn"><i class="fas fa-chevron-circle-left"></i></button>'
+                    }
+                }
+            });
+
+            $('#search').on( 'keyup', function () {
+                table.search( this.value ).draw();
+            } );
 
             $('#min, #max').change(function() {
                 table.draw();
             });
-
             $('#status').change(function() {
                 table.draw();
             });
-        });
+        });       
     </script>
 </body>
 

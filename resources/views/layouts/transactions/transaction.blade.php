@@ -41,23 +41,11 @@
                         </div>
                         <div class="table-data__tool-right">
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#ModalCadastrarTransacao">
-                                <i class="zmdi zmdi-plus"></i>Incluir {{$tipoTransacao}}</button>
+                                <i class="zmdi zmdi-plus"></i>Incluir&nbsp;{{$tipoTransacao}}</button>
                         </div>
                     </div>
-                    <div class="table-responsive table-responsive-data2">
-                        <!-- <table cellspacing="5" cellpadding="5">
-                            <tbody> 
-                                <tr>
-                                    <td>Minimum age:</td>
-                                    <td><input type="text" id="min" name="min"></td>
-                                </tr>
-                                <tr>
-                                    <td>Maximum age:</td>
-                                    <td><input type="text" id="max" name="max"></td>
-                                </tr>
-                            </tbody>
-                        </table> -->
-                        <table id="example" class="table table-data2" style="width:100%">
+                    <div class="table-responsive table-responsive-data2">                        
+                        <table id="transactions" class="table table-data2" style="width:100%">
                             <thead>
                                 <th>#</th>
                                 @if ($typeTransaction == "receivable")
@@ -69,8 +57,8 @@
                                 <th>Descrição</th>
                                 <th>Vencimento</th>
                                 <th>Valor</th>
-                                <th width="120">Situação</th>
-                                <th></th>                                                                
+                                <th>Situação</th>
+                                <th><input type="search" id="search" class="form-control" placeholder="Procurar"></th>                                                                
                             </thead>
                             <tbody>
                                 @foreach ($transactions as $transaction)
@@ -118,13 +106,6 @@
                                             </span>
                                         </div>
                                     </td>
-                                    <!-- Modal com formulário para visualização dos dados da transação selecionada -->
-                                    @include('layouts.modals.modalViewTransaction', [
-                                    'id' => 'ModalVisualizarTransacao'.$transaction->id,
-                                    'title' => 'Visualizar '.$tipoTransacao,
-                                    'transaction' => $transaction
-                                    ])
-                                    <!-- Fim do modal -->
 
                                     <!-- Modal com formulário para alteração dos dados da transação selecionada -->
                                     @include('layouts.modals.modalLiquidateTransaction', [
@@ -135,6 +116,14 @@
                                     'action' => route('admin.transaction.liquidate')
                                     ])
                                     <!-- Fim do modal -->
+
+                                    <!-- Modal com formulário para visualização dos dados da transação selecionada -->
+                                    @include('layouts.modals.modalViewTransaction', [
+                                    'id' => 'ModalVisualizarTransacao'.$transaction->id,
+                                    'title' => 'Visualizar '.$tipoTransacao,
+                                    'transaction' => $transaction
+                                    ])
+                                    <!-- Fim do modal -->                                    
 
                                     <!-- Modal com formulário para alteração dos dados da transação selecionada -->
                                     @include('layouts.modals.modalTransaction', [
