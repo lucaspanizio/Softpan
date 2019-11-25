@@ -11,6 +11,9 @@ class ControllerDashboard extends Controller{
         $count_r = Transaction::where([['type','=','CR'],['situation','=','3']])->count();
         $count_p = Transaction::where([['type','=','CP'],['situation','=','3']])->count();
 
-        return view('layouts.dashboard.dashboard', compact('count_r','count_p'));
+        $sum_r = Transaction::where('type','=','CR')->sum('current_value');
+        $sum_p = Transaction::where('type','=','CP')->sum('current_value');
+
+        return view('layouts.dashboard.dashboard', compact('count_r','count_p','sum_r','sum_p'));
     }
 }

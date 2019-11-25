@@ -41,7 +41,7 @@
                             </label>
                             <select name="entity" id="entity" class="selectpicker" data-live-search="true" data-size="3">
                                 @foreach($entities as $entity)
-                                @if ($entity->situation = false)
+                                @if ($entity->situation = true)
                                 <option value="{{$entity->id}}" {{ empty($transaction) ?"": ($transaction->entity_id == $entity->id ? 'selected' : '') }}>{{$entity->name}}</option>
                                 @endif
                                 @endforeach
@@ -61,8 +61,8 @@
 
                         <div class="col-6">
                             <label for="due_date">Vencimento</label>
-                            <div class="form-group">
-                                <input class="form-control" type="text" datepicker id="due_date" name="due_date" value="{{ empty($transaction) ?'':$transaction->due_date->format('Y-m-d')}}" placeholder="Vencimento" autocomplete="off" />
+                            <div class="form-group">                                
+                                <input class="form-control" type="text" datepicker id="due_date" name="due_date" value="{{ empty($transaction) ?'':$transaction->due_date->format('d/m/Y')}}" placeholder="Vencimento" autocomplete="off" />
                             </div>
                         </div>
                     </div>

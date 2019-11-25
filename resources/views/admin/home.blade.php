@@ -40,10 +40,17 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('cooladmin/css/theme.css') }}">
 
+    <!-- DataTable CSS -->
+    <!-- <link rel="stylesheet" type="text/css" href="/cooladmin/css/jquery.dataTables.min.css"> -->
+
+    <!-- Jquery JS-->
+    <script src="/cooladmin/vendor/jquery-3.2.1.min.js"></script>
 
 </head>
 
-<body class="animsition ">
+<!-- animsition -->
+
+<body class="animsition">
     <div class="page-wrapper">
 
         <!-- HEADER MOBILE-->
@@ -249,8 +256,7 @@
         </div>
     </div>
 
-    <!-- Jquery JS-->
-    <script src="/cooladmin/vendor/jquery-3.2.1.min.js"></script>
+
     <!-- Bootstrap JS-->
     <script src="/cooladmin/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="/cooladmin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
@@ -277,12 +283,14 @@
     <!-- DatePicker js -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
+    <!-- DataTable js -->
+    <script src="/cooladmin/js/jquery.dataTables.min.js"></script>
+
     <!-- Select2 JS -->
     <script src="/cooladmin/js/bootstrap-select.min.js"></script>
 
     <!-- Main JS-->
     <script src="/cooladmin/js/main.js"></script>
-
 
     <script>
         $(function() {
@@ -302,6 +310,64 @@
                 prevText: 'Anterior'
             });
             $('.selectpicker').selectpicker();
+        });
+
+        $.fn.dataTableExt.afnFiltering.push(
+            function(settings, data, dataIndex) {
+                var min = $('#min').val();  
+                var max = $('#max').val();
+
+                let mindate = new Date();
+                mindate.setFullYear(min.split('/')[2]);
+                mindate.setMonth(min.split('/')[1] -1);
+                mindate.setDate(min.split('/')[0]);
+                
+                let maxdate = new Date();
+                maxdate.setFullYear(max.split('/')[2]);
+                maxdate.setMonth(max.split('/')[1] -1);
+                maxdate.setDate(max.split('/')[0]);
+                
+                let coldate = new Date();
+                coldate.setFullYear(data[3].split('/')[2]);
+                coldate.setMonth(data[3].split('/')[1] -1);
+                coldate.setDate(data[3].split('/')[0]);
+
+                if ((isNaN(mindate) && isNaN(maxdate)) ||
+                    (isNaN(mindate) && coldate <= maxdate) ||
+                    (mindate <= coldate && isNaN(maxdate)) ||
+                    (mindate <= coldate && coldate <= maxdate)) {
+                    return true;
+                }
+                if (document.getElementById('example') == settings.nTable) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            function(settings, data, dataIndex) {
+                var status = $('#status').val();
+
+                if(status == data[5] || status == 'TODAS'){
+                    return true;
+                }
+                if (document.getElementById('example') == settings.nTable) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        );
+
+        $(document).ready(function() {
+            var table = $('#example').DataTable();
+
+            $('#min, #max').change(function() {
+                table.draw();
+            });
+
+            $('#status').change(function() {
+                table.draw();
+            });
         });
     </script>
 </body>
