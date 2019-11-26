@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <div class="login-content">
                                 <div class="login-form">
-                                    <form action="" method="post">
+                                    <form action="{{ route('admin.report.getReport', '1') }}" method="get">
 
                                         <div class="row">
                                             <div class="form-group col-lg-6">

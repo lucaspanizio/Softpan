@@ -98,8 +98,7 @@
                                     'variable' => $user
                                     ])
                                     <!-- Fim do modal -->
-                                </tr>
-                                <tr class="spacer"></tr>
+                                </tr>                                
                                 @endforeach
                             </tbody>
                         </table>

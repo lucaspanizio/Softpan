@@ -27,6 +27,7 @@ class TransactionsTableSeeder extends Seeder
             'description' => 'CONTA DE LUZ',
             'installments' => '1',
             'original_value' => '150.00',
+            'current_value' => '150.00',
             'situation' => '2'              
         ]);
 

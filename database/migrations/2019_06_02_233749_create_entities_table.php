@@ -19,8 +19,7 @@ class CreateEntitiesTable extends Migration
             $table->enum('type', ['C', 'F']);  // C - Cliente, F - Fornecedor
             $table->string('cpf')->unique()->nullable();
             $table->string('cnpj')->unique()->nullable();
-
-            /* API VIACEP */
+           
             $table->string('street');
             $table->string('zipcode');                       
             $table->string('city');

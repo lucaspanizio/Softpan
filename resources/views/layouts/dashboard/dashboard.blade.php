@@ -31,7 +31,7 @@
                 <div class="col-md-4 col-sm-6 col-lg">
                     <div class="statistic__item">
                         <h3 class="title-2 m-b-50">Receitas (Anual)</h3>
-                        <h2 class="number" style="color:green">{{ $sum_r }}</h2>
+                        <h2 class="number" style="color:#63c76a">{{ 'R$ '.number_format($sum_r,2, ',', '.') }}</h2>
                         <div class="icon">
                             <i class="zmdi zmdi-money"></i>
                         </div>
@@ -41,7 +41,7 @@
                 <div class="col-md-4 col-sm-6 col-lg">
                     <div class="statistic__item">
                         <h3 class="title-2 m-b-50">Despesas (Anual)</h3>
-                        <h2 class="number" style="color:red">{{ $sum_p }}</h2>
+                        <h2 class="number" style="color:#ff4b5a">{{ 'R$ '.number_format($sum_p,2, ',', '.') }}</h2>
                         <div class="icon">
                             <i class="zmdi zmdi-money-off"></i>
                         </div>
@@ -52,4 +52,69 @@
         </div>
     </div>
 </div>
+
+<script>
+    try {
+        //bar chart
+        var ctx = document.getElementById("barChart");
+        if (ctx) {
+            ctx.height = 200;
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                defaultFontFamily: 'Poppins',
+                data: {
+                    labels: ["Janeiro", "Feveiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                    datasets: [{
+                            label: "Receitas",
+                            data: {!! json_encode($receivables) !!},
+                            // borderColor: "rgba(0, 123, 255, 0.9)",
+                            borderColor: "green",
+                            borderWidth: "0",
+                            // backgroundColor: "rgba(0, 123, 255, 0.5)",
+                            backgroundColor: "#63c76a",
+                            fontFamily: "Poppins"
+                        },
+                        {
+                            label: "Despesas",
+                            data: {!! json_encode($payables) !!},
+                            // borderColor: "rgba(0,0,0,0.09)",
+                            borderColor: "red",
+                            borderWidth: "0",
+                            // backgroundColor: "rgba(0,0,0,0.07)",
+                            backgroundColor: "#ff4b5a",
+                            fontFamily: "Poppins"
+                        }
+                    ]
+                },
+                options: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            fontFamily: 'Poppins'
+                        }
+
+                    },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                fontFamily: "Poppins"
+
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                fontFamily: "Poppins"
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+
+    } catch (error) {
+        console.log(error);
+    }
+</script>
 @endsection

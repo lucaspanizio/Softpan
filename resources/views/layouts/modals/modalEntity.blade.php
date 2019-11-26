@@ -48,7 +48,7 @@
                     <div class="row">
                         <div class="col-4">
                             <label for="zipcode">CEP</label>
-                            <input onblur="pesquisacep(this.value);" name="zipcode" class="form-control" value="{{ empty($entity) ? '' : $entity->zipcode }}" id="zipcode">
+                            <input name="zipcode" class="form-control" value="{{ empty($entity) ? '' : $entity->zipcode }}" id="zipcode">
                         </div>
                         <div class="col-6">
                             <label for="city">Cidade</label>
@@ -83,9 +83,9 @@
 
                         <div class="col-4">
                             <label for="situation">Situação</label>
-                            <select name="situation" id="situation" class="form-control selectpicker">
-                                <option value="1" {{ empty($entity) ? 'selected' : (($entity->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
-                                <option value="0" {{ empty($entity) ? 'selected' : (($entity->situation == "ATIVO")?'selected':'') }}>ATIVO</option>
+                            <select name="situation" class="form-control">
+                                <option value="1" {{ empty($entity) ? 'selected' : (($entity->situation == "ATIVO")?'selected':'') }}>ATIVO</option>
+                                <option value="0" {{ empty($entity) ? '' : (($entity->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
                             </select>
                         </div>
                     </div>

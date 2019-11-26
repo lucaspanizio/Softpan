@@ -64,7 +64,7 @@
                                 @foreach ($transactions as $transaction)
                                 <tr class="tr-shadow">
                                     <td>{{$transaction->id}}</td>
-                                    <td>{{empty($transaction->entity) ? ' ': $transaction->entity->name}}</td>
+                                    <td>{{empty($transaction->entity) ? ' ': $transaction->entity['name']}}</td>
                                     <!-- Nome do fornecedor ou cliente -->
                                     <td>{{$transaction->description}}</td>
                                     <td>{{$transaction->due_date->format('d/m/Y')}}</td>
@@ -84,7 +84,7 @@
                                             <input type="hidden" name="id" value="{{$transaction->id}}">
                                             @if($transaction->current_value != null)
                                             <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Liquidar">
-                                                <button class="item" id="btnReceber" type="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLiquidarTransacao{{$transaction->id}}">
+                                                <button class="item" type="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLiquidarTransacao{{$transaction->id}}">
                                                     <i class=" zmdi zmdi-check"></i>
                                                 </button>
                                             </span>

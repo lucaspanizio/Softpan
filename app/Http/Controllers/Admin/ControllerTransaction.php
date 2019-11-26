@@ -47,52 +47,50 @@ class ControllerTransaction extends Controller
             )
         );
     }
-
+   
     public function store(Request $request, $t)
-    {
+    {        
         $transaction = new Transaction();
         $transaction->due_date = Carbon::createFromFormat('d/m/Y', $request->due_date);      
         $transaction->description = $request->description;
         $transaction->installments = $request->installments;
         $transaction->original_value = $request->original_value;
+        $transaction->current_value = $request->original_value;
         $transaction->rates = $request->rates;
         $transaction->situation = "1";
         if ($t == 'receivable')
             $transaction->type = 'CR';
         else
             $transaction->type = 'CP';
-
         $transaction->save();
         $transaction->entity()->associate(Entity::find($request->input('entity')));
         $transaction->user()->associate(User::find(Auth::user()->id));
         $transaction->company()->associate(Company::find($request->input('company')));
         $transaction->payment()->associate(FormOfPayment::find($request->input('form_of_payment')));
         $transaction->save();
-
         return redirect()->back();
     }
 
     public function update(Request $request)
-    {               
+    {            
+        return $request;   
         $transaction = Transaction::find($request->id);        
         $transaction->due_date = Carbon::createFromFormat('d/m/Y', $request->due_date);
         $transaction->description = $request->description;
         $transaction->installments = $request->installments;
         $transaction->original_value = $request->original_value;
+        $transaction->current_value = $request->original_value;
         $transaction->rates = $request->rates;
-
         $transaction->company()->dissociate();
         $transaction->user()->dissociate();
         $transaction->entity()->dissociate();
         $transaction->payment()->dissociate();
-
         $transaction->save();
-        $transaction->entity()->associate(Entity::find($request->entity));
+        $transaction->entity()->associate(Entity::find($request->input('entity')));
         $transaction->user()->associate(User::find(Auth::user()->id));
-        $transaction->company()->associate(Company::find($request->company));
+        $transaction->company()->associate(Company::find($request->input('company')));
         $transaction->payment()->associate(FormOfPayment::find($request->input('form_of_payment')));
         $transaction->save();
-
         return redirect()->back();
     }
 

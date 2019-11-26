@@ -34,12 +34,12 @@
                             </div>
                         </div>
                         <div class="table-data__tool-right">
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#ModalCadastrarEmpresa">
-                                <i class="zmdi zmdi-plus"></i>incluir empresa</button>
+                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#ModalCadastrarEntidade">
+                                <i class="zmdi zmdi-plus"></i>incluir {{$tipoEntidade}}</button>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-data2">
-                        <table class="table table-data2">
+                        <table class="table table-data2" style="width:100%">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -47,7 +47,7 @@
                                     <th scope="col">Documento</th>
                                     <th scope="col">Cidade</th>
                                     <th scope="col">Estado</th>
-                                    <th></th>
+                                    <th><input type="search" id="search-entities" class="form-control" placeholder="Procurar"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,8 +97,7 @@
                                     'action' => route('admin.entity.update')
                                     ])
                                     <!-- Fim do modal -->
-                                </tr>
-                                <tr class="spacer"></tr>
+                                </tr>                                
                                 @endforeach
                             </tbody>
                         </table>

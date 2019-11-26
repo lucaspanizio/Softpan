@@ -68,9 +68,9 @@
 
                         <div class="col">
                             <label for="situation">Situação</label>
-                            <select name="situation" id="situation" class="form-control selectpicker">
-                                <option value="1" {{ empty($company) ? 'selected' : (($company->situation == "INATIVA")?'selected':'') }}>INATIVA</option>
-                                <option value="0" {{ empty($company) ? 'selected' : (($company->situation == "ATIVA")?'selected':'') }}>ATIVA</option>
+                            <select name="situation" class="form-control">
+                                <option value="1" {{ empty($company) ? 'selected' : (($company->situation == "ATIVA")?'selected':'') }}>ATIVA</option>
+                                <option value="0" {{ empty($company) ? '' : (($company->situation == "INATIVA")?'selected':'') }}>INATIVA</option>
                             </select>
                         </div>
                     </div>

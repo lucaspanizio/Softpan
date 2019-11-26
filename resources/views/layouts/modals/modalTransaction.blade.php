@@ -39,9 +39,9 @@
                                 @else Cliente
                                 @endif
                             </label>
-                            <select name="entity" id="entity" class="selectpicker" data-live-search="true" data-size="3">
+                            <select name="entity" class="form-group selectpicker" data-live-search="true" data-size="3">
                                 @foreach($entities as $entity)
-                                @if ($entity->situation = true)
+                                @if ($entity->situation == true)
                                 <option value="{{$entity->id}}" {{ empty($transaction) ?"": ($transaction->entity_id == $entity->id ? 'selected' : '') }}>{{$entity->name}}</option>
                                 @endif
                                 @endforeach
@@ -70,7 +70,7 @@
                     <div class="form-group row">
                         <div class="col-3">
                             <label for="installments">Parcelas</label>
-                            <input class="form-control" type="number" id="installments" name="installments" maxlength="3" value="{{ empty($transaction) ?'':$transaction->installments }}" />
+                            <input class="form-control" type="number" id="installments" name="installments" maxlength="3" value="{{ empty($transaction) ?'1':$transaction->installments }}" required/>
                         </div>
 
                         <div class="col-4">

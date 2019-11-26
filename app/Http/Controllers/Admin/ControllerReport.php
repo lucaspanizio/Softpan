@@ -18,8 +18,8 @@ class ControllerReport extends Controller
         // $users = User::all();
         // $entities = Entity::all();
         // $transactions = Transaction::all();
-        $count_r = Transaction::where([['type','=','CR'],['situation','=','3']])->count();
-        $count_p = Transaction::where([['type','=','CP'],['situation','=','3']])->count();
+        $count_r = Transaction::where([['type', '=', 'CR'], ['situation', '=', '3']])->count();
+        $count_p = Transaction::where([['type', '=', 'CP'], ['situation', '=', '3']])->count();
 
         return view(
             'layouts.reports.reports',
@@ -34,10 +34,9 @@ class ControllerReport extends Controller
         );
     }
 
-    public function teste()
+    public function getReport($n)
     {
-
-
-        return PDF::loadHTML('<h1>Test</h1>')->stream();
+        $transactions = Transaction::all();        
+        return view('layouts.reports.report'.$n,compact('transactions'));               
     }
 }

@@ -54,9 +54,9 @@
                     <div class="form-group row">
                         <div class="col-6">
                             <label for="situation">Situação</label>
-                            <select name="situation" id="situation" class="form-control selectpicker">
-                                <option value="0" {{ empty($user) ? 'selected' : (($user->situation == "ATIVO")?'selected':'') }}>ATIVO</option>
-                                <option value="1" {{ empty($user) ? 'selected' : (($user->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
+                            <select name="situation" id="situation" class="form-control">
+                                <option value="1" {{ empty($user) ? 'selected' : (($user->situation == "ATIVO")?'selected':'') }}>ATIVO</option>
+                                <option value="0" {{ empty($user) ? '' : (($user->situation == "INATIVO")?'selected':'') }}>INATIVO</option>
                             </select>
                         </div>
                     </div>

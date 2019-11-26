@@ -359,7 +359,7 @@
             $("[datepicker]").datepicker();            
             $('.selectpicker').selectpicker();
 
-            var table = $('#transactions').DataTable({
+            var table = $('table.table-data2').DataTable({
                 "language": {                
                     "paginate": {
                         "first": '<button class="btn"><i class="fas fa-step-backward"></i></button>',
@@ -368,12 +368,10 @@
                         "previous": '<button class="btn"><i class="fas fa-chevron-circle-left"></i></button>'
                     }
                 }
-            });
-
+            });              
             $('#search').on( 'keyup', function () {
                 table.search( this.value ).draw();
             } );
-
             $('#min, #max').change(function() {
                 table.draw();
             });

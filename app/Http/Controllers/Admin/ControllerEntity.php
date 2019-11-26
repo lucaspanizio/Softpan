@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ControllerEntity extends Controller{
     
-    public function index($e){         
+    public function index($e){               
         if ($e == 'client'){
             $entities = Entity::where('type', 'C')->get();
             $tipoEntidade = 'Cliente';
@@ -50,19 +50,14 @@ class ControllerEntity extends Controller{
         $entity->zipcode = $request->zipcode;
         $entity->neighborhood = $request->neighborhood;
         $entity->state = $request->state;
-        $entity->situation = $request->situation;
-
-        // foreach ($request->companies as $c) {
-        //     $company = Company::find($c);
-        //     $entity->companies()->attach($company);
-        // }
-
+        $entity->situation = $request->situation;        
         $entity->save();
 
         return redirect()->back();
     }
 
     public function update(Request $request){
+        
         $request->validate([
             'name' => 'required|max:255',
             'number' => 'required|max:8'
@@ -82,14 +77,7 @@ class ControllerEntity extends Controller{
         $entity->zipcode = $request->zipcode;
         $entity->neighborhood = $request->neighborhood;
         $entity->state = $request->state;
-        $entity->situation = $request->situation;
-
-        // $entity->companies()->detach();
-        // foreach ($request->companies as $c) {
-        //     $company = Company::find($c);
-        //     $entity->companies()->attach($company);
-        // }
-
+        $entity->situation = $request->get('situation');
         $entity->save();
 
         return redirect()->back();
