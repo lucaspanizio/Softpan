@@ -37,7 +37,7 @@
     <link href="/cooladmin/vendor/vector-map/jqvmap.min.css" rel="stylesheet" type="text/css" media="all">
 
     <!-- DatePicker CSS -->
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"> --}}
+    <!-- {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"> --}} -->
     <link href="/cooladmin/css/jquery-ui.css" rel="stylesheet" type="text/css" media="all">
 
     <!-- Select2 CSS -->
@@ -296,7 +296,7 @@
     <script src="/cooladmin/vendor/vector-map/jquery.vmap.world.js"></script>
 
     <!-- DatePicker js -->
-    {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script> --}}
+    <!-- {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script> --}} -->
     <script src="/cooladmin/js/jquery-ui.js"></script>
 
     <!-- DataTable js -->
@@ -347,7 +347,7 @@
                 if(status == data[5] || status == 'TODAS'){
                     return true;
                 }
-                if (document.getElementById('example') == settings.nTable) {
+                if (document.getElementById('transactions') == settings.nTable) {
                     return false;
                 } else {
                     return true;

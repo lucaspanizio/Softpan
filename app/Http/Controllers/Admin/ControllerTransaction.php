@@ -10,6 +10,7 @@ use App\Http\Models\FormOfPayment;
 use App\Http\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class ControllerTransaction extends Controller
 {
@@ -50,7 +51,7 @@ class ControllerTransaction extends Controller
     public function store(Request $request, $t)
     {
         $transaction = new Transaction();
-        $transaction->due_date = $request->due_date;
+        $transaction->due_date = Carbon::createFromFormat('d/m/Y', $request->due_date);      
         $transaction->description = $request->description;
         $transaction->installments = $request->installments;
         $transaction->original_value = $request->original_value;
@@ -72,15 +73,12 @@ class ControllerTransaction extends Controller
     }
 
     public function update(Request $request)
-    {
-        $transaction = Transaction::find($request->id);
-        $transaction->due_date = $request->due_date;
-        $transaction->pay_off_date = $request->pay_off_date;
+    {               
+        $transaction = Transaction::find($request->id);        
+        $transaction->due_date = Carbon::createFromFormat('d/m/Y', $request->due_date);
         $transaction->description = $request->description;
         $transaction->installments = $request->installments;
         $transaction->original_value = $request->original_value;
-        $transaction->current_value = $request->current_value;
-        $transaction->situation = $request->situation;
         $transaction->rates = $request->rates;
 
         $transaction->company()->dissociate();
@@ -89,9 +87,9 @@ class ControllerTransaction extends Controller
         $transaction->payment()->dissociate();
 
         $transaction->save();
-        $transaction->entity()->associate(Entity::find($request->input('entity')));
+        $transaction->entity()->associate(Entity::find($request->entity));
         $transaction->user()->associate(User::find(Auth::user()->id));
-        $transaction->company()->associate(Company::find($request->input('company')));
+        $transaction->company()->associate(Company::find($request->company));
         $transaction->payment()->associate(FormOfPayment::find($request->input('form_of_payment')));
         $transaction->save();
 

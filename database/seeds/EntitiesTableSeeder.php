@@ -14,7 +14,7 @@ class EntitiesTableSeeder extends Seeder
     {
         Entity::create([
             'name' => 'MAGNUS FORMEDIC',
-            'type' => 'C',
+            'type' => 'F',
             'cnpj' => '12111109876543',
             'zipcode' => '86030817',
             'email' => 'magnus@magnus.com',
@@ -36,7 +36,7 @@ class EntitiesTableSeeder extends Seeder
             'name' => 'UNIFIOS',
             'cnpj' => '123456789101112',
             'zipcode' => '86030290',
-            'type' => 'F',
+            'type' => 'C',
             'email' => 'unifios@unifios.com',
             'street' => 'RUA ROMA',
             'neighborhood' => 'JARDIM ALEMANHA',

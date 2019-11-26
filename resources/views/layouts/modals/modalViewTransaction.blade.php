@@ -28,15 +28,15 @@
                 </div>
                 <div class="row">
                     <div class="col-4"><b>Empresa:</b></div>
-                    <div class="col-8">{{$transaction->company->name}}</div>
+                    <div class="col-8">{{$transaction->company['name']}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-4"><b>{{ $transaction->entity->type == 'C' ? 'Cliente:' : 'Fornecedor:' }}</b></div>
-                    <div class="col-8">{{$transaction->entity->name}}</div>
+                    <div class="col-4"><b>{{ $transaction->entity['type'] == 'C' ? 'Cliente:' : 'Fornecedor:' }}</b></div>
+                    <div class="col-8">{{$transaction->entity['name']}}</div>
                 </div>
                 <div class="row">
                     <div class="col-4"><b>Usuário:</b></div>
-                    <div class="col-8">{{$transaction->user->name}}</div>
+                    <div class="col-8">{{$transaction->user['name']}}</div>
                 </div>
                 <div class="row">
                     <div class="col-4"><b>Valor Original:</b></div>
