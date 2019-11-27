@@ -19,7 +19,6 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group">
-
                                 <label>E-mail</label>
                                 <input
                                     class="au-input au-input--full form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
@@ -32,6 +31,7 @@
                                 </span>
                                 @endif
                             </div>
+                            <br>
                             <div class="form-group">
                                 <label>Senha</label>
                                 <input type="password" name="password" placeholder="Senha"
@@ -44,7 +44,8 @@
                                 </span>
                                 @endif
                             </div>
-                            <div class="form-group">
+                            
+                            <!-- <div class="form-group">
                                 <div class="login-checkbox">
                                     <label>
                                         <input type="checkbox" name="remember" id="remember"
@@ -58,7 +59,8 @@
                                         @endif
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
+                            <br>
                             <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Entrar</button>
                         </form>
                         <!-- <div class="register-link">

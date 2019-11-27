@@ -15,20 +15,16 @@
 
     <!-- Fontfaces CSS-->
     <link href="/cooladmin/css/font-face.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" type="text/css"
-        media="all">
-    <link href="/cooladmin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" type="text/css"
-        media="all">
-    <link href="/cooladmin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css"
-        media="all">
+    <link href="/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/cooladmin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/cooladmin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css" media="all">
 
     <!-- Bootstrap CSS-->
     <link href="/cooladmin/vendor/bootstrap-4.1/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 
     <!-- Vendor CSS-->
     <link href="/cooladmin/vendor/animsition/animsition.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" type="text/css"
-        rel="stylesheet" media="all">
+    <link href="/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" type="text/css" rel="stylesheet" media="all">
     <link href="/cooladmin/vendor/wow/animate.css" rel="stylesheet" type="text/css" media="all">
     <link href="/cooladmin/vendor/css-hamburgers/hamburgers.min.css" type="text/css" rel="stylesheet" media="all">
     <link href="/cooladmin/vendor/slick/slick.css" rel="stylesheet" type="text/css" media="all">
@@ -53,8 +49,6 @@
     <script src="/cooladmin/vendor/jquery-3.2.1.min.js"></script>
 
 </head>
-
-<!-- animsition -->
 
 <body class="animsition">
     <div class="page-wrapper">
@@ -98,12 +92,10 @@
                                     <a class="transition" href="{{ route('admin.company.index') }}">Empresas</a>
                                 </li>
                                 <li>
-                                    <a class="transition"
-                                        href="{{ route('admin.entity.index', 'provider') }}">Fornecedores</a>
+                                    <a class="transition" href="{{ route('admin.entity.index', 'provider') }}">Fornecedores</a>
                                 </li>
                                 <li>
-                                    <a class="transition"
-                                        href="{{ route('admin.entity.index', 'client') }}">Clientes</a>
+                                    <a class="transition" href="{{ route('admin.entity.index', 'client') }}">Clientes</a>
                                 </li>
                             </ul>
                         </li>
@@ -171,8 +163,7 @@
                             <a class="transition" href="{{ route('admin.transaction.index', 'receivable') }}">
                                 <i class="fas fa-thumbs-up"></i>Contas a Receber
                                 @if ($count_r > 0)
-                                <span class="inbox-num" data-toggle="tooltip"
-                                    title="Receitas Vencidas">{{ $count_r }}</span>
+                                <span class="inbox-num" data-toggle="tooltip" title="Receitas Vencidas">{{ $count_r }}</span>
                                 @endif
                             </a>
                         </li>
@@ -180,8 +171,7 @@
                             <a class="transition" href="{{ route('admin.transaction.index', 'payable') }}">
                                 <i class="fas fa-thumbs-down"></i>Contas a Pagar
                                 @if ($count_p > 0)
-                                <span class="inbox-num" data-toggle="tooltip"
-                                    title="Despesas Vencidas">{{ $count_p }}</span>
+                                <span class="inbox-num" data-toggle="tooltip" title="Despesas Vencidas">{{ $count_p }}</span>
                                 @endif
                             </a>
                         </li>
@@ -190,15 +180,14 @@
                                 <i class="fas fa-clipboard-list"></i>Relatórios</a>
                         </li>
                         <li>
-                            <a class="transition" href="#" aria-label="Sair"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="transition" href="#" aria-label="Sair" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-power-off"></i>Sair</a>
                         </li>
                     </ul>
                 </nav>
             </div>
         </aside>
-        <!-- END MENU SIDEBAR-->'
+        <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
@@ -208,12 +197,10 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <div class="header-button">
-
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="content">
-                                            <a class="js-acc-btn"
-                                                href="#">{{ucwords(strtolower(Auth::user()->name))}}</a>
+                                            <a class="js-acc-btn" href="#">{{ucwords(strtolower(Auth::user()->name))}}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -234,13 +221,11 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a class="transition" href="#" aria-label="Sair"
-                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <a class="transition" href="#" aria-label="Sair" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                     <i class="zmdi zmdi-power"></i>Sair</a>
                                             </div>
                                         </div>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
                                     </div>
@@ -255,13 +240,12 @@
             <!-- Content -->
             @yield('content')
 
-            <section>
+            <section id="footer">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © 2019 José Lucas Panizio. Template by <a
-                                        href="https://colorlib.com">Colorlib</a>.</p>
+                                <p>Copyright © 2019 José Lucas Panizio. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -271,25 +255,24 @@
         </div>
     </div>
 
-
     <!-- Bootstrap JS-->
     <script src="/cooladmin/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="/cooladmin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="/cooladmin/vendor/slick/slick.min.js">
-    </script>
+
+    <!-- Jquery Mask JS -->
+    <script src="/cooladmin/js/jquery-mask.min.js"></script>
+
+    <!-- Vendor JS -->
+    <script src="/cooladmin/vendor/slick/slick.min.js"></script>
     <script src="/cooladmin/vendor/wow/wow.min.js"></script>
     <script src="/cooladmin/vendor/animsition/animsition.min.js"></script>
-    <script src="/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
+    <script src="/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <script src="/cooladmin/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="/cooladmin/vendor/counter-up/jquery.counterup.min.js">
-    </script>
+    <script src="/cooladmin/vendor/counter-up/jquery.counterup.min.js"></script>
     <script src="/cooladmin/vendor/circle-progress/circle-progress.min.js"></script>
     <script src="/cooladmin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="/cooladmin/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="/cooladmin/vendor/select2/select2.min.js">
-    </script>
+    <script src="/cooladmin/vendor/select2/select2.min.js"></script>
     <script src="/cooladmin/vendor/vector-map/jquery.vmap.js"></script>
     <script src="/cooladmin/vendor/vector-map/jquery.vmap.min.js"></script>
     <script src="/cooladmin/vendor/vector-map/jquery.vmap.sampledata.js"></script>
@@ -308,79 +291,7 @@
     <!-- Main JS-->
     <script src="/cooladmin/js/main.js"></script>
 
-    <script>
-        $.fn.dataTableExt.afnFiltering.push(
-            function(settings, data, dataIndex) {
-                var min = $('#min').val();  
-                var max = $('#max').val();
-
-                let mindate = new Date();
-                mindate.setFullYear(min.split('/')[2]);
-                mindate.setMonth(min.split('/')[1] -1);
-                mindate.setDate(min.split('/')[0]);
-                
-                let maxdate = new Date();
-                maxdate.setFullYear(max.split('/')[2]);
-                maxdate.setMonth(max.split('/')[1] -1);
-                maxdate.setDate(max.split('/')[0]);
-                
-                let coldate = new Date();
-                coldate.setFullYear(data[3].split('/')[2]);
-                coldate.setMonth(data[3].split('/')[1] -1);
-                coldate.setDate(data[3].split('/')[0]);
-
-                if ((isNaN(mindate) && isNaN(maxdate)) ||
-                    (isNaN(mindate) && coldate <= maxdate) ||
-                    (mindate <= coldate && isNaN(maxdate)) ||
-                    (mindate <= coldate && coldate <= maxdate)) {
-                    return true;
-                }
-                if (document.getElementById('transactions') == settings.nTable) {
-                    return false;
-                } else {
-                    return true;
-                }
-            },
-            function(settings, data, dataIndex) {
-                var status = $('#status').val();
-
-                if(status == data[5] || status == 'TODAS'){
-                    return true;
-                }
-                if (document.getElementById('transactions') == settings.nTable) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        );        
-
-        $(function() {
-            $("[datepicker]").datepicker();            
-            $('.selectpicker').selectpicker();
-
-            var table = $('table.table-data2').DataTable({
-                "language": {                
-                    "paginate": {
-                        "first": '<button class="btn"><i class="fas fa-step-backward"></i></button>',
-                        "last": '<button class="btn"><i class="fas fa-step-forward"></i></button>',
-                        "next": '<button class="btn"><i class="fas fa-chevron-circle-right"></i></button>',
-                        "previous": '<button class="btn"><i class="fas fa-chevron-circle-left"></i></button>'
-                    }
-                }
-            });              
-            $('#search').on( 'keyup', function () {
-                table.search( this.value ).draw();
-            } );
-            $('#min, #max').change(function() {
-                table.draw();
-            });
-            $('#status').change(function() {
-                table.draw();
-            });
-        });       
-    </script>
+    @yield('script')
 </body>
 
 </html>
-<!-- end document-->

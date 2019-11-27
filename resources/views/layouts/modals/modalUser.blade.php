@@ -18,31 +18,26 @@
                     <div class="form-group row">
                         <div class="col">
                             <label for="name">Nome Completo</label>
-                            <input name="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" required autofocus value="{{ empty($user) ?'':$user->name }}" id="name" placeholder="">
-
-                            @if ($errors->has('name'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </span>
-                            @endif
+                            <input name="name" type="text" class="form-control text-uppercase" name="name" value="{{ empty($user) ?'':$user->name }}" required>
                         </div>
 
                         <div class="col">
                             <label for="email">E-mail</label>
-                            <input name="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="name" required id="email" value="{{ empty($user) ?'':$user->email }}">
+                            <input name="email" type="email" class="form-control" name="name" value="{{ empty($user) ?'':$user->email }}" required>
 
-                            @if ($errors->has('email'))
+                            <!-- {{ $errors->has('email') ? ' is-invalid' : '' }} -->
+                            <!-- @if ($errors->has('email'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('email') }}</strong>
                             </span>
-                            @endif
+                            @endif -->
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col">
                             <label for="password">{{$lbl_pass1}}</label>
-                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" confirmed>
+                            <input id="password" type="password" class="form-control" name="password">
                         </div>
                     
                         <div class="col">

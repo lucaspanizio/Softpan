@@ -22,7 +22,7 @@ class ControllerUser extends Controller
         $count_r = Transaction::where([['type', '=', 'CR'], ['situation', '=', '3']])->count();
         $count_p = Transaction::where([['type', '=', 'CP'], ['situation', '=', '3']])->count();
 
-        return view('auth.reset', compact('count_r','count_p'));
+        return view('auth.reset', compact('count_r', 'count_p'));
     }
 
     public function reset(Request $request)
@@ -61,37 +61,38 @@ class ControllerUser extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255',
-            'password' => 'required|confirmed'
-        ]);
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->situation = $request->input('situation');
-        $user->save();
+        if (User::where('email', $request->email)->count() == 0) {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->input('email');
+            $user->password = bcrypt($request->input('password'));
+            $user->situation = $request->input('situation');
+            $user->save();
+        } else {
+            return redirect()->back()->with('msg-error', 'Já existe um usuário registrado com o E-mail informado.');
+        }
 
         return redirect()->route('admin.user.index');
     }
 
     public function update(Request $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255'
-        ]);
-
-        $user = User::find($request->id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-
-        if (!empty($request->password)) {
-            if ($request->password == $request->input('password_confirmation'))
-                $user->password = bcrypt($request->password);
+        if (User::where([['email', $request->email], ['id', '!=', $request->id]])->count() > 0) {
+            return redirect()->back()->with('msg-error', 'Já existe um usuário registrado com o E-mail informado.');
         }
 
+        $user = User::find($request->id);
+
+        if (!empty($request->password) || !empty($request->password_confirmation)) {
+            if ($request->password == $request->input('password_confirmation')) {
+                $user->password = bcrypt($request->password);
+            } else {
+                return redirect()->back()->with('msg-error', 'As senhas digitadas são diferentes.');
+            }
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
         $user->situation = $request->situation;
         $user->save();
 

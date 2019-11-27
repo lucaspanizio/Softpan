@@ -9,25 +9,30 @@
             <div class="row">
                 <div class="col-lg-3 col-md-2"></div>
                 <div class="col-lg-6">
+                    @if(session('msg-error'))
+                    <div class="alert alert-danger">
+                        <p>{{session('msg-error')}}</p>
+                    </div>
+                    @endif
                     <div class="card">
                         <div class="card-header">Relatórios</div>
                         <div class="card-body">
                             <div class="login-content">
                                 <div class="login-form">
-                                    <form action="{{ route('admin.report.getReport', '1') }}" method="get">
+                                    <form action="{{ route('admin.report.getReport') }}" method="get">
 
                                         <div class="row">
                                             <div class="form-group col-lg-6">
-                                                <label for="initial_date">Data Inicial: </label>
-                                                <div class="input-group">
-                                                    <input class="form-control" type="text" class="input-group" datepicker placeholder="Data inicial" />
+                                                <label for="min">Data Inicial: </label>
+                                                <div class="rs-select2--light rs-select2--md">
+                                                    <input class="form-control" type="text" name="min" datepicker placeholder="Data Inicial" required readonly autocomplete="off" />
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-lg-6">
-                                                <label for="final_date">Data Final: </label>
-                                                <div class="input-group">
-                                                    <input class="form-control" type="text" datepicker class="input-group" placeholder="Data Final" />
+                                                <label for="max">Data Final: </label>
+                                                <div class="rs-select2--light rs-select2--md">
+                                                    <input class="form-control" type="text" name="max" datepicker placeholder="Data Final" required readonly autocomplete="off" />
                                                 </div>
                                             </div>
                                         </div>
@@ -36,19 +41,14 @@
                                             <div class="form-group col">
                                                 <label for="report"> </label>
                                                 <select name="report" id="report" class="form-control selectpicker">
-                                                    <option value="0">RECEITAS x CLIENTES</option>
-                                                    <option value="1">DESPESAS x FORNECEDOR</option>
-                                                    <option value="2">LISTA DE USUÁRIOS</option>
-                                                    <option value="3">LISTA DE CLIENTES</option>
-                                                    <option value="4">LISTA DE FORNECEDORES</option>
-                                                    <option value="5">LISTA DE RECEITAS</option>
-                                                    <option value="6">LISTA DE DESPESAS</option>
+                                                    <option value="1">RECEITAS x CLIENTES</option>
+                                                    <option value="2">DESPESAS x FORNECEDOR</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <br>
 
-                                        <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">imprimir relatório</button>
+                                        <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">gerar relatório</button>
                                     </form>
                                 </div>
                             </div>
@@ -60,4 +60,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $(function() {
+        $("[datepicker]").datepicker();
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 6000);
+    });
+</script>
 @endsection

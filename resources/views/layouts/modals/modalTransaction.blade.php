@@ -24,10 +24,10 @@
                     <div class="form-group row">
                         <div class="col-6">
                             <label for="company">Empresa</label>
-                            <select class="selectpicker" name="company" id="company" data-live-search="true" data-size="3">
-                                @foreach($companies as $company)
-                                <option value="{{$company->id}}" {{ empty($transaction) ?"": ($transaction->company_id == $company->id ? 'selected' : '') }}>
-                                    {{$company->name}}
+                            <select class="form-control" name="company">
+                                @foreach($companies as $c)
+                                <option value="{{$c->id}}" {{ empty($transaction) ? '' : ($transaction->company_id == $c->id ? 'selected' : '') }}>
+                                    {{$c->name}}
                                 </option>
                                 @endforeach
                             </select>
@@ -39,10 +39,10 @@
                                 @else Cliente
                                 @endif
                             </label>
-                            <select name="entity" class="form-group selectpicker" data-live-search="true" data-size="3">
-                                @foreach($entities as $entity)
-                                @if ($entity->situation == true)
-                                <option value="{{$entity->id}}" {{ empty($transaction) ?"": ($transaction->entity_id == $entity->id ? 'selected' : '') }}>{{$entity->name}}</option>
+                            <select name="entity" class="form-control">
+                                @foreach($entities as $e)
+                                @if ($e->situation == 1)
+                                <option value="{{$e->id}}" {{ empty($transaction) ? '' : ($transaction->entity_id == $e->id ? 'selected' : '') }}>{{$e  ->name}}</option>
                                 @endif
                                 @endforeach
                             </select>
@@ -52,9 +52,9 @@
                     <div class="form-group row">
                         <div class="col-6">
                             <label for="form_of_payment">Forma de Pagamento</label>
-                            <select name="form_of_payment" id="form_of_payment" class="form-control selectpicker" data-dropup-auto="false">
+                            <select name="form_of_payment" class="form-control">
                                 @foreach ($payments as $p)
-                                <option value="{{$p->id}}">{{$p->description}}</option>
+                                <option value="{{$p->id}}" {{ empty($transaction) ? '' : ($transaction->payment_id == $p->id ? 'selected' : '') }}>{{$p->description}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -62,7 +62,7 @@
                         <div class="col-6">
                             <label for="due_date">Vencimento</label>
                             <div class="form-group">                                
-                                <input class="form-control" type="text" datepicker name="due_date" value="{{ empty($transaction) ? '' : $transaction->due_date->format('d/m/Y') }}" placeholder="Vencimento" autocomplete="off" />
+                                <input class="form-control" type="text" datepicker name="due_date" value="{{ empty($transaction) ? '' : $transaction->due_date->format('d/m/Y') }}" placeholder="Vencimento" required autocomplete="off" />
                             </div>                            
                         </div>
                     </div>
@@ -75,12 +75,12 @@
 
                         <div class="col-4">
                             <label for="rates">Taxas</label>
-                            <input class="form-control" type="text" id="rates" name="rates" value="{{ empty($transaction) ?'':$transaction->rates }}" placeholder="R$">
+                            <input class="form-control mask-money" type="text" id="rates" name="rates" value="{{ empty($transaction) ?'':$transaction->rates }}" placeholder="R$">
                         </div>
 
                         <div class="col-4">
                             <label for="original_value">Valor</label>
-                            <input class="form-control" type="text" id="original_value" name="original_value" value="{{ empty($transaction) ?'':$transaction->original_value }}" placeholder="R$" />
+                            <input class="form-control mask-money" type="text" name="original_value" value="{{ empty($transaction) ?'': 'R$ '.number_format($transaction->current_value,2, ',', '.') }}" placeholder="R$" required/>
                         </div>
                     </div>
                 </div>
@@ -91,5 +91,5 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div>    
 </div>

@@ -48,14 +48,14 @@
                     </div>
                 </div>
             </div>
-            {{-- </div> --}}
+             </div> 
         </div>
     </div>
 </div>
 
 <script>
-    try {
-        //bar chart
+    $(document).ready(function () {
+        try {        
         var ctx = document.getElementById("barChart");
         if (ctx) {
             ctx.height = 200;
@@ -63,24 +63,20 @@
                 type: 'bar',
                 defaultFontFamily: 'Poppins',
                 data: {
-                    labels: ["Janeiro", "Feveiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                    labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
                     datasets: [{
                             label: "Receitas",
-                            data: {!! json_encode($receivables) !!},
-                            // borderColor: "rgba(0, 123, 255, 0.9)",
+                            data: [{{ $receivables }}], 
                             borderColor: "green",
                             borderWidth: "0",
-                            // backgroundColor: "rgba(0, 123, 255, 0.5)",
                             backgroundColor: "#63c76a",
                             fontFamily: "Poppins"
                         },
                         {
                             label: "Despesas",
-                            data: {!! json_encode($payables) !!},
-                            // borderColor: "rgba(0,0,0,0.09)",
+                            data: [{{ $payables }}],
                             borderColor: "red",
                             borderWidth: "0",
-                            // backgroundColor: "rgba(0,0,0,0.07)",
                             backgroundColor: "#ff4b5a",
                             fontFamily: "Poppins"
                         }
@@ -115,6 +111,8 @@
 
     } catch (error) {
         console.log(error);
-    }
+    } 
+    });
+    
 </script>
 @endsection

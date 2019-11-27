@@ -20,11 +20,11 @@ class CreateTransactionsTable extends Migration
             $table->string('installments')->nullable(false)->default('1'); //Quantidade de parcelas
             $table->enum('type', ['CP', 'CR']); //CP - Contas a Pagar, CR - Contas a Receber
             $table->string('description')->nullable(false);
-            $table->string('original_value')->nullable(false);
+            $table->double('original_value')->nullable(false);
             $table->string('interest_rate')->nullable(); //Juros
             $table->string('penalty')->nullable(); //Multa
             $table->string('rates')->nullable(true); //Taxas (TED, geração de boleto...)
-            $table->string('current_value')->nullable();
+            $table->double('current_value')->nullable();
             $table->enum('situation', ['1', '2', '3'])->default('1')->nullable(); //1 - A VENCER, 2 - PAGA, 3 - VENCIDA
             $table->softDeletes();
             $table->timestamps();

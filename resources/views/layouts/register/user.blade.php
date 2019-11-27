@@ -22,14 +22,19 @@
 
             <div class="row">
                 <div class="col-md-12">
+                    @if(session('msg-error'))
+                    <div class="alert alert-danger">
+                        <p>{{session('msg-error')}}</p>
+                    </div>
+                    @endif
                     <!-- DATA TABLE -->
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="rs-select2--light rs-select2--md">
-                                <select class="js-select2" name="property">
-                                    <option selected="selected">Todos</option>
-                                    <option value="">Ativos</option>
-                                    <option value="">Inativos</option>
+                                <select class="js-select2" id="status" name="property">
+                                    <option value="TODOS" selected="selected">Todos</option>
+                                    <option value="ATIVO">Ativos</option>
+                                    <option value="INATIVO">Inativos</option>
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
@@ -40,22 +45,22 @@
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-data2">
-                        <table class="table table-data2">
+                        <table id="users" class="table table-data2">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Nome</th>
                                     <th col="20px">Email</th>
                                     <th>Situação</th>
-                                    <th></th>
+                                    <th><input type="search" id="search" class="form-control" placeholder="Procurar"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($users as $user)
                                 <tr class="tr-shadow">
                                     <td>{{$user->id}}</td>
-                                    <td class="desc">{{ ucwords(strtolower($user->name)) }}</td>
-                                    <td><span class="block-email">{{ strtolower($user->email) }}</span></td>
+                                    <td class="desc">{{ strtoupper($user->name) }}</td>
+                                    <td><span class="block-email">{{ $user->email }}</span></td>
                                     @if ($user->situation == '1')
                                     <td><span class="status--process">Ativo</span></td>
                                     @else
@@ -98,7 +103,7 @@
                                     'variable' => $user
                                     ])
                                     <!-- Fim do modal -->
-                                </tr>                                
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -109,4 +114,45 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $.fn.dataTableExt.afnFiltering.push(
+        function(settings, data, dataIndex) {
+            var status = $('#status').val();
+
+            if (status == data[3] || status == 'TODOS') {
+                return true;
+            }
+            if (document.getElementById('users') == settings.nTable) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    );
+
+    $(function() {
+        var table = $('#users').DataTable({
+            "language": {
+                "paginate": {
+                    "first": '<button class="btn"><i class="fas fa-step-backward"></i></button>',
+                    "last": '<button class="btn"><i class="fas fa-step-forward"></i></button>',
+                    "next": '<button class="btn"><i class="fas fa-chevron-circle-right"></i></button>',
+                    "previous": '<button class="btn"><i class="fas fa-chevron-circle-left"></i></button>'
+                }
+            }
+        });
+        $('#search').on('keyup', function() {
+            table.search(this.value).draw();
+        });
+        $('#status').change(function() {
+            table.draw();
+        });
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 6000);
+    });
+</script>
 @endsection

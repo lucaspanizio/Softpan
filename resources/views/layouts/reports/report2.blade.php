@@ -1,7 +1,7 @@
 @extends('admin.home')
 
-@section('title','- Relatório 1')
-<!-- Receitas x Clientes -->
+@section('title','- Relatório 2')
+<!-- Despesas x Fornecedores -->
 
 @section('content')
 <div class="main-content">
@@ -13,14 +13,14 @@
                         <div class="row">
                             <div class="col-12">
                                 <h4>
-                                    Relação de Clientes x Receitas
+                                    Relação de Fornecedores x Despesas
                                     <small class="float-right">Emissão: {{ \Carbon\Carbon::now('America/Sao_Paulo')->format('d/m/Y') }}</small>
                                 </h4>
                             </div>
                         </div>
                         <div class="row invoice-info">
-                            <div class="col-12 invoice-col">
-                                Período Selecionado: {{ $min }} a {{ $max}}
+                            <div class="col-sm-4 invoice-col">
+                                Período do Relatório:
                             </div>
                         </div>
                         <br>
@@ -30,7 +30,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nº</th>
-                                            <th>Cliente</th>
+                                            <th>Fornecedor</th>
                                             <th>Vencimento</th>
                                             <th>Data Pagamento</th>
                                             <th>Valor Original</th>
@@ -41,7 +41,7 @@
                                         @foreach($transactions as $transaction)
                                         <tr>
                                             <td>{{$transaction->id}}</td>
-                                            <td>{{ strtoupper($transaction->entity['name']) }}</td>
+                                            <td>{{strtoupper($transaction->entity['name'])}}</td>
                                             <td>{{$transaction->due_date->format('d/m/Y')}}</td>
                                             <td>{{$transaction->pay_off_date != null ? $transaction->pay_off_date->format('d/m/Y') : ''}}</td>
                                             <td>{{ 'R$ '.number_format($transaction->original_value,2, ',', '.') }}</td>

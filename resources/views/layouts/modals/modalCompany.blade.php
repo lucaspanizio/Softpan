@@ -19,51 +19,51 @@
                     <div class="row">
                         <div class="col">
                             <label for="name">Nome/ Razão</label>
-                            <input name="name" type="text" class="form-control" value="{{ empty($company) ?'':$company->name }}" id="name">
+                            <input name="name" type="text" class="form-control text-uppercase" value="{{ empty($company) ?'':$company->name }}" id="name" required>
                         </div>
                         <div class="col">
                             <label for="cnpj">CNPJ</label>
-                            <input name="cnpj" type="text" class="form-control" value="{{ empty($company) ?'':$company->cnpj }}" id="cnpj">
+                            <input name="cnpj" type="text" class="form-control mask-cnpj" value="{{ empty($company) ?'':$company->cnpj }}" id="cnpj" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-9">
                             <label for="street">Rua</label>
-                            <input name="street" type="text" class="form-control" value="{{ empty($company) ?'':$company->street }}" id="street">
+                            <input name="street" type="text" class="form-control text-uppercase" value="{{ empty($company) ?'':$company->street }}">
                         </div>
                         <div class="col-3">
                             <label for="number">Número</label>
-                            <input name="number" type="number" min="0" class="form-control" value="{{ empty($company) ?'':$company->number }}" id="number">
+                            <input name="number" type="text" maxlength="6" class="form-control" value="{{ empty($company) ?'':$company->number }}">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-8">
                             <label for="neighborhood">Bairro</label>
-                            <input name="neighborhood" type="text" class="form-control" value="{{ empty($company) ?'':$company->neighborhood }}" id="neighborhood">
+                            <input name="neighborhood" type="text" class="form-control text-uppercase" value="{{ empty($company) ?'':$company->neighborhood }}">
                         </div>
                         <div class="col-4">
                             <label for="zipcode">CEP</label>
-                            <input name="zipcode" type="text" class="form-control" value="{{ empty($company) ?'':$company->zipcode }}" id="zipcode">
+                            <input name="zipcode" type="text" class="form-control mask-zipcode" value="{{ empty($company) ?'':$company->zipcode }}">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-10">
                             <label for="city">Cidade</label>
-                            <input name="city" type="text" class="form-control" value="{{ empty($company) ?'':$company->city }}" id="city">
+                            <input name="city" type="text" class="form-control text-uppercase" value="{{ empty($company) ?'':$company->city }}">
                         </div>
                         <div class="col-2">
                             <label for="state">Estado</label>
-                            <input name="state" type="text" class="form-control" value="{{ empty($company) ?'':$company->state }}" id="state" maxlength="2" size="2">
+                            <input name="state" type="text" class="form-control mask-state" value="{{ empty($company) ?'':$company->state }}">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col">
                             <label for="phone1">Telefone</label>
-                            <input name="phone1" type="text" class="form-control" value="{{ empty($company) ?'':$company->phone1 }}" id="phone1">
+                            <input name="phone1" type="text" class="form-control mask-phone" value="{{ empty($company) ?'':$company->phone1 }}" id="phone1">
                         </div>
 
                         <div class="col">

@@ -17,10 +17,10 @@ class ControllerCompany extends Controller{
     }
 
     public function store(Request $request){
-        $request->validate([
-            'name' => 'required|max:255',
-            'number' => 'max:8'            
-        ]);
+        if (Entity::where('cnpj', $request->cnpj)->count() > 0) {
+            return redirect()->back()->with('msg-error', 'Já existe uma empresa registrada com o CNPJ informado.');
+        }
+
         $company = new Company();
         $company->name = $request->name;
         $company->phone = $request->phone;
@@ -38,10 +38,10 @@ class ControllerCompany extends Controller{
     }
 
     public function update(Request $request){
-        $request->validate([
-            'name' => 'required|max:255',
-            'number' => 'max:8'
-        ]);
+
+        if (Entity::where([['cnpj', $request->cnpj], ['id', '!=', $request->id]])->count() > 0) {
+            return redirect()->back()->with('msg-error', 'Já existe uma empresa registrada com o CNPJ informado.');
+        }
         
         $company = Company::find($request->id);
         $company->name = $request->name;        

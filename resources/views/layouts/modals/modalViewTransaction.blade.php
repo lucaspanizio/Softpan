@@ -28,32 +28,36 @@
                 </div>
                 <div class="row">
                     <div class="col-4"><b>Empresa:</b></div>
-                    <div class="col-8">{{$transaction->company['name']}}</div>
+                    <div class="col-8">{{ strtoupper($transaction->company['name']) }}</div>
                 </div>
                 <div class="row">
                     <div class="col-4"><b>{{ $transaction->entity['type'] == 'C' ? 'Cliente:' : 'Fornecedor:' }}</b></div>
-                    <div class="col-8">{{$transaction->entity['name']}}</div>
+                    <div class="col-8">{{ strtoupper($transaction->entity['name']) }}</div>
                 </div>
                 <div class="row">
                     <div class="col-4"><b>Usuário:</b></div>
-                    <div class="col-8">{{$transaction->user['name']}}</div>
+                    <div class="col-8">{{ strtoupper($transaction->user['name']) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-4"><b>Forma de Pagamento:</b></div>
+                    <div class="col-8">{{$transaction->payment['description']}}</div>
                 </div>
                 <div class="row">
                     <div class="col-4"><b>Valor Original:</b></div>
-                    <div class="col-8">{{$transaction->original_value}}</div>
+                    <div class="col-8">{{ 'R$ '.number_format($transaction->original_value,2, ',', '.') }}</div>
                 </div>
                 <div class="row">
                     <div class="col-4"><b>Valor Juros:</b></div>
-                    <div class="col-8">{{ $transaction->interest_rate != null ? $transaction->interest_rate : ''}}</div>
+                    <div class="col-8">{{ $transaction->interest_rate != null ? 'R$ '.number_format($transaction->interest_rate,2, ',', '.') : ''}}</div>
                 </div>
                 <div class="row">
                     <div class="col-4"><b>Valor Multa:</b></div>
-                    <div class="col-8">{{$transaction->penalty != null ? $transaction->penalty : ''}}</div>
+                    <div class="col-8">{{$transaction->penalty != null ? 'R$ '.number_format($transaction->penalty,2, ',', '.') : ''}}</div>
                 </div>
                 <div class="row">
                     <div class="col-4"><b>Valor Total Pago:</b></div>
                     @if($transaction->pay_off_date != null)
-                    <div class="col-8">{{$transaction->current_value}}</div>
+                    <div class="col-8">{{ 'R$ '.number_format($transaction->current_value,2, ',', '.') }}</div>
                     @endif
                 </div>
                 <div class="row">

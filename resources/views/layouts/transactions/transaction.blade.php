@@ -33,10 +33,10 @@
                                 <div class="dropDownSelect2"></div>
                             </div>
                             <div class="rs-select2--light rs-select2--md">
-                                <input class="form-control datepicker" type="text" id="min" name="min" datepicker placeholder="Data inicial" />
+                                <input class="form-control datepicker" type="text" id="min" name="min" datepicker placeholder="Data inicial" autocomplete="off" />
                             </div>
                             <div class="rs-select2--light rs-select2--md">
-                                <input class="form-control datepicker" type="text" id="max" name="max" datepicker placeholder="Data Final" />
+                                <input class="form-control datepicker" type="text" id="max" name="max" datepicker placeholder="Data Final" autocomplete="off" />
                             </div>
                         </div>
                         <div class="table-data__tool-right">
@@ -44,9 +44,9 @@
                                 <i class="zmdi zmdi-plus"></i>Incluir&nbsp;{{$tipoTransacao}}</button>
                         </div>
                     </div>
-                    <div class="table-responsive table-responsive-data2">                        
+                    <div class="table-responsive table-responsive-data2">
                         <table id="transactions" class="table table-data2" style="width:100%">
-                            <thead>
+                            <thead>                                
                                 <th>#</th>
                                 @if ($typeTransaction == "receivable")
                                 <th>Cliente</th>
@@ -57,32 +57,29 @@
                                 <th>Descrição</th>
                                 <th>Vencimento</th>
                                 <th>Valor</th>
-                                <th>Situação</th>
-                                <th><input type="search" id="search" class="form-control" placeholder="Procurar"></th>                                                                
+                                <th class="hidden">Situação</th>
+                                <th><input type="search" id="search" class="form-control" placeholder="Procurar"></th>
                             </thead>
                             <tbody>
                                 @foreach ($transactions as $transaction)
                                 <tr class="tr-shadow">
                                     <td>{{$transaction->id}}</td>
-                                    <td>{{empty($transaction->entity) ? ' ': $transaction->entity['name']}}</td>
+                                    <td>{{empty($transaction->entity) ? ' ': strtoupper($transaction->entity['name']) }}</td>
                                     <!-- Nome do fornecedor ou cliente -->
-                                    <td>{{$transaction->description}}</td>
+                                    <td>{{ strtoupper($transaction->description) }}</td>
                                     <td>{{$transaction->due_date->format('d/m/Y')}}</td>
-                                    <td>{{$transaction->current_value != null ? $transaction->current_value : $transaction->original_value}}
+                                    <td>{{'R$ '.number_format($transaction->current_value,2, ',', '.')}}
                                     </td>
-                                    <td>
-                                        @if($transaction->situation == '1')
-                                        <span class="status--meddium">A VENCER</span>
-                                        @elseif ($transaction->situation == '2')
-                                        <span class="status--process">PAGA</span>
-                                        @else
-                                        <span class="status--denied">VENCIDA</span>
+                                    <td class="hidden">
+                                        @if($transaction->situation == '1') A VENCER
+                                        @elseif ($transaction->situation == '2') PAGA
+                                        @else VENCIDA
                                         @endif
                                     </td>
                                     <td>
                                         <div class="table-data-feature">
                                             <input type="hidden" name="id" value="{{$transaction->id}}">
-                                            @if($transaction->current_value != null)
+                                            @if($transaction->situation != '2')
                                             <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Liquidar">
                                                 <button class="item" type="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalLiquidarTransacao{{$transaction->id}}">
                                                     <i class=" zmdi zmdi-check"></i>
@@ -120,10 +117,9 @@
                                     <!-- Modal com formulário para visualização dos dados da transação selecionada -->
                                     @include('layouts.modals.modalViewTransaction', [
                                     'id' => 'ModalVisualizarTransacao'.$transaction->id,
-                                    'title' => 'Visualizar '.$tipoTransacao,
-                                    'transaction' => $transaction
+                                    'title' => 'Visualizar '.$tipoTransacao                                    
                                     ])
-                                    <!-- Fim do modal -->                                    
+                                    <!-- Fim do modal -->
 
                                     <!-- Modal com formulário para alteração dos dados da transação selecionada -->
                                     @include('layouts.modals.modalTransaction', [
@@ -149,7 +145,7 @@
                                 </tr>
                                 <!-- <tr class="spacer"></tr> -->
                                 @endforeach
-                            </tbody>                            
+                            </tbody>
                         </table>
                     </div>
                     <!-- END DATA TABLE -->
@@ -158,4 +154,81 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $.fn.dataTableExt.afnFiltering.push(
+        function(settings, data, dataIndex) {
+            var min = $('#min').val();
+            var max = $('#max').val();
+
+            let mindate = new Date();
+            mindate.setFullYear(min.split('/')[2]);
+            mindate.setMonth(min.split('/')[1] - 1);
+            mindate.setDate(min.split('/')[0]);
+
+            let maxdate = new Date();
+            maxdate.setFullYear(max.split('/')[2]);
+            maxdate.setMonth(max.split('/')[1] - 1);
+            maxdate.setDate(max.split('/')[0]);
+
+            let coldate = new Date();
+            coldate.setFullYear(data[3].split('/')[2]);
+            coldate.setMonth(data[3].split('/')[1] - 1);
+            coldate.setDate(data[3].split('/')[0]);
+
+            if ((isNaN(mindate) && isNaN(maxdate)) ||
+                (isNaN(mindate) && coldate <= maxdate) ||
+                (mindate <= coldate && isNaN(maxdate)) ||
+                (mindate <= coldate && coldate <= maxdate)) {
+                return true;
+            }
+            if (document.getElementById('transactions') == settings.nTable) {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        function(settings, data, dataIndex) {
+            var status = $('#status').val();
+
+            if (status == data[5] || status == 'TODAS') {
+                return true;
+            }
+            if (document.getElementById('transactions') == settings.nTable) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    );
+
+    $(function() {
+        $("[datepicker]").datepicker();
+        // $('.selectpicker.company').selectpicker();
+        // $('.selectpicker.entity').selectpicker();
+
+        var table = $('#transactions').DataTable({
+            "language": {
+                "paginate": {
+                    "first": '<button class="btn"><i class="fas fa-step-backward"></i></button>',
+                    "last": '<button class="btn"><i class="fas fa-step-forward"></i></button>',
+                    "next": '<button class="btn"><i class="fas fa-chevron-circle-right"></i></button>',
+                    "previous": '<button class="btn"><i class="fas fa-chevron-circle-left"></i></button>'
+                }
+            }
+        });
+        $('#search').on('keyup', function() {
+            table.search(this.value).draw();
+        });
+        $('#min, #max').change(function() {
+            table.draw();
+        });
+        $('#status').change(function() {
+            table.draw();
+        });
+        $('.mask-money').mask('#.##0,00', {reverse: true});
+    });    
+</script>
 @endsection

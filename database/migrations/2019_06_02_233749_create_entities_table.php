@@ -17,21 +17,21 @@ class CreateEntitiesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->enum('type', ['C', 'F']);  // C - Cliente, F - Fornecedor
-            $table->string('cpf')->unique()->nullable();
-            $table->string('cnpj')->unique()->nullable();
+            $table->string('cpf')->unique()->nullable(true);
+            $table->string('cnpj')->unique()->nullable(true);
            
-            $table->string('street');
-            $table->string('zipcode');                       
-            $table->string('city');
-            $table->string('state');
-            $table->string('neighborhood');
-            $table->string('number');
+            $table->string('street')->nullable(true);
+            $table->string('zipcode')->nullable(true);                     
+            $table->string('city')->nullable(true);
+            $table->string('state')->nullable(true);
+            $table->string('neighborhood')->nullable(true);
+            $table->string('number')->nullable(true);
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone1');
-            $table->string('phone2')->nullable();
-            $table->string('cellphone')->nullable();
+            $table->string('phone2')->nullable(true);
+            $table->string('cellphone')->nullable(true);
             $table->boolean('situation')->default(true);   
             
             $table->timestamps();

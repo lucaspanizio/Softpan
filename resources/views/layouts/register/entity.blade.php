@@ -21,14 +21,19 @@
 
             <div class="row">
                 <div class="col-md-12">
+                    @if(session('msg-error'))
+                    <div class="alert alert-danger">
+                        <p>{{session('msg-error')}}</p>
+                    </div>
+                    @endif
                     <!-- DATA TABLE -->
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="rs-select2--light rs-select2--md">
-                                <select class="js-select2" name="property">
-                                    <option selected="selected">Todos</option>
-                                    <option value="">Ativos</option>
-                                    <option value="">Inativos</option>
+                                <select class="js-select2" id="status" name="property">
+                                    <option value="TODOS" selected="selected">Todos</option>
+                                    <option value="ATIVO">Ativos</option>
+                                    <option value="INATIVO">Inativos</option>
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
@@ -39,29 +44,36 @@
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-data2">
-                        <table class="table table-data2" style="width:100%">
+                        <table id="entities" class="table table-data2" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">{{$tipoEntidade}}</th>
-                                    <th scope="col">Documento</th>
-                                    <th scope="col">Cidade</th>
-                                    <th scope="col">Estado</th>
-                                    <th><input type="search" id="search-entities" class="form-control" placeholder="Procurar"></th>
+                                    <th>#</th>
+                                    <th>{{$tipoEntidade}}</th>
+                                    <th>Documento</th>
+                                    <th>Cidade</th>
+                                    <th>Estado</th>
+                                    <th class="hidden">Situação</th>
+                                    <th><input type="search" id="search" class="form-control" placeholder="Procurar"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($entities as $entity)
                                 <tr class="tr-shadow">
                                     <td>{{$entity->id}}</td>
-                                    <td>{{$entity->name}}</td>
+                                    <td>{{ strtoupper($entity->name) }}</td>
                                     @if (!empty($entity->cnpj))
                                     <td>{{$entity->cnpj}}</td>
                                     @else
                                     <td>{{$entity->cpf}}</td>
                                     @endif
-                                    <td>{{$entity->city}}</td>
-                                    <td>{{$entity->state}}</td>
+                                    <td>{{ strtoupper($entity->city) }}</td>
+                                    <td>{{ strtoupper($entity->state) }}</td>
+                                    <td class="hidden">
+                                        @if($entity->situation == 1) ATIVO
+                                        @else INATIVO
+                                        @endif
+                                    </td>
+
                                     <td>
                                         <div class="table-data-feature">
                                             <span data-toggle="tooltip" data-placement="top" title="Alterar">
@@ -97,7 +109,7 @@
                                     'action' => route('admin.entity.update')
                                     ])
                                     <!-- Fim do modal -->
-                                </tr>                                
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -108,14 +120,69 @@
         </div>
     </div>
 </div>
+@endsection
 
-<!-- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif -->
+@section('script')
+<script>
+    $.fn.dataTableExt.afnFiltering.push(
+        function(settings, data, dataIndex) {
+            var status = $('#status').val();
+
+            if (status == data[5] || status == 'TODOS') {
+                return true;
+            }
+            if (document.getElementById('entities') == settings.nTable) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    );
+
+    $(function() {
+        var table = $('#entities').DataTable({
+            "language": {
+                "paginate": {
+                    "first": '<button class="btn"><i class="fas fa-step-backward"></i></button>',
+                    "last": '<button class="btn"><i class="fas fa-step-forward"></i></button>',
+                    "next": '<button class="btn"><i class="fas fa-chevron-circle-right"></i></button>',
+                    "previous": '<button class="btn"><i class="fas fa-chevron-circle-left"></i></button>'
+                }
+            }
+        });
+        $('#search').on('keyup', function() {
+            table.search(this.value).draw();
+        });
+        $('#status').change(function() {
+            table.draw();
+        });
+
+        /* Inicio Mascaras */
+        $('.mask-cpf').mask('000-000.000-00');
+        $('.mask-cnpj').mask('00.000.000/0000-00');
+        $('.mask-state').mask('SS');
+        $('.mask-phone').mask('(00) 0000-0000');
+        $('.mask-cellphone').mask('(00) 0 0000-0000');
+        $('.mask-zipcode').mask('00000-000');
+        /* Fim Mascaras */
+
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 6000);
+
+        /* Controle sobre CNPJ ou CPF
+         * Nunca permitira o preenchimento dos dois campos no formulário
+         */
+        var cpf = document.getElementById("cpf");
+        var cnpj = document.getElementById("cnpj");
+
+        cpf.addEventListener('keyup', function() {
+            cnpj.disabled = cpf.value.trim().length > 0;
+        });
+        
+        cnpj.addEventListener('keyup', function() {
+            cpf.disabled = cnpj.value.trim().length > 0;
+        });
+    });
+</script>
 @endsection

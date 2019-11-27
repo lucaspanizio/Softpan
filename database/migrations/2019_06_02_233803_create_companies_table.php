@@ -16,15 +16,15 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');            
-            $table->string('zipcode');                 
-            $table->string('cnpj')->unique();
+            $table->string('zipcode')->nullable(true);                 
+            $table->string('cnpj')->unique()->nullable(false);
             $table->boolean('situation')->default(true); 
-            $table->string('phone')->nullable();
-            $table->string('street');
-            $table->string('neighborhood');
-            $table->string('number');
-            $table->string('city');
-            $table->string('state');
+            $table->string('phone')->nullable(true);
+            $table->string('street')->nullable(true);
+            $table->string('neighborhood')->nullable(true);
+            $table->string('number')->nullable(true);
+            $table->string('city')->nullable(true);
+            $table->string('state')->nullable(true);
             
             $table->timestamps();
             $table->softDeletes();
